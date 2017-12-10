@@ -5,8 +5,6 @@
 
 #include "ex2.h"
 
-#define DSTRING_SIZE 4
-
 typedef struct _Flight {
 	int Num;
 	FlightType Type;

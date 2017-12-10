@@ -3,6 +3,7 @@
 
 int main()
 {
+	/* Flight ADT Simple Test */
 	int fNum = 1;
 	FlightType fType = DOMESTIC;
 	char *fDst= "TLV";
