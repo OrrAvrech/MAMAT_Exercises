@@ -34,7 +34,7 @@ pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 void destroyFlight(pFlight f)
 {
 	if (f == NULL)
-		printf("Flight is empty");
+		return;
 	free(f->Dest);
 	free(f);
 }
@@ -42,7 +42,7 @@ void destroyFlight(pFlight f)
 void printFlight(pFlight f)
 {
 	if (f == NULL)
-		printf("Flight is empty");
+		return;
 
 	char cType = 'D', cEm = 'R';
 	if (f->Type == INTERNATIONAL)

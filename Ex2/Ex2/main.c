@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "flight.h"
+#include "runway.h"
 
 int main()
 {
@@ -14,4 +14,20 @@ int main()
 	f = createFlight(fNum, fType, fDst, fEmergency);
 	printFlight(f);
 	destroyFlight(f);
+
+	/* Runway ADT Simple Test */
+	int rNum = 1;
+	FlightType rType = DOMESTIC;
+	pRunway r;
+	r = createRunway(rNum, rType);
+
+	pFlight f2, f3;
+	f2 = createFlight(2, fType, "YYZ", TRUE);
+	f3 = createFlight(3, fType, "ELT", FALSE);
+
+	addFlight(r, f2);
+	addFlight(r, f3);
+
+	printRunway(r);
+	destroyRunway(r);
 }
