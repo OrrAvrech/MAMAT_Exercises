@@ -13,5 +13,5 @@ int main()
 	pFlight f;
 	f = createFlight(fNum, fType, fDst, fEmergency);
 	printFlight(f);
-	destroyFlight(f);
+	destroyFlight(f)     // removed ; for test
 }
