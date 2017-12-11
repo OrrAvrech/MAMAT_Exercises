@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "flight.h"
 
 int main()
@@ -6,7 +7,7 @@ int main()
 	/* Flight ADT Simple Test */
 	int fNum = 1;
 	FlightType fType = DOMESTIC;
-	char *fDst= "TLV";
+	char* fDst= "TLV";
 	BOOL fEmergency = TRUE;
 
 	pFlight f;

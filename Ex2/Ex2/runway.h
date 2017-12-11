@@ -13,7 +13,7 @@ typedef struct _Node {
 typedef struct _Runway {
 	int Num;
 	FlightType Type;
-	Node *List;
+	Node *Head;
 } Runway, *pRunway;
 
 typedef enum _Result { FAILURE, SUCCESS } Result;

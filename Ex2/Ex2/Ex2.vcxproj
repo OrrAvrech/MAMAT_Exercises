@@ -120,10 +120,12 @@
   <ItemGroup>
     <ClInclude Include="ex2.h" />
     <ClInclude Include="flight.h" />
+    <ClInclude Include="runway.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="flight.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="runway.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
