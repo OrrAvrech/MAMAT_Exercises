@@ -77,10 +77,10 @@ int getEmergencyNum(pRunway r)
 	return Emergency_count;
 }
 
-void listAppend(Node** headRef, pFlight fCopy)
+Node* listAppend(Node* headRef, pFlight fCopy)
 {
 	/* (Helper function)
-		Inserts a new flight <fCopy> to the last node
+		Inserts a new flight <fCopy> in the last node
 	*/
 	Node *newNode;
 	newNode = (Node*)malloc(sizeof(Node));
@@ -88,21 +88,22 @@ void listAppend(Node** headRef, pFlight fCopy)
 		return;
 	newNode->f = fCopy;
 	newNode->pNext = NULL; // Since it's the last node on the list
-	if (*headRef == NULL)
+	if (headRef == NULL)
 	{	// Empty list case
-		*headRef = newNode;
-		return;
+		headRef = newNode;
+		return headRef;
 	}
 	Node *pElem;
-	pElem = *headRef;
-	while (pElem)
+	pElem = headRef;
+	while (pElem->pNext)
 	{
 		pElem = pElem->pNext;
 	}
-	pElem = newNode;
+	pElem->pNext = newNode;
+	return headRef;
 }
 
-void listInsertIn(Node** headRef, int count, pFlight fCopy)
+Node* listInsertIn(Node* headRef, int count, pFlight fCopy)
 {
 	/* (Helper function)
 		Inserts a new flight <fCopy> after node #<count>
@@ -113,21 +114,22 @@ void listInsertIn(Node** headRef, int count, pFlight fCopy)
 		return;
 	newNode->f = fCopy;
 	if (count == 0)
-	{	//Empty list case (Emergency Flight)
-		newNode->pNext = NULL;
-		*headRef = newNode;
-		return;
+	{	
+		newNode->pNext = headRef;
+		headRef = newNode;
+		return headRef;
 	}
 	Node *pElem;
-	pElem = *headRef;
+	pElem = headRef;
 	while (count)
 	{	//Count elements
 		count--;
 		pElem = pElem->pNext;
 	}
 	//Insert newNode after element #<count>
-	newNode->pNext = pElem->pNext;
-	pElem->pNext = newNode;
+	newNode->pNext = pElem;
+	pElem = newNode;
+	return headRef;
 }
 
 Result addFlight(pRunway r, pFlight f)
@@ -144,14 +146,16 @@ Result addFlight(pRunway r, pFlight f)
 	if ((fCopy->Type != r->Type) || (isFlightExists(r, fCopy->Num) == TRUE))
 		return FAILURE;
 
+	int Emergency_count = getEmergencyNum(r);
+	int Flight_count = getFlightNum(r);
 	if (!fCopy->IsEmergency)
 		// New Regular flights always goes to the end of the list
-		listAppend(&(r->Head), fCopy);
+		r->Head = listAppend(r->Head, fCopy);
+	else if (Emergency_count == Flight_count)
+		r->Head = listAppend(r->Head, fCopy);
 	else
-	{	// New Emergency flights goes after the last E flight 
-		int Emergency_count = getEmergencyNum(r);
-		listInsertIn(&(r->Head), Emergency_count, fCopy);
-	}
+		// New Emergency flights goes after the last E flight 
+		r->Head = listInsertIn(r->Head, Emergency_count, fCopy);
 	return SUCCESS;
 }
 

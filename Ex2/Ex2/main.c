@@ -22,8 +22,8 @@ int main()
 	r = createRunway(rNum, rType);
 
 	pFlight f2, f3;
-	f2 = createFlight(2, fType, "YYZ", TRUE);
-	f3 = createFlight(3, fType, "ELT", FALSE);
+	f2 = createFlight(2, fType, "YYZ", FALSE);
+	f3 = createFlight(3, fType, "ELT", TRUE);
 
 	addFlight(r, f2);
 	addFlight(r, f3);
