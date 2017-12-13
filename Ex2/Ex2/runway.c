@@ -121,14 +121,14 @@ Node* listInsertIn(Node* headRef, int count, pFlight fCopy)
 	}
 	Node *pElem;
 	pElem = headRef;
-	while (count)
+	while (count>1)
 	{	//Count elements
 		count--;
 		pElem = pElem->pNext;
 	}
 	//Insert newNode after element #<count>
-	newNode->pNext = pElem;
-	pElem = newNode;
+	newNode->pNext = pElem->pNext;
+	pElem->pNext = newNode;
 	return headRef;
 }
 
