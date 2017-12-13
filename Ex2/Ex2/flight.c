@@ -5,20 +5,32 @@
 #include <string.h>
 #include "flight.h"
 
-/*int ValidParams(int fNum)
+BOOL FlightValidParams(int fNum, char* fDst)
 {
 	if (fNum < 1 || fNum > MAX_ID)
 		// Flight Number is Out of Range
-		return 0;
+		return FALSE;
+	if (strlen(fDst) == 3)
+		// Flight Destination is wrong
+	{
+		int i;
+		for (i = 0; i < strlen(fDst); i++)
+		{
+			if (fDst[i] < 'A' || fDst[i] > 'Z')
+				return FALSE;
+		}
+	}
 	else
-		return 1;
-}*/
+		return FALSE;
+
+	return TRUE;
+}
 
 pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 {
 	pFlight f;
-	/*if (!ValidParams(fNum))
-		return NULL;*/
+	if (!FlightValidParams(fNum, fDst))
+		return NULL;
 	f = (pFlight)malloc(sizeof(Flight));
 	if (f == NULL)
 		return NULL;

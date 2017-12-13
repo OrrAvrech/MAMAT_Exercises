@@ -6,7 +6,9 @@
 
 pRunway createRunway(int rNum, FlightType rType)
 {
-	// check valid params
+	if (rNum < 1 || rNum > MAX_ID)
+		// Runway Number is Out of Range
+		return NULL;
 
 	pRunway r;
 	r = (pRunway)malloc(sizeof(Runway));
@@ -35,7 +37,8 @@ void destroyRunway(pRunway r)
 
 BOOL isFlightExists(pRunway r, int fNum)
 {
-	// check valid params
+	if (r == NULL || fNum < 1 || fNum > MAX_ID)
+		return FALSE;
 	Node *pElem;
 	pElem = r->Head;
 	while (pElem)
@@ -50,7 +53,8 @@ BOOL isFlightExists(pRunway r, int fNum)
 
 int getFlightNum(pRunway r)
 {
-	// check valid params
+	if (r == NULL)
+		return -1;
 	Node *pElem;
 	pElem = r->Head;
 	int count = 0;
@@ -64,7 +68,8 @@ int getFlightNum(pRunway r)
 
 int getEmergencyNum(pRunway r)
 {
-	//check valid params
+	if (r == NULL)
+		return -1;
 	Node *pElem;
 	pElem = r->Head;
 	int Emergency_count = 0;
@@ -134,6 +139,9 @@ Node* listInsertIn(Node* headRef, int count, pFlight fCopy)
 
 Result addFlight(pRunway r, pFlight f)
 {
+	if (r == NULL || f == NULL || (r->Type != f->Type))
+		return FAILURE;
+
 	// Create Flight copy
 	pFlight fCopy;
 	fCopy = (pFlight)malloc(sizeof(Flight));
@@ -142,7 +150,6 @@ Result addFlight(pRunway r, pFlight f)
 	fCopy = createFlight(f->Num, f->Type, f->Dest, f->IsEmergency);
 	free(f);
 
-	// check valid params
 	if ((fCopy->Type != r->Type) || (isFlightExists(r, fCopy->Num) == TRUE))
 		return FAILURE;
 
@@ -161,8 +168,7 @@ Result addFlight(pRunway r, pFlight f)
 
 Result removeFlight(pRunway r, int fNum)
 {
-	//check valid params
-	if ((r->Head == NULL) || (isFlightExists(r, fNum) == FALSE))
+	if ((r == NULL) || (r->Head == NULL) || (isFlightExists(r, fNum) == FALSE))
 		return FAILURE;
 	Node *pElem, *pPrev;
 	pElem = r->Head;
