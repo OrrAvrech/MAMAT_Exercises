@@ -118,11 +118,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="airport.h" />
     <ClInclude Include="ex2.h" />
     <ClInclude Include="flight.h" />
     <ClInclude Include="runway.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="airport.c" />
     <ClCompile Include="flight.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="runway.c" />

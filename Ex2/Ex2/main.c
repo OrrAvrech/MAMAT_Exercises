@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <string.h>
-#include "runway.h"
+#include "airport.h"
 
 int main()
 {
-	/* Flight ADT Simple Test */
+	/*
+	/* Flight ADT Simple Test 
 	int fNum = 1;
 	FlightType fType = DOMESTIC;
 	char* fDst= "TLV";
@@ -15,7 +16,7 @@ int main()
 	printFlight(f);
 	destroyFlight(f);
 
-	/* Runway ADT Simple Test */
+	/* Runway ADT Simple Test 
 	int rNum = 1;
 	FlightType rType = DOMESTIC;
 	pRunway r;
@@ -40,4 +41,18 @@ int main()
 	printRunway(r);
 
 	destroyRunway(r);
+	*/
+
+	/* Airport ADT Simple Test */
+	int rNum[3] = { 1, 4, 2 };
+	FlightType rType[2] = { DOMESTIC, INTERNATIONAL };
+	addRunway(rNum[0], rType[0]);
+	addFlightToAirport(1, rType[0], "TLV", TRUE);
+	addRunway(rNum[1], rType[1]);
+	addFlightToAirport(2, rType[1], "YYZ", FALSE);
+	addRunway(rNum[2], rType[1]);
+	addFlightToAirport(3, rType[1], "LGD", FALSE);
+	addFlightToAirport(4, rType[1], "LDN", TRUE);
+	printAirport();
+	destroyAirport();
 }

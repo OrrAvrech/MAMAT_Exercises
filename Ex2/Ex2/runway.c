@@ -82,7 +82,7 @@ int getEmergencyNum(pRunway r)
 	return Emergency_count;
 }
 
-Node* listAppend(Node* headRef, pFlight fCopy)
+Node* listAppend(Node* head, pFlight fCopy)
 {
 	/* (Helper function)
 		Inserts a new flight <fCopy> in the last node
@@ -93,22 +93,20 @@ Node* listAppend(Node* headRef, pFlight fCopy)
 		return;
 	newNode->f = fCopy;
 	newNode->pNext = NULL; // Since it's the last node on the list
-	if (headRef == NULL)
+	if (head == NULL)
 	{	// Empty list case
-		headRef = newNode;
-		return headRef;
+		head = newNode;
+		return head;
 	}
 	Node *pElem;
-	pElem = headRef;
+	pElem = head;
 	while (pElem->pNext)
-	{
 		pElem = pElem->pNext;
-	}
 	pElem->pNext = newNode;
-	return headRef;
+	return head;
 }
 
-Node* listInsertIn(Node* headRef, int count, pFlight fCopy)
+Node* listInsertIn(Node* head, int count, pFlight fCopy)
 {
 	/* (Helper function)
 		Inserts a new flight <fCopy> after node #<count>
@@ -120,12 +118,12 @@ Node* listInsertIn(Node* headRef, int count, pFlight fCopy)
 	newNode->f = fCopy;
 	if (count == 0)
 	{	
-		newNode->pNext = headRef;
-		headRef = newNode;
-		return headRef;
+		newNode->pNext = head;
+		head = newNode;
+		return head;
 	}
 	Node *pElem;
-	pElem = headRef;
+	pElem = head;
 	while (count>1)
 	{	//Count elements
 		count--;
@@ -134,7 +132,7 @@ Node* listInsertIn(Node* headRef, int count, pFlight fCopy)
 	//Insert newNode after element #<count>
 	newNode->pNext = pElem->pNext;
 	pElem->pNext = newNode;
-	return headRef;
+	return head;
 }
 
 Result addFlight(pRunway r, pFlight f)
