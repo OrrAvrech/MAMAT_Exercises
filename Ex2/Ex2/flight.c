@@ -5,27 +5,39 @@
 #include <string.h>
 #include "flight.h"
 
-/*int ValidParams(int fNum)
+BOOL FlightValidParams(int fNum, char* fDst)
 {
 	if (fNum < 1 || fNum > MAX_ID)
 		// Flight Number is Out of Range
-		return 0;
+		return FALSE;
+	if (strlen(fDst) == 3)
+		// Flight Destination is wrong
+	{
+		int i;
+		for (i = 0; i < strlen(fDst); i++)
+		{
+			if (fDst[i] < 'A' || fDst[i] > 'Z')
+				return FALSE;
+		}
+	}
 	else
-		return 1;
-}*/
+		return FALSE;
+
+	return TRUE;
+}
 
 pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 {
 	pFlight f;
-	/*if (!ValidParams(fNum))
-		return NULL;*/
+	if (!FlightValidParams(fNum, fDst))
+		return NULL;
 	f = (pFlight)malloc(sizeof(Flight));
 	if (f == NULL)
 		return NULL;
 	
 	f->Num  = fNum;
 	f->Type = fType;
-	f->Dest = _strdup(fDst);
+	f->Dest = _strdup(fDst); // malloc and strcopy in unix
 	f->IsEmergency = fEmergency;
 
 	return f;
@@ -34,7 +46,7 @@ pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 void destroyFlight(pFlight f)
 {
 	if (f == NULL)
-		printf("Flight is empty");
+		return;
 	free(f->Dest);
 	free(f);
 }
@@ -42,7 +54,7 @@ void destroyFlight(pFlight f)
 void printFlight(pFlight f)
 {
 	if (f == NULL)
-		printf("Flight is empty");
+		return;
 
 	char cType = 'D', cEm = 'R';
 	if (f->Type == INTERNATIONAL)

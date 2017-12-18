@@ -17,6 +17,9 @@ pFlight createFlight(int, FlightType, char*, BOOL);
 void	destroyFlight(pFlight);
 void	printFlight(pFlight);
 
+// Flight Implementation Functions
+BOOL FlightValidParams(int, char*);
+
 #endif
 
 
