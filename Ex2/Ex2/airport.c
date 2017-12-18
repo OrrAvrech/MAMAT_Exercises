@@ -9,6 +9,8 @@ pAirport g_airport = NULL;
 
 Result addRunway(int rNum, FlightType rType)
 {
+	if (rNum < 1 || rNum > MAX_ID)
+		return FAILURE;
 	pRunway runw;
 	runw = createRunway(rNum, rType);
 	if (runw == NULL)
@@ -37,6 +39,35 @@ Result addRunway(int rNum, FlightType rType)
 	return SUCCESS;
 }
 
+Result removeRunway(int rNum)
+{
+	if (g_airport == NULL || rNum < 1 || rNum > MAX_ID)
+		return FAILURE;
+	pAirport pElem, pPrev;
+	pElem = g_airport;
+	pPrev = pElem;
+	if (pElem->r->Num == rNum)
+	{	// Runway is in airport head
+		g_airport = pElem->pNext;
+		destroyRunway(pElem->r);
+		free(pElem);
+		return SUCCESS;
+	}
+	while (pElem)
+	{
+		pPrev = pElem;
+		pElem = pElem->pNext;
+		if (pElem->r->Num == rNum)
+		{
+			pPrev->pNext = pElem->pNext;
+			destroyRunway(pElem->r);
+			free(pElem);
+			return SUCCESS;
+		}
+	}
+	return FAILURE; // No runway has been found
+}
+
 Result addFlightToAirport(int fNum, FlightType fType, char* fDest, BOOL fEmergency)
 {
 	pFlight f;
@@ -46,7 +77,7 @@ Result addFlightToAirport(int fNum, FlightType fType, char* fDest, BOOL fEmergen
 	pAirport pElem;
 	pElem = g_airport;
 	pRunway rFlight = NULL;
-	int temp = 0;
+	int temp = MAX_ID+1;
 	int count = 0;
 	while (pElem)
 	{
@@ -54,8 +85,6 @@ Result addFlightToAirport(int fNum, FlightType fType, char* fDest, BOOL fEmergen
 			return FAILURE;
 		if (f->Type == pElem->r->Type)
 		{
-			rFlight = pElem->r;
-			temp = getFlightNum(rFlight);
 			count++;
 			if (getFlightNum(pElem->r) < temp)
 			{ // Add flight to a suitable runway with minimum flights
@@ -77,6 +106,50 @@ Result addFlightToAirport(int fNum, FlightType fType, char* fDest, BOOL fEmergen
 	{
 		return addFlight(rFlight, f);
 	}
+}
+
+Result departAirport()
+{
+	if (g_airport == NULL)
+		return FAILURE;
+	pAirport pElem;
+	pElem = g_airport;
+	pRunway rFlight = pElem->r;
+	int tempEmergencyNum = 0;
+	int tempFlightNum = 0;
+	int tempRunwayNum = MAX_ID+1;
+	int flagEqual = 1;
+	while (pElem)
+	{
+		if (getEmergencyNum(pElem->r) > tempEmergencyNum)
+		{
+			flagEqual = 0;
+			rFlight = pElem->r;
+			tempEmergencyNum = getEmergencyNum(rFlight);
+			tempFlightNum = getFlightNum(rFlight);
+			tempRunwayNum = rFlight->Num;
+		}
+		else if (getEmergencyNum(pElem->r) == tempEmergencyNum || flagEqual == 1)
+		{
+			flagEqual = 1;
+			if (getFlightNum(pElem->r) > tempFlightNum)
+			{
+				rFlight = pElem->r;
+				tempFlightNum = getFlightNum(rFlight);
+				tempRunwayNum = rFlight->Num;
+			}
+			else if (getFlightNum(pElem->r) == tempFlightNum)
+			{
+				if (pElem->r->Num < tempRunwayNum)
+				{
+					rFlight = pElem->r;
+					tempRunwayNum = rFlight->Num;
+				}
+			}
+		}
+		pElem = pElem->pNext;
+	}
+	return depart(rFlight);
 }
 
 void printAirport()

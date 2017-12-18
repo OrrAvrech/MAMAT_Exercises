@@ -47,12 +47,17 @@ int main()
 	int rNum[3] = { 1, 4, 2 };
 	FlightType rType[2] = { DOMESTIC, INTERNATIONAL };
 	addRunway(rNum[0], rType[0]);
-	addFlightToAirport(1, rType[0], "TLV", TRUE);
+	addFlightToAirport(1, rType[0], "TLV", FALSE);
 	addRunway(rNum[1], rType[1]);
-	addFlightToAirport(2, rType[1], "YYZ", FALSE);
+	addFlightToAirport(2, rType[1], "YYZ", TRUE);
 	addRunway(rNum[2], rType[1]);
-	addFlightToAirport(3, rType[1], "LGD", FALSE);
+	addFlightToAirport(3, rType[1], "LGD", TRUE);
 	addFlightToAirport(4, rType[1], "LDN", TRUE);
+	addFlightToAirport(5, rType[1], "ARL", TRUE);
+	addFlightToAirport(6, rType[1], "JFK", TRUE);
+	//removeRunway(rNum[1]);
+	departAirport();
+	//departAirport();
 	printAirport();
 	destroyAirport();
 }

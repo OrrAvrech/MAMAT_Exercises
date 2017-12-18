@@ -14,7 +14,7 @@ typedef struct _Airport {
 Result addRunway(int, FlightType);
 Result removeRunway(int);
 Result addFlightToAirport(int, FlightType, char*, BOOL);
-Result depart();
+Result departAirport();
 Result changeDest(char*, char*);
 Result delay(char*);
 void printAirport();
