@@ -7,6 +7,20 @@
 /* Globals */
 pAirport g_airport = NULL;
 
+/* Data Types */
+typedef struct _depart_nums {
+	int EmergencyNum;
+	int FlightNum;
+	int RunwayID;
+} depart_nums;
+
+/* Helper Functions Declaration */
+int getRunwayNum();
+pRunway findRunway(int rNum);
+int compare_EmergencyNum(const void* a, const void* b);
+int compare_FlightNum(const void* a, const void* b);
+int compare_RunwayID(const void* a, const void* b);
+
 Result addRunway(int rNum, FlightType rType)
 {
 	if (rNum < 1 || rNum > MAX_ID)
@@ -119,37 +133,156 @@ Result departAirport()
 	int tempFlightNum = 0;
 	int tempRunwayNum = MAX_ID+1;
 	int flagEqual = 1;
-	while (pElem)
+	int i = 0;
+	while (i<2)
 	{
-		if (getEmergencyNum(pElem->r) > tempEmergencyNum)
+		while (pElem)
 		{
-			flagEqual = 0;
-			rFlight = pElem->r;
-			tempEmergencyNum = getEmergencyNum(rFlight);
-			tempFlightNum = getFlightNum(rFlight);
-			tempRunwayNum = rFlight->Num;
-		}
-		else if (getEmergencyNum(pElem->r) == tempEmergencyNum || flagEqual == 1)
-		{
-			flagEqual = 1;
-			if (getFlightNum(pElem->r) > tempFlightNum)
+			if (getEmergencyNum(pElem->r) > tempEmergencyNum)
 			{
+				flagEqual = 0;
 				rFlight = pElem->r;
+				tempEmergencyNum = getEmergencyNum(rFlight);
 				tempFlightNum = getFlightNum(rFlight);
 				tempRunwayNum = rFlight->Num;
 			}
-			else if (getFlightNum(pElem->r) == tempFlightNum)
+			else if (getEmergencyNum(pElem->r) == tempEmergencyNum || flagEqual == 1)
 			{
-				if (pElem->r->Num < tempRunwayNum)
+				flagEqual = 1;
+				if (getFlightNum(pElem->r) > tempFlightNum)
 				{
 					rFlight = pElem->r;
+					tempFlightNum = getFlightNum(rFlight);
 					tempRunwayNum = rFlight->Num;
 				}
+				else if (getFlightNum(pElem->r) == tempFlightNum)
+				{
+					if (pElem->r->Num < tempRunwayNum)
+					{
+						rFlight = pElem->r;
+						tempRunwayNum = rFlight->Num;
+					}
+				}
 			}
+			pElem = pElem->pNext;
 		}
+		i++;
+		pElem = g_airport;
+	}
+
+	return depart(rFlight);
+}
+
+int getRunwayNum()
+{
+	if (g_airport == NULL)
+		return -1;
+	pAirport pElem;
+	pElem = g_airport;
+	int count = 0;
+	while (pElem)
+	{
+		count++;
 		pElem = pElem->pNext;
 	}
-	return depart(rFlight);
+	return count;
+}
+
+pRunway findRunway(int rNum)
+{
+	pAirport pElem;
+	pElem = g_airport;
+	while (pElem)
+	{
+		if (pElem->r->Num == rNum)
+			return pElem->r;
+		pElem = pElem->pNext;
+	}
+	return NULL;
+}
+
+int compare_EmergencyNum(const void *a, const void *b) 
+{	// Decreasing Order
+	depart_nums* pElem_a = (depart_nums*) a;
+	depart_nums* pElem_b = (depart_nums*) b;
+
+	if (pElem_a->EmergencyNum < pElem_b->EmergencyNum)
+		return 1;
+	else if (pElem_a->EmergencyNum < pElem_b->EmergencyNum)
+		return 0;
+	else 
+		return -1;
+}
+
+int compare_FlightNum(const void *a, const void *b)
+{	// Decreasing Order
+	depart_nums* pElem_a = (depart_nums*)a;
+	depart_nums* pElem_b = (depart_nums*)b;
+
+	if (pElem_a->FlightNum < pElem_b->FlightNum)
+		return 1;
+	else if (pElem_a->FlightNum < pElem_b->FlightNum)
+		return 0;
+	else
+		return -1;
+}
+
+int compare_RunwayID(const void *a, const void *b)
+{	// Increasing Order
+	depart_nums* pElem_a = (depart_nums*)a;
+	depart_nums* pElem_b = (depart_nums*)b;
+
+	if (pElem_a->RunwayID > pElem_b->RunwayID)
+		return 1;
+	else if (pElem_a->RunwayID < pElem_b->RunwayID)
+		return 0;
+	else
+		return -1;
+}
+
+Result departAirport2()
+{
+	if (g_airport == NULL)
+		return FAILURE;
+	depart_nums* helper_arr;
+	helper_arr = (depart_nums*)malloc(getRunwayNum() * sizeof(depart_nums));
+	if (helper_arr == NULL)
+		return FAILURE;
+	pAirport pElem;
+	pElem = g_airport;
+	int i = 0;
+	pRunway rFlight = NULL;
+	//int(*compare_arr[])(const void*, const void*) = { compare_EmergencyNum, compare_FlightNum, compare_RunwayID };
+	while (pElem)
+	{
+		helper_arr[i].EmergencyNum = getEmergencyNum(pElem->r);
+		helper_arr[i].FlightNum	= getFlightNum(pElem->r);
+		helper_arr[i].RunwayID = pElem->r->Num;
+		i++;
+		pElem = pElem->pNext;
+	}
+	qsort(helper_arr, getRunwayNum(), sizeof(depart_nums), compare_EmergencyNum); //decreasing
+	if (helper_arr[0].EmergencyNum > helper_arr[1].EmergencyNum)
+	{
+		rFlight = findRunway(helper_arr[0].RunwayID);
+		return depart(rFlight);
+	}
+	else
+	{
+		qsort(helper_arr, getRunwayNum(), sizeof(depart_nums), compare_FlightNum); //decreasing
+		if (helper_arr[0].FlightNum > helper_arr[1].FlightNum)
+		{
+			rFlight = findRunway(helper_arr[0].RunwayID);
+			return depart(rFlight);
+		}
+		else
+		{
+			qsort(helper_arr, getRunwayNum(), sizeof(depart_nums), compare_RunwayID); //increasing
+			rFlight = findRunway(helper_arr[0].RunwayID);
+			return depart(rFlight);
+		}
+	}
+	free(helper_arr);
 }
 
 void printAirport()

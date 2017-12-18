@@ -44,10 +44,13 @@ int main()
 	*/
 
 	/* Airport ADT Simple Test */
-	int rNum[3] = { 1, 4, 2 };
+	int rNum[3] = { 5, 4, 2 };
 	FlightType rType[2] = { DOMESTIC, INTERNATIONAL };
 	addRunway(rNum[0], rType[0]);
 	addFlightToAirport(1, rType[0], "TLV", FALSE);
+	addFlightToAirport(7, rType[0], "TLV", FALSE);
+	addFlightToAirport(8, rType[0], "TLV", TRUE);
+	addFlightToAirport(9, rType[0], "TLV", FALSE);
 	addRunway(rNum[1], rType[1]);
 	addFlightToAirport(2, rType[1], "YYZ", TRUE);
 	addRunway(rNum[2], rType[1]);
@@ -56,8 +59,7 @@ int main()
 	addFlightToAirport(5, rType[1], "ARL", TRUE);
 	addFlightToAirport(6, rType[1], "JFK", TRUE);
 	//removeRunway(rNum[1]);
-	departAirport();
-	//departAirport();
+	departAirport2();
 	printAirport();
 	destroyAirport();
 }

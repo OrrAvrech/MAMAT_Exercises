@@ -15,6 +15,7 @@ Result addRunway(int, FlightType);
 Result removeRunway(int);
 Result addFlightToAirport(int, FlightType, char*, BOOL);
 Result departAirport();
+Result departAirport2();
 Result changeDest(char*, char*);
 Result delay(char*);
 void printAirport();
