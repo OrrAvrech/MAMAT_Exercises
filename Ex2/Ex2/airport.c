@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "airport.h"
 
 /* Globals */
@@ -14,7 +15,7 @@ typedef struct _depart_nums {
 	int RunwayID;
 } depart_nums;
 
-/* Helper Functions Declaration */
+/* Helper Function Declarations */
 int getRunwayNum();
 pRunway findRunway(int rNum);
 int compare_EmergencyNum(const void* a, const void* b);
@@ -122,57 +123,6 @@ Result addFlightToAirport(int fNum, FlightType fType, char* fDest, BOOL fEmergen
 	}
 }
 
-Result departAirport()
-{
-	if (g_airport == NULL)
-		return FAILURE;
-	pAirport pElem;
-	pElem = g_airport;
-	pRunway rFlight = pElem->r;
-	int tempEmergencyNum = 0;
-	int tempFlightNum = 0;
-	int tempRunwayNum = MAX_ID+1;
-	int flagEqual = 1;
-	int i = 0;
-	while (i<2)
-	{
-		while (pElem)
-		{
-			if (getEmergencyNum(pElem->r) > tempEmergencyNum)
-			{
-				flagEqual = 0;
-				rFlight = pElem->r;
-				tempEmergencyNum = getEmergencyNum(rFlight);
-				tempFlightNum = getFlightNum(rFlight);
-				tempRunwayNum = rFlight->Num;
-			}
-			else if (getEmergencyNum(pElem->r) == tempEmergencyNum || flagEqual == 1)
-			{
-				flagEqual = 1;
-				if (getFlightNum(pElem->r) > tempFlightNum)
-				{
-					rFlight = pElem->r;
-					tempFlightNum = getFlightNum(rFlight);
-					tempRunwayNum = rFlight->Num;
-				}
-				else if (getFlightNum(pElem->r) == tempFlightNum)
-				{
-					if (pElem->r->Num < tempRunwayNum)
-					{
-						rFlight = pElem->r;
-						tempRunwayNum = rFlight->Num;
-					}
-				}
-			}
-			pElem = pElem->pNext;
-		}
-		i++;
-		pElem = g_airport;
-	}
-
-	return depart(rFlight);
-}
-
 int getRunwayNum()
 {
 	if (g_airport == NULL)
@@ -240,7 +190,7 @@ int compare_RunwayID(const void *a, const void *b)
 		return -1;
 }
 
-Result departAirport2()
+Result departAirport()
 {
 	if (g_airport == NULL)
 		return FAILURE;
@@ -252,7 +202,6 @@ Result departAirport2()
 	pElem = g_airport;
 	int i = 0;
 	pRunway rFlight = NULL;
-	//int(*compare_arr[])(const void*, const void*) = { compare_EmergencyNum, compare_FlightNum, compare_RunwayID };
 	while (pElem)
 	{
 		helper_arr[i].EmergencyNum = getEmergencyNum(pElem->r);

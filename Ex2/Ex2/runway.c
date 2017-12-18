@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include "runway.h"
 
+/* Helper Function Declarations */
+Node* listAppend(Node* head, pFlight fCopy);
+Node* listInsertIn(Node* head, int count, pFlight fCopy);
+
 pRunway createRunway(int rNum, FlightType rType)
 {
 	if (rNum < 1 || rNum > MAX_ID)
@@ -90,7 +94,7 @@ Node* listAppend(Node* head, pFlight fCopy)
 	Node *newNode;
 	newNode = (Node*)malloc(sizeof(Node));
 	if (newNode == NULL)
-		return;
+		return NULL;
 	newNode->f = fCopy;
 	newNode->pNext = NULL; // Since it's the last node on the list
 	if (head == NULL)
@@ -114,7 +118,7 @@ Node* listInsertIn(Node* head, int count, pFlight fCopy)
 	Node *newNode;
 	newNode = (Node*)malloc(sizeof(Node));
 	if (newNode == NULL)
-		return;
+		return NULL;
 	newNode->f = fCopy;
 	if (count == 0)
 	{	

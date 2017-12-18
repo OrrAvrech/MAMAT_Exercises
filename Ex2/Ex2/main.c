@@ -59,7 +59,7 @@ int main()
 	addFlightToAirport(5, rType[1], "ARL", TRUE);
 	addFlightToAirport(6, rType[1], "JFK", TRUE);
 	//removeRunway(rNum[1]);
-	departAirport2();
+	departAirport();
 	printAirport();
 	destroyAirport();
 }
