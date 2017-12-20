@@ -146,7 +146,7 @@ Result addFlight(pRunway r, pFlight f)
 	if (fCopy == NULL)
 		return FAILURE;
 	fCopy = createFlight(f->Num, f->Type, f->Dest, f->IsEmergency);
-	free(f);
+	//free(f);                             //doesnt it delete the original flight?
 
 	if ((fCopy->Type != r->Type) || (isFlightExists(r, fCopy->Num) == TRUE))
 		return FAILURE;

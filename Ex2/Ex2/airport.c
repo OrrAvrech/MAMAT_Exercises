@@ -1,22 +1,9 @@
-<<<<<<< HEAD
-//airport.c
-// airport implementation
-=======
 // airport.c -- Airport Implementation
->>>>>>> bb67105bf99c9f8e5dfcd6eb39d707b456bc48c9
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "airport.h"
 
-<<<<<<< HEAD
-Result addRunway(int rNum, FlightType rType) {
-
-	// *** add  HERE   tests for inputs.****
-
-
-}
-=======
 /* Globals */
 pAirport g_airport = NULL;
 
@@ -191,4 +178,106 @@ void destroyAirport()
 	free(g_airport);
 }
 
->>>>>>> bb67105bf99c9f8e5dfcd6eb39d707b456bc48c9
+Result changeDest(char* old_dest, char* new_dest) 
+{
+	if (g_airport == NULL)
+		return FAILURE;
+
+	if (strlen(old_dest) != 3 || strlen(new_dest) != 3) return FAILURE;
+	else
+	{
+		int i;
+		for (i = 0; i < 3; i++)
+		{
+			if (old_dest[i] < 'A' || old_dest[i] > 'Z' || new_dest[i] < 'A' || new_dest[i] > 'Z')
+				return FAILURE;
+		}
+	}
+
+	pAirport pElem = g_airport;
+	pRunway rRunway; 
+	pNode flight_Node; 
+	pFlight flight;
+	while(pElem)
+	{ 
+		rRunway = pElem->r;
+		flight_Node = rRunway->Head;
+		while (flight_Node)
+		{
+			flight = flight_Node->f;
+			if (!strcmp(flight->Dest, old_dest))
+				flight->Dest = new_dest;
+			flight_Node = flight_Node->pNext;
+		}
+
+		pElem = pElem->pNext;
+	}
+	return SUCCESS;
+}
+
+Result delay(char* fDst)
+{
+	if (g_airport == NULL)
+		return FAILURE;
+
+	if (strlen(fDst) != 3 ) return FAILURE;
+	else
+	{
+		int i;
+		for (i = 0; i < 3; i++)
+		{
+			if (fDst[i] < 'A' || fDst[i] > 'Z')
+				return FAILURE;
+		}
+	}
+
+	pAirport pElem = g_airport;
+	pRunway rRunway, eme_runaway_delayed, reg_runaway_delayed;
+	pNode flight_Node;
+	pFlight flight, temp_flight;
+	while (pElem)
+	{
+		rRunway = pElem->r;
+		eme_runaway_delayed = createRunway(rRunway->Num, rRunway->Type);
+		if (eme_runaway_delayed == NULL) return FAILURE;
+		reg_runaway_delayed = createRunway(rRunway->Num, rRunway->Type);
+		if (reg_runaway_delayed == NULL) return FAILURE;
+		flight_Node = rRunway->Head;
+		while (flight_Node)
+		{
+			flight = flight_Node->f;
+			if (!strcmp(flight->Dest, fDst))
+			{
+				if (flight->IsEmergency)
+					addFlight(eme_runaway_delayed, flight);
+				else
+					addFlight(reg_runaway_delayed, flight);
+				flight_Node = flight_Node->pNext;
+				removeFlight(rRunway, flight->Num);
+			}
+			else flight_Node = flight_Node->pNext;
+		}
+		if (eme_runaway_delayed != NULL)
+		{
+			flight_Node = eme_runaway_delayed->Head;
+			for (int i = 0; i < getFlightNum(eme_runaway_delayed); i++)
+			{
+				addFlight(rRunway, flight_Node->f);
+				flight_Node = flight_Node->pNext;
+			}
+			destroyRunway(eme_runaway_delayed);
+		}
+		if (reg_runaway_delayed != NULL)
+		{
+			flight_Node = reg_runaway_delayed->Head;
+			for (int i = 0; i < getFlightNum(reg_runaway_delayed); i++)
+			{
+				addFlight(rRunway, flight_Node->f);
+				flight_Node = flight_Node->pNext;
+			}
+			destroyRunway(reg_runaway_delayed);
+		}
+		pElem = pElem->pNext;
+	}
+	return SUCCESS;
+}

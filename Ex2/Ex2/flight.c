@@ -11,7 +11,7 @@ BOOL FlightValidParams(int fNum, char* fDst)
 		// Flight Number is Out of Range
 		return FALSE;
 	if (strlen(fDst) == 3)
-		// Flight Destination is wrong
+		// Flight Destination is correct
 	{
 		int i;
 		for (i = 0; i < strlen(fDst); i++)

@@ -14,9 +14,7 @@ int main()
 	pFlight f;
 	f = createFlight(fNum, fType, fDst, fEmergency);
 	printFlight(f);
-<<<<<<< HEAD
 	destroyFlight(f);   
-=======
 	destroyFlight(f);
 
 	/* Runway ADT Simple Test 
@@ -58,10 +56,16 @@ int main()
 	addFlightToAirport(4, rType[1], "LDN", TRUE);
 	addFlightToAirport(5, rType[1], "ARL", TRUE);
 	addFlightToAirport(6, rType[1], "JFK", TRUE);
-	//removeRunway(rNum[1]);
+	addFlightToAirport(7, rType[1], "LGD", FALSE);
+	addFlightToAirport(8, rType[1], "LGD", FALSE);
+	addFlightToAirport(9, rType[1], "JFK", FALSE);
+	addFlightToAirport(10, rType[1], "JFK", FALSE);
+	printAirport();
+	delay("LGD");
+	printAirport();
+	changeDest("LGD", "LGG");
+	printAirport();
 	departAirport();
-	//departAirport();
 	printAirport();
 	destroyAirport();
->>>>>>> bb67105bf99c9f8e5dfcd6eb39d707b456bc48c9
 }

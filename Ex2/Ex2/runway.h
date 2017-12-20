@@ -8,7 +8,7 @@
 typedef struct _Node {
 	pFlight f;		// element data
 	struct _Node *pNext;	// pointer to next element
-} Node;
+} Node, *pNode;
 
 typedef struct _Runway {
 	int Num;
