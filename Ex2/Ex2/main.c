@@ -14,6 +14,9 @@ int main()
 	pFlight f;
 	f = createFlight(fNum, fType, fDst, fEmergency);
 	printFlight(f);
+<<<<<<< HEAD
+	destroyFlight(f);   
+=======
 	destroyFlight(f);
 
 	/* Runway ADT Simple Test 
@@ -62,4 +65,5 @@ int main()
 	departAirport();
 	printAirport();
 	destroyAirport();
+>>>>>>> bb67105bf99c9f8e5dfcd6eb39d707b456bc48c9
 }

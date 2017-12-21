@@ -1,10 +1,23 @@
+<<<<<<< HEAD
+//airport.c
+// airport implementation
+=======
 // airport.c -- Airport Implementation
+>>>>>>> bb67105bf99c9f8e5dfcd6eb39d707b456bc48c9
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "airport.h"
 
+<<<<<<< HEAD
+Result addRunway(int rNum, FlightType rType) {
+
+	// *** add  HERE   tests for inputs.****
+
+
+}
+=======
 /* Globals */
 pAirport g_airport = NULL;
 
@@ -260,3 +273,4 @@ void destroyAirport()
 	free(g_airport);
 }
 
+>>>>>>> bb67105bf99c9f8e5dfcd6eb39d707b456bc48c9
