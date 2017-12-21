@@ -37,7 +37,7 @@ pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 	
 	f->Num  = fNum;
 	f->Type = fType;
-	f->Dest = _strdup(fDst); // malloc and strcopy in unix
+	f->Dest = fDst; //_strdup(fDst); // malloc and strcopy in unix  // gave me errors;
 	f->IsEmergency = fEmergency;
 
 	return f;

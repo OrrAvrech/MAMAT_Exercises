@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "airport.h"
 
 /* Globals */
@@ -162,6 +163,7 @@ void printAirport()
 		printRunway(pElem->r);
 		pElem = pElem->pNext;
 	}
+	printf("\n")
 }
 
 void destroyAirport()
@@ -219,7 +221,6 @@ Result delay(char* fDst)
 {
 	if (g_airport == NULL)
 		return FAILURE;
-
 	if (strlen(fDst) != 3 ) return FAILURE;
 	else
 	{
@@ -235,6 +236,7 @@ Result delay(char* fDst)
 	pRunway rRunway, eme_runaway_delayed, reg_runaway_delayed;
 	pNode flight_Node;
 	pFlight flight, temp_flight;
+	int i;
 	while (pElem)
 	{
 		rRunway = pElem->r;
@@ -260,7 +262,7 @@ Result delay(char* fDst)
 		if (eme_runaway_delayed != NULL)
 		{
 			flight_Node = eme_runaway_delayed->Head;
-			for (int i = 0; i < getFlightNum(eme_runaway_delayed); i++)
+			for (i = 0; i < getFlightNum(eme_runaway_delayed); i++)
 			{
 				addFlight(rRunway, flight_Node->f);
 				flight_Node = flight_Node->pNext;
@@ -270,7 +272,7 @@ Result delay(char* fDst)
 		if (reg_runaway_delayed != NULL)
 		{
 			flight_Node = reg_runaway_delayed->Head;
-			for (int i = 0; i < getFlightNum(reg_runaway_delayed); i++)
+			for (i = 0; i < getFlightNum(reg_runaway_delayed); i++)
 			{
 				addFlight(rRunway, flight_Node->f);
 				flight_Node = flight_Node->pNext;
