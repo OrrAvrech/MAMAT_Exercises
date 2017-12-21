@@ -28,8 +28,8 @@ BOOL FlightValidParams(int fNum, char* fDst)
 
 	return TRUE;
 }
-/*	 getting flight number and flight destionation as input and checks if
-they are valid.  */
+/*	INPUTS: flight number ,flight type,  flight Destionation and if emergency(BOOL)
+ OUTPUT: flight struct containing the flight parameters*/
 pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 {
 	pFlight f;
@@ -46,7 +46,9 @@ pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 
 	return f;
 }
-
+/*	 INPUTS: flight struct
+OUTPUT: none 
+clearing the flight from memeory*/
 void destroyFlight(pFlight f)
 {
 	if (f == NULL)
@@ -54,7 +56,10 @@ void destroyFlight(pFlight f)
 	free(f->Dest);
 	free(f);
 }
-
+/*	 INPUTS: flight struct
+OUTPUT: none
+printing flight details in the format of
+"Flight: (flight num) (flight type first letter) (flight destination) (emergency or regular first letter)"*/
 void printFlight(pFlight f)
 {
 	if (f == NULL)
@@ -65,7 +70,6 @@ void printFlight(pFlight f)
 		cType = 'I';
 	if (f->IsEmergency == TRUE)
 		cEm = 'E';
-
 	printf("Flight %d %c %s %c\n", f->Num, cType, f->Dest, cEm);
 }
 

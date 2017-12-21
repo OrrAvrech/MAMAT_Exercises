@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include "runway.h"
 
+
+/*	 INPUTS: runway number and runway type
+OUTPUT: none
+clearing the flight from memeory*/
 pRunway createRunway(int rNum, FlightType rType)
 {
 	if (rNum < 1 || rNum > MAX_ID)
