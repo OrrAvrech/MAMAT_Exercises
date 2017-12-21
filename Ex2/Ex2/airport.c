@@ -8,6 +8,24 @@
 /* Globals */
 pAirport g_airport = NULL;
 
+/* Data Types */
+typedef struct _depart_nums {
+	int EmergencyNum;
+	int FlightNum;
+	int RunwayID;
+} depart_nums;
+
+/* Helper Function Declarations */
+
+int getRunwayNum();
+pRunway findRunway(int rNum);
+int compare_EmergencyNum(const void* a, const void* b);
+int compare_FlightNum(const void* a, const void* b);
+int compare_RunwayID(const void* a, const void* b);
+
+/*	 INPUTS: runway number and runway type
+OUTPUT: SUCCESS if managed to add the runway to the airport, else, FAILURE
+*/
 Result addRunway(int rNum, FlightType rType)
 {
 	if (rNum < 1 || rNum > MAX_ID)
@@ -45,6 +63,9 @@ Result addRunway(int rNum, FlightType rType)
 	return SUCCESS;
 }
 
+/*	 INPUTS: runway number and runway type
+OUTPUT: SUCCESS if managed to add the runway to the airport, else, FAILURE
+*/
 Result removeRunway(int rNum)
 {
 	if (g_airport == NULL || rNum < 1 || rNum > MAX_ID)
@@ -74,6 +95,10 @@ Result removeRunway(int rNum)
 	return FAILURE; // No runway has been found
 }
 
+/*	 INPUTS: flight number, flight type, flight destination, emergency(BOOL)
+OUTPUT: SUCCESS if managed to add the flight to the airport, else, FAILURE
+adds a flight to the airport and putting it in the correct runway in the correct order
+*/
 Result addFlightToAirport(int fNum, FlightType fType, char* fDest, BOOL fEmergency)
 {
 	pFlight f;
@@ -114,50 +139,142 @@ Result addFlightToAirport(int fNum, FlightType fType, char* fDest, BOOL fEmergen
 	}
 }
 
+/* helper function
+counts the number of runways in the airport
+*/
+int getRunwayNum()
+{
+	if (g_airport == NULL)
+		return -1;
+	pAirport pElem;
+	pElem = g_airport;
+	int count = 0;
+	while (pElem)
+	{
+		count++;
+		pElem = pElem->pNext;
+	}
+	return count;
+}
+
+/* helper function
+gets a runway number and return a pointer to the runway struct
+*/
+pRunway findRunway(int rNum)
+{
+	pAirport pElem;
+	pElem = g_airport;
+	while (pElem)
+	{
+		if (pElem->r->Num == rNum)
+			return pElem->r;
+		pElem = pElem->pNext;
+	}
+	return NULL;
+}
+
+/* helper function
+compares the number of emergency flights and returns -1,0,1 if the first number is smaller,equal,larger
+than the other number
+*/
+int compare_EmergencyNum(const void *a, const void *b) 
+{	// Decreasing Order
+	depart_nums* pElem_a = (depart_nums*) a;
+	depart_nums* pElem_b = (depart_nums*) b;
+
+	if (pElem_a->EmergencyNum < pElem_b->EmergencyNum)
+		return 1;
+	else if (pElem_a->EmergencyNum < pElem_b->EmergencyNum)
+		return 0;
+	else 
+		return -1;
+}
+
+/* helper function
+compares the number of flights and returns -1,0,1 if the first number is smaller,equal,larger
+than the other number
+*/
+int compare_FlightNum(const void *a, const void *b)
+{	// Decreasing Order
+	depart_nums* pElem_a = (depart_nums*)a;
+	depart_nums* pElem_b = (depart_nums*)b;
+
+	if (pElem_a->FlightNum < pElem_b->FlightNum)
+		return 1;
+	else if (pElem_a->FlightNum < pElem_b->FlightNum)
+		return 0;
+	else
+		return -1;
+}
+
+/* helper function
+compares the runway number and returns -1,0,1 if the first number is larger,equal,smaller
+than the other number
+*/
+int compare_RunwayID(const void *a, const void *b)
+{	// Increasing Order
+	depart_nums* pElem_a = (depart_nums*)a;
+	depart_nums* pElem_b = (depart_nums*)b;
+
+	if (pElem_a->RunwayID > pElem_b->RunwayID)
+		return 1;
+	else if (pElem_a->RunwayID < pElem_b->RunwayID)
+		return 0;
+	else
+		return -1;
+}
+
+/*	 INPUTS: none
+OUTPUT: SUCCESS if managed to depart the flight from the airport, else, FAILURE
+choose a flight to depart and remove it from the airport 
+*/
 Result departAirport()
 {
 	if (g_airport == NULL)
 		return FAILURE;
+	depart_nums* helper_arr;
+	helper_arr = (depart_nums*)malloc(getRunwayNum() * sizeof(depart_nums));
+	if (helper_arr == NULL)
+		return FAILURE;
 	pAirport pElem;
 	pElem = g_airport;
-	pRunway rFlight = pElem->r;
-	int tempEmergencyNum = 0;
-	int tempFlightNum = 0;
-	int tempRunwayNum = MAX_ID+1;
-	int flagEqual = 1;
+	int i = 0;
+	pRunway rFlight = NULL;
 	while (pElem)
 	{
-		if (getEmergencyNum(pElem->r) > tempEmergencyNum)
-		{
-			flagEqual = 0;
-			rFlight = pElem->r;
-			tempEmergencyNum = getEmergencyNum(rFlight);
-			tempFlightNum = getFlightNum(rFlight);
-			tempRunwayNum = rFlight->Num;
-		}
-		else if (getEmergencyNum(pElem->r) == tempEmergencyNum || flagEqual == 1)
-		{
-			flagEqual = 1;
-			if (getFlightNum(pElem->r) > tempFlightNum)
-			{
-				rFlight = pElem->r;
-				tempFlightNum = getFlightNum(rFlight);
-				tempRunwayNum = rFlight->Num;
-			}
-			else if (getFlightNum(pElem->r) == tempFlightNum)
-			{
-				if (pElem->r->Num < tempRunwayNum)
-				{
-					rFlight = pElem->r;
-					tempRunwayNum = rFlight->Num;
-				}
-			}
-		}
+		helper_arr[i].EmergencyNum = getEmergencyNum(pElem->r);
+		helper_arr[i].FlightNum	= getFlightNum(pElem->r);
+		helper_arr[i].RunwayID = pElem->r->Num;
+		i++;
 		pElem = pElem->pNext;
 	}
-	return depart(rFlight);
+	qsort(helper_arr, getRunwayNum(), sizeof(depart_nums), compare_EmergencyNum); //decreasing
+	if (helper_arr[0].EmergencyNum > helper_arr[1].EmergencyNum)
+	{
+		rFlight = findRunway(helper_arr[0].RunwayID);
+		return depart(rFlight);
+	}
+	else
+	{
+		qsort(helper_arr, getRunwayNum(), sizeof(depart_nums), compare_FlightNum); //decreasing
+		if (helper_arr[0].FlightNum > helper_arr[1].FlightNum)
+		{
+			rFlight = findRunway(helper_arr[0].RunwayID);
+			return depart(rFlight);
+		}
+		else
+		{
+			qsort(helper_arr, getRunwayNum(), sizeof(depart_nums), compare_RunwayID); //increasing
+			rFlight = findRunway(helper_arr[0].RunwayID);
+			return depart(rFlight);
+		}
+	}
+	free(helper_arr);
 }
-
+/*	 INPUTS: none
+OUTPUT: none
+print all the information about the airports, runways and flights
+*/
 void printAirport()
 {
 	printf("Airport status:\n");
@@ -170,7 +287,10 @@ void printAirport()
 	}
 	printf("\n");
 }
-
+/*	 INPUTS: none
+OUTPUT: none
+clear all the runways and flights from memory
+*/
 void destroyAirport()
 {
 	if (g_airport == NULL)
@@ -184,7 +304,10 @@ void destroyAirport()
 	}
 	free(g_airport);
 }
-
+/*	 INPUTS: old flight destination, new flight destionation
+OUTPUT: SUCCESS if managed to change the flight destionation, else, FAILURE
+finds all the flight to a old destination and change their destionation to new destionation
+*/
 Result changeDest(char* old_dest, char* new_dest) 
 {
 	if (g_airport == NULL)
@@ -221,7 +344,9 @@ Result changeDest(char* old_dest, char* new_dest)
 	}
 	return SUCCESS;
 }
-
+/*	 INPUTS: flight destination
+OUTPUT: SUCCESS if managed to delay the flights to the  destionation, else, FAILURE
+*/
 Result delay(char* fDst)
 {
 	if (g_airport == NULL)
@@ -240,7 +365,7 @@ Result delay(char* fDst)
 	pAirport pElem = g_airport;
 	pRunway rRunway, eme_runaway_delayed, reg_runaway_delayed;
 	pNode flight_Node;
-	pFlight flight, temp_flight;
+	pFlight flight;
 	int i;
 	while (pElem)
 	{

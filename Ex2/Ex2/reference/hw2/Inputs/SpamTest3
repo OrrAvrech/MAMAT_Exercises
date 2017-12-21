@@ -1,0 +1,52 @@
+Insert 1 I
+Insert 2 I
+Insert 3 D
+Insert 4 D 
+Add 1 D TLV R
+Add 2 I BAR E
+Add 3 D ELT E
+Add 4 D TLV R
+Add 5 I MIL E
+Add 6 I MAD R
+Add 7 I PAR R
+Add 8 I PAR E
+Add 9 D HFA E
+Add 10 D HFA R
+Add 11 D TLV R
+Add 12 I PAR E
+Add 13 D TLV R
+print
+add
+insert
+exit
+remove
+depart
+Storm
+Print
+Storm PAR
+Print
+Storm TLV
+Print
+Storm tlv
+Storm TL3
+Depart
+Depart 1
+Depart 3
+Depart 5
+Depart 2
+Depart 1
+Depart 1
+Depart 1
+Depart 1
+Depart 1
+Print
+Add 1 D TLV RR
+Add 1 D TLV 
+Add 1 D TLV R
+Add 99 D TLV R
+Add 432 I BAR R
+Add 0 D ELT R
+Add -1 D ELT R
+Print
+Remove 3
+Print

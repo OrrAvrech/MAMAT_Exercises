@@ -1,0 +1,21 @@
+Insert
+Insert -1 D
+Insert 1 E
+Insert 1234567 I
+Depart
+Depart 0
+Depart 1
+Depart L
+Storm
+Storm CDG
+Storm CD
+Storm CDGG
+Storm Cdg
+Remove
+Remove -1
+Remove 1
+Add
+Add I 1 ABC
+Add I 1 ABC E
+Add D 1 ABC R
+Print

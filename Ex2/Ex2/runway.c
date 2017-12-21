@@ -5,9 +5,13 @@
 #include "runway.h"
 
 
+/* Helper Function Declarations */
+Node* listAppend(Node* head, pFlight fCopy);
+Node* listInsertIn(Node* head, int count, pFlight fCopy);
+
 /*	 INPUTS: runway number and runway type
-OUTPUT: none
-clearing the flight from memeory*/
+OUTPUT: pointer to runway struct 
+creating a runway*/
 pRunway createRunway(int rNum, FlightType rType)
 {
 	if (rNum < 1 || rNum > MAX_ID)
@@ -24,7 +28,9 @@ pRunway createRunway(int rNum, FlightType rType)
 
 	return r;
 }
-
+/*	 INPUTS: pointer runway struct
+OUTPUT: none
+clearing a runway and all the flights in it from memory*/
 void destroyRunway(pRunway r)
 {
 	if (r == NULL)
@@ -38,7 +44,9 @@ void destroyRunway(pRunway r)
 	}
 	free(r);
 }
-
+/*	 INPUTS: pointer runway struct and flight number
+OUTPUT: BOOL True if the flight number is already in the runway, else FALSE 
+*/
 BOOL isFlightExists(pRunway r, int fNum)
 {
 	if (r == NULL || fNum < 1 || fNum > MAX_ID)
@@ -55,6 +63,9 @@ BOOL isFlightExists(pRunway r, int fNum)
 	return FALSE;
 }
 
+/*	 INPUTS: pointer runway struct
+OUTPUT: the number of total flights in the runway
+*/
 int getFlightNum(pRunway r)
 {
 	if (r == NULL)
@@ -69,7 +80,9 @@ int getFlightNum(pRunway r)
 	}
 	return count;
 }
-
+/*	 INPUTS: pointer runway struct
+OUTPUT: the number of emergency flights in the runway
+*/
 int getEmergencyNum(pRunway r)
 {
 	if (r == NULL)
@@ -86,15 +99,15 @@ int getEmergencyNum(pRunway r)
 	return Emergency_count;
 }
 
+/* (Helper function)
+Inserts a new flight <fCopy> in the last node
+*/
 Node* listAppend(Node* head, pFlight fCopy)
 {
-	/* (Helper function)
-		Inserts a new flight <fCopy> in the last node
-	*/
 	Node *newNode;
 	newNode = (Node*)malloc(sizeof(Node));
 	if (newNode == NULL)
-		return;
+		return NULL;
 	newNode->f = fCopy;
 	newNode->pNext = NULL; // Since it's the last node on the list
 	if (head == NULL)
@@ -110,15 +123,15 @@ Node* listAppend(Node* head, pFlight fCopy)
 	return head;
 }
 
+/* (Helper function)
+Inserts a new flight <fCopy> after node #<count>
+*/
 Node* listInsertIn(Node* head, int count, pFlight fCopy)
 {
-	/* (Helper function)
-		Inserts a new flight <fCopy> after node #<count>
-	*/
 	Node *newNode;
 	newNode = (Node*)malloc(sizeof(Node));
 	if (newNode == NULL)
-		return;
+		return NULL;
 	newNode->f = fCopy;
 	if (count == 0)
 	{	
@@ -138,7 +151,9 @@ Node* listInsertIn(Node* head, int count, pFlight fCopy)
 	pElem->pNext = newNode;
 	return head;
 }
-
+/*	 INPUTS: pointer to runway struct and pointer to flight struct
+OUTPUT: SUCCESS if managed to add the flight and FAILURE else
+*/
 Result addFlight(pRunway r, pFlight f)
 {
 	if (r == NULL || f == NULL || (r->Type != f->Type))
@@ -168,6 +183,9 @@ Result addFlight(pRunway r, pFlight f)
 	return SUCCESS;
 }
 
+/*	 INPUTS: pointer to runway struct and flight number
+OUTPUT: SUCCESS if managed to remove the flight and FAILURE else
+*/
 Result removeFlight(pRunway r, int fNum)
 {
 	if ((r == NULL) || (r->Head == NULL) || (isFlightExists(r, fNum) == FALSE))
@@ -192,6 +210,9 @@ Result removeFlight(pRunway r, int fNum)
 	return SUCCESS;
 }
 
+/*	 INPUTS: pointer to runway struct 
+OUTPUT: SUCCESS if managed to the flight that was next to depart and FAILURE else
+*/
 Result depart(pRunway r)
 {
 	if (r == NULL || r->Head == NULL)
@@ -203,6 +224,9 @@ Result depart(pRunway r)
 	return SUCCESS;
 }
 
+/*	 INPUTS: pointer to runway struct 
+OUTPUT: none
+prints the runway details, number of flights waiting and all the flights in the runway*/
 void printRunway(pRunway r)
 {
 	if (r == NULL)

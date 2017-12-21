@@ -1,12 +1,13 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "airport.h"
 #define MAX_LINE_SIZE 256
 int main()
 {
 	/*
-	/* Flight ADT Simple Test 
+	Flight ADT Simple Test 
 	int fNum = 1;
 	FlightType fType = DOMESTIC;
 	char* fDst= "TLV";
@@ -18,7 +19,7 @@ int main()
 	destroyFlight(f);   
 	destroyFlight(f);
 
-	/* Runway ADT Simple Test 
+	Runway ADT Simple Test 
 	int rNum = 1;
 	FlightType rType = DOMESTIC;
 	pRunway r;
@@ -48,9 +49,13 @@ int main()
 	/* Airport ADT Simple Test */
 	/*
 	int rNum[3] = { 1, 4, 2 };
+	int rNum[3] = { 5, 4, 2 };
 	FlightType rType[2] = { DOMESTIC, INTERNATIONAL };
 	addRunway(rNum[0], rType[0]);
 	addFlightToAirport(1, rType[0], "TLV", FALSE);
+	addFlightToAirport(7, rType[0], "TLV", FALSE);
+	addFlightToAirport(8, rType[0], "TLV", TRUE);
+	addFlightToAirport(9, rType[0], "TLV", FALSE);
 	addRunway(rNum[1], rType[1]);
 	addFlightToAirport(2, rType[1], "YYZ", TRUE);
 	addRunway(rNum[2], rType[1]);
@@ -71,7 +76,8 @@ int main()
 	printAirport();
 	destroyAirport(); 
 	*/
-	char szLine[MAX_LINE_SIZE];
+	char szLine[MAX_LINE_SIZE+1];
+	szLine[MAX_LINE_SIZE] = '\0';
 	char* delimters = " \n\t";
 	//char* saveP; //for strtok_r
 	char* func; 
@@ -79,17 +85,41 @@ int main()
 	char* in2;
 	char* in3;
 	char* in4;
+	/*func = (char *)malloc(MAX_LINE_SIZE * sizeof(char)+1);
+	if (func == NULL)
+		return -1;
+	in1 = (char *)malloc(MAX_LINE_SIZE * sizeof(char) + 1);
+	if (in1 == NULL)
+		return -1;
+	in2 = (char *)malloc(MAX_LINE_SIZE * sizeof(char) + 1);
+	if (in2 == NULL)
+		return -1;
+	in3 = (char *)malloc(MAX_LINE_SIZE * sizeof(char) + 1);
+	if (in3 == NULL)
+		return -1;
+	in4 = (char *)malloc(MAX_LINE_SIZE * sizeof(char) + 1);
+	if (in4 == NULL)
+		return -1;*/
 	Result Results;
 	FlightType type;
 	BOOL emergency;
-
 	while (fgets(szLine, MAX_LINE_SIZE, stdin))
 	{
-		func = (char *)strtok(szLine, delimters);
-		in1 = (char *)strtok(NULL, delimters);
-		in2 = (char *)strtok(NULL, delimters);
-		in3 = (char *)strtok(NULL, delimters);
-		in4 = (char *)strtok(NULL, delimters);
+		/*i = 1;
+		strcpy(input[0], strtok(szLine, delimters));
+		while (token || i < 3)
+		{
+			input[i] = (char *)malloc(MAX_LINE_SIZE + 1);
+			token = strtok(NULL, delimters));
+			i++;
+		}*/
+		func = strtok(szLine, delimters);
+		in1 = strtok(NULL, delimters);
+		in2 = strtok(NULL, delimters);
+		in3 = strtok(NULL, delimters);
+		in4 = strtok(NULL, delimters);
+		if (func == NULL)
+			continue;
 		if (!strcmp(func, "Insert"))
 		{
 			if (in1 == NULL || in2 == NULL) 
@@ -217,11 +247,18 @@ int main()
 		}
 		else if (!strcmp(func, "Exit"))
 		{
-			destroyAirport();
-			return 1;
+			break;
 		}
 		else fprintf(stderr, "Command not found.\n");
 	}
+	/*if (func != NULL) free(func);
+	if (in1 != NULL) 
+	{ 
+		free(in1); 
+	}
+	if (in2 != NULL) free(in2);
+	if (in3 != NULL) free(in3);
+	if (in4 != NULL) free(in4);*/
 	destroyAirport();
 	return 1;
 }

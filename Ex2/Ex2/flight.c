@@ -1,5 +1,5 @@
 // flight.c -- Flight Implementation
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,7 +29,7 @@ BOOL FlightValidParams(int fNum, char* fDst)
 	return TRUE;
 }
 /*	INPUTS: flight number ,flight type,  flight Destionation and if emergency(BOOL)
- OUTPUT: flight struct containing the flight parameters*/
+ OUTPUT: pointer flight struct containing the flight parameters*/
 pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 {
 	pFlight f;
@@ -41,12 +41,14 @@ pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 	
 	f->Num  = fNum;
 	f->Type = fType;
-	f->Dest = _strdup(fDst); // malloc and strcopy in unix  // gave me errors;
+	f->Dest = (char*)malloc(sizeof(char)*strlen(fDst));
+	strcpy(f->Dest, fDst);
+	//f->Dest = _strdup(fDst); // malloc and strcopy in unix
 	f->IsEmergency = fEmergency;
 
 	return f;
 }
-/*	 INPUTS: flight struct
+/*	 INPUTS: pointer to flight struct
 OUTPUT: none 
 clearing the flight from memeory*/
 void destroyFlight(pFlight f)
@@ -56,7 +58,7 @@ void destroyFlight(pFlight f)
 	free(f->Dest);
 	free(f);
 }
-/*	 INPUTS: flight struct
+/*	 INPUTS:pointer to flight struct
 OUTPUT: none
 printing flight details in the format of
 "Flight: (flight num) (flight type first letter) (flight destination) (emergency or regular first letter)"*/
