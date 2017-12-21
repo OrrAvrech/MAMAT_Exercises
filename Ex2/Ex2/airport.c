@@ -30,10 +30,15 @@ Result addRunway(int rNum, FlightType rType)
 	}
 	pAirport pElem;
 	pElem = g_airport;
-	while (pElem->pNext)
+	while (pElem)
 	{
 		if (pElem->r->Num == rNum)
 			return FAILURE;
+		pElem = pElem->pNext;
+	}
+	pElem = g_airport;
+	while (pElem->pNext)
+	{
 		pElem = pElem->pNext;
 	}
 	pElem->pNext = newNode;
@@ -163,7 +168,7 @@ void printAirport()
 		printRunway(pElem->r);
 		pElem = pElem->pNext;
 	}
-	printf("\n")
+	printf("\n");
 }
 
 void destroyAirport()

@@ -5,7 +5,10 @@
 #include <string.h>
 #include "flight.h"
 
+/*	 INPUTS: flight number , flight Destionation 
+	 OUTPUT: BOOL TRUE if the input are Valid and FALSE if not*/
 BOOL FlightValidParams(int fNum, char* fDst)
+
 {
 	if (fNum < 1 || fNum > MAX_ID)
 		// Flight Number is Out of Range
@@ -25,7 +28,8 @@ BOOL FlightValidParams(int fNum, char* fDst)
 
 	return TRUE;
 }
-
+/*	 getting flight number and flight destionation as input and checks if
+they are valid.  */
 pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 {
 	pFlight f;
@@ -37,7 +41,7 @@ pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 	
 	f->Num  = fNum;
 	f->Type = fType;
-	f->Dest = fDst; //_strdup(fDst); // malloc and strcopy in unix  // gave me errors;
+	f->Dest = _strdup(fDst); // malloc and strcopy in unix  // gave me errors;
 	f->IsEmergency = fEmergency;
 
 	return f;
