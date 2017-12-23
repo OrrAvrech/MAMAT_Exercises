@@ -84,6 +84,7 @@ Result removeRunway(int rNum)
 	{
 		pPrev = pElem;
 		pElem = pElem->pNext;
+		if (pElem == NULL) return FAILURE;
 		if (pElem->r->Num == rNum)
 		{
 			pPrev->pNext = pElem->pNext;

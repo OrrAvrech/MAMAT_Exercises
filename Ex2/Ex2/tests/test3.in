@@ -1,0 +1,44 @@
+Mister Boin
+Add 22 D JFK R
+Insert 1 
+Insert 1 D
+            Insert 2 D
+Add 23 I JFK R
+Insert 2 D
+Insert 2 I
+Insert 3 R
+Insert 3 I
+Insert 4 I
+Add 22 D JFK 
+Add 22 D JFK R
+Add 22 D JFK R
+Add 23 D JFKR R
+Add 23 P JFK R
+Add -2 D HYT R
+Add 24 D JFK R
+Add 26 D ABC R
+Add 27 D DBZ R
+Add 28 D JFK E
+Add 29 D JFK E
+Add 31 D ABC E
+Add 32 I ABC E
+Add 33 I ABC R
+Print
+Remove 3
+Change JFK POK
+Delay POK
+Print
+Depart
+Depart
+Print
+Depart
+Depart
+Print
+Depart
+Depart
+Print
+Depart
+Depart
+Depart
+Delay JFK
+Change JFK POK

@@ -16,8 +16,6 @@ typedef struct _Runway {
 	Node *Head;
 } Runway, *pRunway;
 
-typedef enum _Result { FAILURE, SUCCESS } Result;
-
 // Runway Interface Functions
 pRunway createRunway(int, FlightType);
 void	destroyRunway(pRunway);

@@ -1,0 +1,36 @@
+Print
+Insert 100001 D
+Insert 100000 D
+Add 100001 D AAA R
+Add 100000 D AAA R
+Add 1 D ABC E
+Add 2 D AAB E
+Add 3 D ACB E
+Add 4 D AHA R
+Print
+Delay AAB
+Print
+Insert 2 I
+Add 19 I APA E
+Delay APA
+Change APA KFC
+Print
+Change KFC ABI
+Print
+Delay ABI
+Print
+Change ABC ACB
+Delay ACB
+Print
+Change AAA
+Change AAA BBB
+Add 20 I BBB E
+Add 22 D PPP E
+Print
+Remove 1
+Print
+Add 919 D ACB R
+Add 900 D QIW R
+Print
+Delay ACB
+Print

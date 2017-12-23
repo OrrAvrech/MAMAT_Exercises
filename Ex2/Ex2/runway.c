@@ -17,7 +17,7 @@ pRunway createRunway(int rNum, FlightType rType)
 	if (rNum < 1 || rNum > MAX_ID)
 		// Runway Number is Out of Range
 		return NULL;
-
+	if (rNum / 1 - rNum > 0) return NULL;
 	pRunway r;
 	r = (pRunway)malloc(sizeof(Runway));
 	if (r == NULL)
@@ -40,7 +40,8 @@ void destroyRunway(pRunway r)
 	{
 		pElem = r->Head;
 		r->Head = r->Head->pNext;
-		free(pElem);
+		destroyFlight(pElem->f);
+		
 	}
 	free(r);
 }
@@ -165,7 +166,7 @@ Result addFlight(pRunway r, pFlight f)
 	if (fCopy == NULL)
 		return FAILURE;
 	fCopy = createFlight(f->Num, f->Type, f->Dest, f->IsEmergency);
-	//free(f);                             //doesnt it delete the original flight?
+	// free(f); will be released by the calling function.
 
 	if ((fCopy->Type != r->Type) || (isFlightExists(r, fCopy->Num) == TRUE))
 		return FAILURE;

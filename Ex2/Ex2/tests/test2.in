@@ -1,0 +1,76 @@
+
+
+
+Print
+print
+add
+Add
+Insert
+insert
+Add 1 D AAA R
+Insert 1 D
+Insert 1 D
+Insert 2 D
+Insert 3 I
+Insert 4 I
+Print
+Add 1 D AAA R
+Add 2 D AAA R
+Add 3 I AAA R
+
+Add 4 I AAA R
+Print
+Add 5 D BBB E
+Add 6 I BBB E
+Add 7 D CCC R
+Add 8 I CCC R
+Print
+Delay AAA
+
+
+Print
+Depart
+Depart
+Depart
+Print
+Remove 4
+Print
+Change AAA KFC
+Print
+Depart
+Depart
+Print
+Delay AAA
+Print
+Delay KFC
+Delay KfC
+Print
+Depart
+Depart
+Depart
+Depart
+Depart
+Print
+Depart
+Depart
+Depart
+Print
+Print
+Depart
+Depart
+Depart
+Depart
+Print
+Remove 1
+Remove 1
+Remove 2
+Remove 2
+Print
+Remove 10
+Remove -1
+Remove 3
+Remove 4
+Print
+
+Exit
+Print

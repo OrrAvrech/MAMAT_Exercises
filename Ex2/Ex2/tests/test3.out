@@ -1,0 +1,71 @@
+Airport status:
+Runway 1 domestic
+4 flights are waiting:
+Flight 28 D JFK E
+Flight 31 D ABC E
+Flight 22 D JFK R
+Flight 26 D ABC R
+Runway 2 domestic
+3 flights are waiting:
+Flight 29 D JFK E
+Flight 24 D JFK R
+Flight 27 D DBZ R
+Runway 3 international
+1 flights are waiting:
+Flight 32 I ABC E
+Runway 4 international
+1 flights are waiting:
+Flight 33 I ABC R
+
+Airport status:
+Runway 1 domestic
+4 flights are waiting:
+Flight 31 D ABC E
+Flight 28 D POK E
+Flight 26 D ABC R
+Flight 22 D POK R
+Runway 2 domestic
+3 flights are waiting:
+Flight 29 D POK E
+Flight 27 D DBZ R
+Flight 24 D POK R
+Runway 4 international
+1 flights are waiting:
+Flight 33 I ABC R
+
+Airport status:
+Runway 1 domestic
+2 flights are waiting:
+Flight 26 D ABC R
+Flight 22 D POK R
+Runway 2 domestic
+3 flights are waiting:
+Flight 29 D POK E
+Flight 27 D DBZ R
+Flight 24 D POK R
+Runway 4 international
+1 flights are waiting:
+Flight 33 I ABC R
+
+Airport status:
+Runway 1 domestic
+1 flights are waiting:
+Flight 22 D POK R
+Runway 2 domestic
+2 flights are waiting:
+Flight 27 D DBZ R
+Flight 24 D POK R
+Runway 4 international
+1 flights are waiting:
+Flight 33 I ABC R
+
+Airport status:
+Runway 1 domestic
+0 flights are waiting:
+Runway 2 domestic
+1 flights are waiting:
+Flight 24 D POK R
+Runway 4 international
+1 flights are waiting:
+Flight 33 I ABC R
+

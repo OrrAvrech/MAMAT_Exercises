@@ -1,12 +1,16 @@
-// ex2.h -- General
+#ifndef EX2_H_
+#define EX2_H_
 
-#ifndef _ex2_h
-#define _ex2_h
+typedef enum ftype_t {
+	DOMESTIC, INTERNATIONAL
+} FlightType;
+typedef enum boolean_t {
+	FALSE, TRUE
+} BOOL;
+typedef enum result_t {
+	FAILURE, SUCCESS
+} Result;
 
-#define MAX_ID 100
+#define MAX_ID (100000)
 
-typedef enum _FlightType{DOMESTIC, INTERNATIONAL} FlightType;
-typedef enum _BOOL{FALSE, TRUE} BOOL;
-
-#endif
-
+#endif /* EX2_H_ */

@@ -1,0 +1,81 @@
+
+print
+Print
+Insert -1 I
+Insert 1 P
+Insert 1 D
+Add 1 D JFK R
+Add 1 D AAA R
+Add 2 D AAA R
+Add 3 D BBB R
+Add 4 D CCC R
+Insert 2 I
+Add 50 I CCC E
+Depart
+Print
+Add 50 I CCC E
+
+
+Print
+Insert 3 D
+Add 60 D KFC E
+Add 61 I KFC E
+Add 62 D ABC E
+Depart
+Insert 4 D
+Print
+Add -1 D KAK R
+Add 11 D aBC R
+Add 12 D AbC R
+Print
+Add 13 D ABc R
+Add 13 D ABC R
+Print
+Add 14 D ARK R
+Add 15 D JFK R
+Print
+Add 16 D JFK R
+Add 17 D JFK E
+Print
+Delay JFK
+Print
+Delay ABC
+Print
+Depart
+Depart
+Depart
+Print
+Depart
+Depart
+Remove 4
+Print
+Depart
+Depart
+Depart
+Print
+Depart
+Depart
+Depart
+Print
+Depart
+Print
+Depart
+Depart
+Depart
+Depart
+Print
+Remove 4
+Print
+Remove 1
+Remove 2
+Remove 3
+Remove 4
+Remove 5
+Insert 1 D
+Add 1 D JFK R
+Add 2 D ABC E
+Print
+Change JFK AAA
+Print
+Delay AAA
+Print
