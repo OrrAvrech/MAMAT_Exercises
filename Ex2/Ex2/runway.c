@@ -17,7 +17,7 @@ pRunway createRunway(int rNum, FlightType rType)
 	if (rNum < 1 || rNum > MAX_ID)
 		// Runway Number is Out of Range
 		return NULL;
-	if (rNum / 1 - rNum > 0) return NULL;
+	// if (rNum % 1 > 0) return NULL;//                                  ** need to be coded better...it doesnt work**
 	pRunway r;
 	r = (pRunway)malloc(sizeof(Runway));
 	if (r == NULL)

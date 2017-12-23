@@ -13,7 +13,7 @@ BOOL FlightValidParams(int fNum, char* fDst)
 	if (fNum < 1 || fNum > MAX_ID)
 		// Flight Number is Out of Range
 		return FALSE;
-	if (fNum / 1 - fNum > 0 ) return FALSE;
+	// if (fNum % 1 > 0 ) return FALSE;                          //  ** need to be coded better...it doesnt work**
 	if (strlen(fDst) == 3)
 		// Flight Destination is correct
 	{
@@ -27,7 +27,7 @@ BOOL FlightValidParams(int fNum, char* fDst)
 	else
 		return FALSE;
 
-	return TRUE;
+	return TRUE; 
 }
 /*	INPUTS: flight number ,flight type,  flight Destionation and if emergency(BOOL)
  OUTPUT: pointer flight struct containing the flight parameters*/
