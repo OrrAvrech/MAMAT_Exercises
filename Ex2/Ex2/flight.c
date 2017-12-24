@@ -43,7 +43,7 @@ pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 	f->Num  = fNum;
 	f->Type = fType;
 	f->Dest = (char*)malloc(strlen(fDst)+1);
-	strcpy(f->Dest, fDst);
+	strncpy(f->Dest, fDst,4);
 	//f->Dest = _strdup(fDst); // malloc and strcopy in unix
 	f->IsEmergency = fEmergency;
 
@@ -56,7 +56,7 @@ void destroyFlight(pFlight f)
 {
 	if (f == NULL)
 		return;
-	// free(f->Dest); removed to check if tests are passing. im not sure you need to free the string because somehow f clears it on it own? 
+	free(f->Dest); //removed to check if tests are passing. im not sure you need to free the string because somehow f clears it on it own? 
 	free(f);
 }
 /*	 INPUTS:pointer to flight struct

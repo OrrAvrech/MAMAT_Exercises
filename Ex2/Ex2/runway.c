@@ -41,7 +41,7 @@ void destroyRunway(pRunway r)
 		pElem = r->Head;
 		r->Head = r->Head->pNext;
 		destroyFlight(pElem->f);
-		
+		free(pElem);
 	}
 	free(r);
 }
@@ -166,11 +166,11 @@ Result addFlight(pRunway r, pFlight f)
 	if (fCopy == NULL)
 		return FAILURE;
 	fCopy = createFlight(f->Num, f->Type, f->Dest, f->IsEmergency);
-	// free(f); will be released by the calling function.
-
 	if ((fCopy->Type != r->Type) || (isFlightExists(r, fCopy->Num) == TRUE))
+	{
+		destroyFlight(fCopy);
 		return FAILURE;
-
+	}
 	int Emergency_count = getEmergencyNum(r);
 	int Flight_count = getFlightNum(r);
 	if (!fCopy->IsEmergency)
@@ -197,6 +197,7 @@ Result removeFlight(pRunway r, int fNum)
 	if (pElem->f->Num == fNum)
 	{	// FlightNum is in Head
 		r->Head = pElem->pNext;
+		destroyFlight(pElem->f);
 		free(pElem);
 		return SUCCESS;
 	}
@@ -207,6 +208,7 @@ Result removeFlight(pRunway r, int fNum)
 		pElem = pElem->pNext;
 	}
 	pPrev->pNext = pElem->pNext;
+	destroyFlight(pElem->f);
 	free(pElem);
 	return SUCCESS;
 }
@@ -221,6 +223,7 @@ Result depart(pRunway r)
 	Node *pElem;
 	pElem = r->Head;
 	r->Head = pElem->pNext;
+	destroyFlight(pElem->f);
 	free(pElem);
 	return SUCCESS;
 }

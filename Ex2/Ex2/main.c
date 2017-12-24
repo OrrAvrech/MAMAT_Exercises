@@ -106,7 +106,7 @@ int main()
 	while (fgets(szLine, MAX_LINE_SIZE, stdin))
 	{
 		/*i = 1;
-		strcpy(input[0], strtok(szLine, delimters));
+		strncpy(input[0], strtok(szLine, delimters));
 		while (token || i < 3)
 		{
 			input[i] = (char *)malloc(MAX_LINE_SIZE + 1);
@@ -251,14 +251,6 @@ int main()
 		}
 		else fprintf(stderr, "Command not found.\n");
 	}
-	/*if (func != NULL) free(func);
-	if (in1 != NULL) 
-	{ 
-		free(in1); 
-	}
-	if (in2 != NULL) free(in2);
-	if (in3 != NULL) free(in3);
-	if (in4 != NULL) free(in4);*/
 	destroyAirport();
 	return 1;
-}
+} 

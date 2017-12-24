@@ -1,5 +1,5 @@
 // airport.c -- Airport Implementation
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -51,7 +51,11 @@ Result addRunway(int rNum, FlightType rType)
 	while (pElem)
 	{
 		if (pElem->r->Num == rNum)
+		{
+			free(newNode);
+			destroyRunway(runw);
 			return FAILURE;
+		}
 		pElem = pElem->pNext;
 	}
 	pElem = g_airport;
@@ -73,8 +77,8 @@ Result removeRunway(int rNum)
 	pAirport pElem, pPrev;
 	pElem = g_airport;
 	pPrev = pElem;
-	if (pElem->r->Num == rNum)
-	{	// Runway is in airport head
+	if (pElem->r->Num == rNum) // Runway is in airport head
+	{	
 		g_airport = pElem->pNext;
 		destroyRunway(pElem->r);
 		free(pElem);
@@ -103,6 +107,7 @@ adds a flight to the airport and putting it in the correct runway in the correct
 Result addFlightToAirport(int fNum, FlightType fType, char* fDest, BOOL fEmergency)
 {
 	pFlight f;
+	Result results;
 	f = createFlight(fNum, fType, fDest, fEmergency);
 	if (f == NULL || g_airport == NULL)
 		return FAILURE;
@@ -114,7 +119,10 @@ Result addFlightToAirport(int fNum, FlightType fType, char* fDest, BOOL fEmergen
 	while (pElem)
 	{
 		if (isFlightExists(pElem->r, fNum))
+		{
+			destroyFlight(f);
 			return FAILURE;
+		}
 		if (f->Type == pElem->r->Type)
 		{
 			count++;
@@ -132,11 +140,16 @@ Result addFlightToAirport(int fNum, FlightType fType, char* fDest, BOOL fEmergen
 		pElem = pElem->pNext;
 	}
 	if (count == 0)
+	{
 		// No runway exists with the given flight type
+		destroyFlight(f);
 		return FAILURE;
+	}
 	else
 	{
-		return addFlight(rFlight, f);
+		results = addFlight(rFlight, f);
+		destroyFlight(f);
+		return results;
 	}
 }
 
@@ -362,7 +375,9 @@ Result delay(char* fDst)
 				return FAILURE;
 		}
 	}
-
+	char * destination;
+	destination = malloc(sizeof(fDst));
+	strncpy(destination, fDst,4);
 	pAirport pElem = g_airport;
 	pRunway rRunway, eme_runaway_delayed, reg_runaway_delayed;
 	pNode flight_Node;
@@ -379,7 +394,7 @@ Result delay(char* fDst)
 		while (flight_Node)
 		{
 			flight = flight_Node->f;
-			if (!strcmp(flight->Dest, fDst))
+			if (!strcmp(flight->Dest, destination))
 			{
 				if (flight->IsEmergency)
 					addFlight(eme_runaway_delayed, flight);
@@ -412,5 +427,6 @@ Result delay(char* fDst)
 		}
 		pElem = pElem->pNext;
 	}
+	free(destination);
 	return SUCCESS;
 }
