@@ -13,7 +13,6 @@ BOOL FlightValidParams(int fNum, char* fDst)
 	if (fNum < 1 || fNum > MAX_ID)
 		// Flight Number is Out of Range
 		return FALSE;
-	// if (fNum % 1 > 0 ) return FALSE;                          //  ** need to be coded better...it doesnt work**
 	if (strlen(fDst) == 3)
 		// Flight Destination is correct
 	{
@@ -44,7 +43,6 @@ pFlight createFlight(int fNum, FlightType fType, char *fDst, BOOL fEmergency)
 	f->Type = fType;
 	f->Dest = (char*)malloc(strlen(fDst)+1);
 	strncpy(f->Dest, fDst,4);
-	//f->Dest = _strdup(fDst); // malloc and strcopy in unix
 	f->IsEmergency = fEmergency;
 
 	return f;
@@ -56,7 +54,6 @@ void destroyFlight(pFlight f)
 {
 	if (f == NULL)
 		return;
-	free(f->Dest); //removed to check if tests are passing. im not sure you need to free the string because somehow f clears it on it own? 
 	free(f);
 }
 /*	 INPUTS:pointer to flight struct
