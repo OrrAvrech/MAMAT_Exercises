@@ -1,0 +1,14 @@
+#!/bin/bash
+
+input=$(<"$1")
+convfile=$(echo "$input" | tr ,.: " ") 
+maxlen=0
+for token in $convfile; do
+  len=${#token}
+  if (( len > maxlen ));then
+    maxlen=${#token}
+    longest=$token
+  fi
+done
+printf 'The longest word is %s and its length is %d.\n' "$longest" "$maxlen"
+exit 0

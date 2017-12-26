@@ -1,0 +1,85 @@
+Graph vertices:
+0
+Graph edges:
+Shortest Path Results:
+The shortest path from source 0     to 0     costs: 0     and the previous vertex is: 0    
+The neighbors of vertex 0 are:
+Graph vertices:
+1
+0
+Graph edges:
+Shortest Path Results:
+The shortest path from source 0     to 0     costs: 0     and the previous vertex is: 0    
+The shortest path from source 0     to 1     costs: 2147483647 and the previous vertex is: -1   
+Shortest Path Results:
+The shortest path from source 1     to 0     costs: 2147483647 and the previous vertex is: -1   
+The shortest path from source 1     to 1     costs: 0     and the previous vertex is: 1    
+The neighbors of vertex 0 are:
+The neighbors of vertex 1 are:
+Shortest Path Results:
+The shortest path from source 0     to 0     costs: 0     and the previous vertex is: 0    
+The shortest path from source 0     to 1     costs: 2147483647 and the previous vertex is: -1   
+The shortest path from source 0     to 2     costs: 2147483647 and the previous vertex is: -1   
+The shortest path from source 0     to 3     costs: 2147483647 and the previous vertex is: -1   
+The shortest path from source 0     to 4     costs: 2147483647 and the previous vertex is: -1   
+The shortest path from source 0     to 5     costs: 2147483647 and the previous vertex is: -1   
+The shortest path from source 0     to 6     costs: 2147483647 and the previous vertex is: -1   
+The shortest path from source 0     to 7     costs: 2147483647 and the previous vertex is: -1   
+The shortest path from source 0     to 8     costs: 2147483647 and the previous vertex is: -1   
+The shortest path from source 0     to 9     costs: 2147483647 and the previous vertex is: -1   
+The neighbors of vertex 0 are:
+The neighbors of vertex 9 are:
+0
+The neighbors of vertex 0 are:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Graph vertices:
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+Graph edges:
+0-9
+0-8
+0-7
+0-6
+0-5
+0-4
+0-3
+0-2
+0-1
+Shortest Path Results:
+The shortest path from source 0     to 0     costs: 0     and the previous vertex is: 0    
+The shortest path from source 0     to 1     costs: 2     and the previous vertex is: 0    
+The shortest path from source 0     to 2     costs: 1     and the previous vertex is: 0    
+The shortest path from source 0     to 3     costs: 1     and the previous vertex is: 0    
+The shortest path from source 0     to 4     costs: 1     and the previous vertex is: 0    
+The shortest path from source 0     to 5     costs: 1     and the previous vertex is: 0    
+The shortest path from source 0     to 6     costs: 1     and the previous vertex is: 0    
+The shortest path from source 0     to 7     costs: 1     and the previous vertex is: 0    
+The shortest path from source 0     to 8     costs: 1     and the previous vertex is: 0    
+The shortest path from source 0     to 9     costs: 1     and the previous vertex is: 0    
+Shortest Path Results:
+The shortest path from source 9     to 0     costs: 1     and the previous vertex is: 9    
+The shortest path from source 9     to 1     costs: 3     and the previous vertex is: 0    
+The shortest path from source 9     to 2     costs: 2     and the previous vertex is: 0    
+The shortest path from source 9     to 3     costs: 2     and the previous vertex is: 0    
+The shortest path from source 9     to 4     costs: 2     and the previous vertex is: 0    
+The shortest path from source 9     to 5     costs: 2     and the previous vertex is: 0    
+The shortest path from source 9     to 6     costs: 2     and the previous vertex is: 0    
+The shortest path from source 9     to 7     costs: 2     and the previous vertex is: 0    
+The shortest path from source 9     to 8     costs: 2     and the previous vertex is: 0    
+The shortest path from source 9     to 9     costs: 0     and the previous vertex is: 9    
