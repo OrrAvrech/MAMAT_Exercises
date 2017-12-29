@@ -14,8 +14,8 @@ typedef struct _Node {
 
 typedef struct List_
 {
-	pNode *head;
-	pNode *iterator;
+	pNode head;
+	pNode iterator;
 	CLONE_FUNC clone_func;
 	DESTROY_FUNC dest_func;
 	int list_size; // will be updated on every change in order to skip counting all the elements everytime we need the list number

@@ -17,7 +17,7 @@ typedef struct _Vertex
 
 typedef struct _Edge
 {
-	PVertex nodeA;              // should be a pointer or vertrx?
+	PVertex nodeA;              
 	PVertex nodeB;
 	int weight;
 } *PEdge, Edge;

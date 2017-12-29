@@ -4,7 +4,7 @@
 #include "list.h"
 
 Bool Compare_Edges(PElem pElem1, PElem pElem2);
-PEdge Clone_Edge(PEdge org_pEdge);
+PElem Clone_Edge(PElem org_pElem);
 void Destroy_Edge(PElem pElem);
 Bool Compare_Vertex(PElem pElem1, PElem pElem2);
 void Destroy_Vertex(PElem pElem);
@@ -199,7 +199,7 @@ output: BOOL TRUE if managed to add the edge and FALSE otherwise*/
 Bool GraphAddEdge(PGraph pGraph, int vertex1, int vertex2, int weight)
 {
 	Bool result;
-	if (pGraph == NULL || vertex1 == NULL || vertex2 == NULL || weight == NULL)
+	if (pGraph == NULL)
 		return FALSE;
 	if (weight > MAX_WEIGHT || weight < MIN_WEIGHT || vertex1 == vertex2)
 		return FALSE;
@@ -210,20 +210,17 @@ Bool GraphAddEdge(PGraph pGraph, int vertex1, int vertex2, int weight)
 	pVertex2 = malloc(sizeof(Vertex));
 	pVertex1->serialNumber = vertex1;
 	pVertex2->serialNumber = vertex2;
+	pEdge->nodeA = pVertex1;
+	pEdge->nodeB = pVertex2;
 	if (SetFindElement(pGraph->vertex_set, (PElem)pVertex1) == NULL || SetFindElement(pGraph->vertex_set, (PElem)pVertex2) == NULL)
 	{
 		Destroy_Edge((PElem)pEdge);
-		Destroy_Vertex((PElem)pVertex1);
-		Destroy_Vertex((PElem)pVertex2);
 		return FALSE;
 	}
-	pEdge->nodeA = pVertex1;
-	pEdge->nodeB = pVertex2;
+	
 	pEdge->weight = weight;
 	result = (SetAdd(pGraph->edges_set, (PElem)pEdge));
 	Destroy_Edge((PElem)pEdge);
-	Destroy_Vertex((PElem)pVertex1);
-	Destroy_Vertex((PElem)pVertex2);
 	return result;
 }
 
@@ -233,7 +230,7 @@ output: number of edges*/
 int GraphGetNumberOfEdges(PGraph pGraph)
 {
 	if (pGraph == NULL)
-		return NULL;
+		return 0;
 	return SetGetSize(pGraph->edges_set);
 }
 
@@ -243,7 +240,7 @@ output: number of vertices*/
 int GraphGetNumberOfVertices(PGraph pGraph)
 {
 	if (pGraph == NULL)
-		return NULL;
+		return 0;
 	return SetGetSize(pGraph->vertex_set);
 }
 
@@ -252,7 +249,7 @@ Input: pointer to graph , source vertex
 output: set of neighbor vertices*/
 PSet GraphNeighborVertices(PGraph pGraph, int source_vertex)
 {
-	if (pGraph == NULL || source_vertex == NULL)
+	if (pGraph == NULL)
 		return NULL;
 	PSet pSet;
 	PEdge pEdge;
@@ -268,6 +265,12 @@ PSet GraphNeighborVertices(PGraph pGraph, int source_vertex)
 	PElem pElem_v, pElem_e;
 	pElem_e = SetGetFirst(pGraph->edges_set);
 	if (pElem_e == NULL)
+	{
+		Destroy_Vertex((PElem)src_pVertex);
+		SetDestroy(pSet);
+		return NULL;
+	}
+	if (!SetFindElement(pGraph->vertex_set, (PElem)src_pVertex))
 	{
 		Destroy_Vertex((PElem)src_pVertex);
 		SetDestroy(pSet);
@@ -308,7 +311,7 @@ PSet GraphVerticesStatus(PGraph pGraph)
 {
 	if (pGraph == NULL)
 		return NULL;
-	return pGraph->vertex_set
+	return pGraph->vertex_set;
 }
 
 /* the function returns a pointer to the edges set of the graph

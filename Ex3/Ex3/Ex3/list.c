@@ -5,7 +5,7 @@
 /* the function create a list and assign it the specific clone and destroy function
 Input: clone func , destroy func
 Output: list */
-PList Listcreate(CLONE_FUNC clone_func, DESTROY_FUNC dest_func)
+PList ListCreate(CLONE_FUNC clone_func, DESTROY_FUNC dest_func)
 {
 	PList list;
 	list = malloc(sizeof(List));
@@ -33,21 +33,18 @@ void ListDestroy(PList list)
 	free(list);   // need to free head and iterator?
 }
 /* the function adds a Pelem as the first element of list
-Input: list , pElem 
+Input: list , pElem
 Output Success if managed to insert the pElem and Fail otherwise */
 Result ListAdd(PList list, PElem pElem)
 {
 	if (list == NULL || pElem == NULL) return FAIL;
-	pNode new_node , temp;
+	pNode new_node;
 	PElem new_pElem;
 	new_node = malloc(sizeof(Node));
-	if (new_node == NULL) return FAIL;
 	new_pElem = list->clone_func(pElem);
 	new_node->pElem = new_pElem;
-	new_node->pNext = NULL;
-	temp = list->head;
+	new_node->pNext = list->head;
 	list->head = new_node;
-	new_node->pNext = temp;
 	list->iterator = NULL;
 	list->list_size++;
 	return SUCCESS;
@@ -60,7 +57,7 @@ PElem ListGetFirst(PList list)
 {
 	if (list == NULL || list->head == NULL) return NULL;
 	list->iterator = list->head;
-	return list->iterator;
+	return list->iterator->pElem;
 }
 
 /* the function moves the iterator to the next element and returns its updated value
@@ -68,12 +65,9 @@ Input: list
 output: node of the next pElem*/
 PElem ListGetNext(PList list)
 {
-	if (list == NULL || list->iterator == NULL) return NULL;
-	pNode next_node;
-	next_node = list->iterator;
-	next_node = next_node->pNext;
-	list->iterator = next_node;
-	return list->iterator;
+	if (list == NULL || list->iterator->pNext == NULL) return NULL;
+	list->iterator = list->iterator->pNext;
+	return list->iterator->pElem;
 }
 
 /* the function removes the element the iterator of list points at.
