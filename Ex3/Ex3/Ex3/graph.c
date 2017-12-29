@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "graph.h"
 #include "list.h"
+#include "limits.h"
 
 Bool Compare_Edges(PElem pElem1, PElem pElem2);
 PElem Clone_Edge(PElem org_pElem);
@@ -18,6 +19,9 @@ PGraph GraphCreate();
 PSet GraphNeighborVertices(PGraph pGraph, int source_vertex);
 PSet GraphEdgesStatus(PGraph pGraph);
 PSet GraphVerticesStatus(PGraph pGraph);
+
+int minInd(int* arr, int size);
+int findWeight(PSet edges_set, PVertex u, PVertex v);
 
 // **************************************     Edges Function             ************************
  
@@ -145,7 +149,7 @@ PGraph GraphCreate()
 	if (vertex_set == NULL)
 		return NULL;
 	edge_set = SetCreate(Compare_Edges, Clone_Edge, Destroy_Edge);
-	if (vertex_set == NULL)
+	if (vertex_set == NULL) //edges_set?
 	{
 		SetDestroy(vertex_set);
 		return NULL;
@@ -322,4 +326,103 @@ PSet GraphEdgesStatus(PGraph pGraph)
 	if (pGraph == NULL)
 		return NULL;
 	return pGraph->edges_set;
+}
+
+int minInd(int* arr, int size)
+{
+	int ind = 0;
+	int min = arr[ind];
+	int i;
+	for (i = 1; i < size; i++)
+	{
+		if (arr[i] < min)
+		{
+			ind = i;
+			min = arr[i];
+		}
+	}
+	return i;
+}
+
+int findWeight(PSet edges_set, PVertex u, PVertex v)
+{
+	int uNum = u->serialNumber, vNum = v->serialNumber;
+	pNode edgeNode = edges_set->setElements->head;
+	pNode temp;
+	temp = edgeNode;
+	PEdge pEdge;
+	while (temp != NULL)
+	{
+		pEdge = (PEdge)temp->pElem;
+		if (pEdge->nodeA->serialNumber == uNum && pEdge->nodeB->serialNumber == vNum)
+			return pEdge->weight;
+		else if (pEdge->nodeB->serialNumber == uNum && pEdge->nodeA->serialNumber == vNum)
+			return pEdge->weight;
+		else
+			return UNDEFINED;
+	}
+}
+
+void GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev)
+{
+	if (pGraph == NULL || dist == NULL || prev == NULL)
+		return;
+	if (SetFindElement(pGraph->vertex_set, (PElem)source) == NULL)
+		return;
+
+	PSet Q; // vertex_set
+	Q = SetCreate(Compare_Vertex, Clone_Vertex, Destroy_Vertex);
+	if (Q == NULL)
+		return;
+
+	PList graph_vertex_list = pGraph->vertex_set->setElements;
+	int size = graph_vertex_list->list_size;
+	pNode vertexNode = graph_vertex_list->head;
+	PVertex pVertex;
+	for (; vertexNode->pNext != NULL; vertexNode = vertexNode->pNext)
+	{
+		pVertex = (PVertex)vertexNode->pElem;
+		dist[pVertex->serialNumber] = INT_MAX;
+		prev[pVertex->serialNumber] = UNDEFINED;
+		if (SetAdd(Q, pVertex) == FALSE)
+			return;
+	}
+	dist[source] = 0;
+	prev[source] = source;
+
+	int minSerial;
+	PSet neighborVertices;
+	PVertex u;
+	while (Q != NULL)
+	{
+		minSerial = minInd(dist, size);
+		u = (PVertex)SetFindElement(pGraph->vertex_set, (PElem)minSerial);
+		neighborVertices = GraphNeighborVertices(pGraph, minSerial);
+		if (neighborVertices == NULL)
+			return;
+
+		pNode neighborNode = Q->setElements->head;
+		PVertex v;
+		int alt, length;
+		for (; neighborNode->pNext != NULL; neighborNode = neighborNode->pNext)
+		{
+			v = (PVertex)neighborNode->pElem;
+			length = findWeight(pGraph->edges_set, u, v);
+			if (length == UNDEFINED)
+				return;
+			alt = dist[u->serialNumber] + length;
+			if (alt < dist[v->serialNumber])
+			{
+				dist[v->serialNumber] = alt;
+				prev[v->serialNumber] = u->serialNumber;
+			}
+		}
+	}
+
+
+
+	
+	
+
+
 }

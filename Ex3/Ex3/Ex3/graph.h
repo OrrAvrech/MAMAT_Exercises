@@ -4,6 +4,7 @@
 #include "set.h"
 #define MAX_WEIGHT 10
 #define MIN_WEIGHT 0
+#define UNDEFINED -1
 typedef struct _Graph
 {
 	PSet vertex_set;
@@ -28,7 +29,7 @@ void GraphDestroy(PGraph);
 Bool GraphAddVertex(PGraph, int);
 Bool GraphAddEdge(PGraph pGraph, int vertex1, int vertex2, int weight);
 PSet GraphNeighborVertices(PGraph, int);
-// Bool GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev);    need to be written
+void GraphFindShortestPath(PGraph, int, int*, int*);    //need to be written
 int GraphGetNumberOfEdges(PGraph);
 int GraphGetNumberOfVertices(PGraph);
 PSet GraphVerticesStatus(PGraph);
