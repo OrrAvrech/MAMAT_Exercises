@@ -1,6 +1,6 @@
 #ifndef SET_H_
 #define SET_H_
-
+#include "list.h"
 typedef enum{FALSE, TRUE} Bool;
 
 typedef struct _Set* PSet;

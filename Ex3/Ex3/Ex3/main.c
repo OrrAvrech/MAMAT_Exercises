@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS 
 #include "list.h"
 #include "set.h"
 #include "graph.h"
@@ -27,7 +28,6 @@ int main() {
 	int vertex1;
 	int vertex2;
 	int weight;
-	int i;
 	PGraph pGraph = NULL;
 	PVertex pVertex = NULL;
 	PEdge pEdge = NULL;
@@ -126,8 +126,9 @@ int main() {
 			}
 			SetDestroy(neighbors);
 		}
-		else if(strcmp(command,"find_shortest_path") == 0)
+		/*else if(strcmp(command,"find_shortest_path") == 0)            // unmark after finish writing
 		{
+			int i;
 			arg1 = strtok(NULL, delimiters);
 			if(arg1 == NULL)
 			{
@@ -164,7 +165,7 @@ int main() {
 
 			free(dist);
 			free(prev);
-		}
+		}*/ 
 		else if(strcmp(command,"print_graph") == 0)
 		{
 			PSet vertices = GraphVerticesStatus(pGraph);

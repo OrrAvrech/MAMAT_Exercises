@@ -1,5 +1,5 @@
-#ifndef GRAPH_H_
-#define GRAPH_H_
+#ifndef graph_h_
+#define graph_h_
 
 #include "set.h"
 #define MAX_WEIGHT 10
@@ -18,7 +18,7 @@ typedef struct _Vertex
 typedef struct _Edge
 {
 	PVertex nodeA;              // should be a pointer or vertrx?
-	PVertex* nodeB;
+	PVertex nodeB;
 	int weight;
 } *PEdge, Edge;
 
@@ -28,7 +28,7 @@ void GraphDestroy(PGraph);
 Bool GraphAddVertex(PGraph, int);
 Bool GraphAddEdge(PGraph pGraph, int vertex1, int vertex2, int weight);
 PSet GraphNeighborVertices(PGraph, int);
-Bool GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev);
+// Bool GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev);    need to be written
 int GraphGetNumberOfEdges(PGraph);
 int GraphGetNumberOfVertices(PGraph);
 PSet GraphVerticesStatus(PGraph);
