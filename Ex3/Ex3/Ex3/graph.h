@@ -34,6 +34,5 @@ int GraphGetNumberOfEdges(PGraph);
 int GraphGetNumberOfVertices(PGraph);
 PSet GraphVerticesStatus(PGraph);
 PSet GraphEdgesStatus(PGraph);
-void PrintGraph(PGraph);
 
 #endif /* GRAPH_H_ */

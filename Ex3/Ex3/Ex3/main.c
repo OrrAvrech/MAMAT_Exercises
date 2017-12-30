@@ -166,7 +166,7 @@ int main() {
 			}
 			SetDestroy(neighbors);
 		}
-		else if(strcmp(command,"find_shortest_path") == 0)            // unmark after finish writing
+		else if(strcmp(command,"find_shortest_path") == 0) 
 		{
 			int i;
 			arg1 = strtok(NULL, delimiters);

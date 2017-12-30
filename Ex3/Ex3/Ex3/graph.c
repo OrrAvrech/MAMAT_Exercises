@@ -476,28 +476,3 @@ Bool GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev)
 	SetDestroy(Q);
 	return TRUE;
 }
-
-void PrintGraph(PGraph pGraph)
-{
-	PSet vertices = GraphVerticesStatus(pGraph);
-	PSet edges = GraphEdgesStatus(pGraph);
-
-	printf("Graph vertices:\n");
-	PVertex pVertex;
-	pVertex = SetGetFirst(vertices);
-	while (pVertex)
-	{
-		printf("%d\n", pVertex->serialNumber);
-		pVertex = SetGetNext(vertices);
-	}
-	printf("Graph edges:\n");
-	PEdge pEdge;
-	pEdge = SetGetFirst(edges);
-	while (pEdge)
-	{
-		int nodeAnum = pEdge->nodeA->serialNumber;
-		int nodeBnum = pEdge->nodeB->serialNumber;
-		printf("%d-%d\n", nodeAnum < nodeBnum ? nodeAnum : nodeBnum, nodeAnum >= nodeBnum ? nodeAnum : nodeBnum);
-		pEdge = SetGetNext(edges);
-	}
-}
