@@ -434,7 +434,7 @@ Bool GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev)
 	int minSerial, ind = 0;
 	PSet neighborVertices;
 	PVertex u;
-	int* usedArr = (int*)malloc(sizeof(dist));
+	int* usedArr = (int*)malloc(size*sizeof(int));
 	
 	int ii;
 	for (ii = 0; ii < size; ii++)
@@ -470,7 +470,10 @@ Bool GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev)
 			}
 			pElem_v = SetGetNext(neighborVertices);
 		}
+		SetDestroy(neighborVertices);
 	}
+	free(usedArr);
+	SetDestroy(Q);
 	return TRUE;
 }
 
