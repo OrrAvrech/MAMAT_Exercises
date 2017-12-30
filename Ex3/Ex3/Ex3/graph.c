@@ -24,6 +24,7 @@ int minInd(int* arr, int* used, int size);
 Bool isUsedInd(int* used, int ind, int size);
 int findWeight(PSet edges_set, PVertex u, PVertex v);
 PVertex findVertexByNum(PSet vertex_set, int serialNum);
+Bool allSet(int* used, int size);
 
 // **************************************     Edges Function             ************************
  

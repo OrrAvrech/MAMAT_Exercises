@@ -14,6 +14,8 @@ PList ListCreate(CLONE_FUNC clone_func, DESTROY_FUNC dest_func)
 	list->clone_func = clone_func;
 	list->dest_func = dest_func;
 	list->list_size = 0;
+
+	return list;
 }
 
 /* the function clearing a list and all it contaions from memory

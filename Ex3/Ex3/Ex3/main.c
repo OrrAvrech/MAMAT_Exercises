@@ -18,7 +18,7 @@ int comp (const void * elem1, const void * elem2)
 }
 
 int main() {
-
+	/*
 	PGraph pGraph = NULL;
 	PVertex pVertex = NULL;
 	PEdge pEdge = NULL;
@@ -54,10 +54,10 @@ int main() {
 		printf("The shortest path from source %-5d to %-5d costs: %-5d and the previous vertex is: %-5d\n", source, i, dist[i], prev[i]);
 	}
 
+	*/
 
 
-
-	/*
+	
 	char szLine[MAX_LINE_SIZE];
 	char* delimiters = " \t\n";
 	char* command;
@@ -248,7 +248,7 @@ int main() {
 	}
 	GraphDestroy(pGraph);
 
-	*/
+	
 	return 0;
 }
 
