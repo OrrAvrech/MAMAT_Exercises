@@ -18,6 +18,46 @@ int comp (const void * elem1, const void * elem2)
 }
 
 int main() {
+
+	PGraph pGraph = NULL;
+	PVertex pVertex = NULL;
+	PEdge pEdge = NULL;
+
+	pGraph = GraphCreate();
+	GraphAddVertex(pGraph, 0);
+	GraphAddVertex(pGraph, 1);
+	GraphAddVertex(pGraph, 2);
+	GraphAddVertex(pGraph, 3);
+	GraphAddVertex(pGraph, 4);
+	GraphAddVertex(pGraph, 5);
+	GraphAddVertex(pGraph, 6);
+	GraphAddVertex(pGraph, 7);
+	GraphAddVertex(pGraph, 8);
+	GraphAddEdge(pGraph, 3, 1, 6);
+	GraphAddEdge(pGraph, 3, 0, 6);
+	GraphAddEdge(pGraph, 3, 6, 6);
+	GraphAddEdge(pGraph, 0, 1, 6);
+	GraphAddEdge(pGraph, 2, 1, 6);
+	GraphAddEdge(pGraph, 4, 1, 6);
+	GraphAddEdge(pGraph, 5, 1, 6);
+	GraphAddEdge(pGraph, 4, 7, 6);
+	GraphAddEdge(pGraph, 5, 8, 6);
+	PrintGraph(pGraph);
+
+	int* dist = (int*)malloc(sizeof(int)*GraphGetNumberOfVertices(pGraph));
+	int* prev = (int*)malloc(sizeof(int)*GraphGetNumberOfVertices(pGraph));
+	int source = 0, i;
+	GraphFindShortestPath(pGraph, source, dist, prev);
+	printf("Shortest Path Results:\n");
+	for (i = 0; i < GraphGetNumberOfVertices(pGraph); i++)
+	{
+		printf("The shortest path from source %-5d to %-5d costs: %-5d and the previous vertex is: %-5d\n", source, i, dist[i], prev[i]);
+	}
+
+
+
+
+	/*
 	char szLine[MAX_LINE_SIZE];
 	char* delimiters = " \t\n";
 	char* command;
@@ -126,7 +166,7 @@ int main() {
 			}
 			SetDestroy(neighbors);
 		}
-		/*else if(strcmp(command,"find_shortest_path") == 0)            // unmark after finish writing
+		else if(strcmp(command,"find_shortest_path") == 0)            // unmark after finish writing
 		{
 			int i;
 			arg1 = strtok(NULL, delimiters);
@@ -165,7 +205,7 @@ int main() {
 
 			free(dist);
 			free(prev);
-		}*/ 
+		}
 		else if(strcmp(command,"print_graph") == 0)
 		{
 			PSet vertices = GraphVerticesStatus(pGraph);
@@ -207,6 +247,8 @@ int main() {
 		}
 	}
 	GraphDestroy(pGraph);
+
+	*/
 	return 0;
 }
 

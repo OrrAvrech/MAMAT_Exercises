@@ -20,8 +20,10 @@ PSet GraphNeighborVertices(PGraph pGraph, int source_vertex);
 PSet GraphEdgesStatus(PGraph pGraph);
 PSet GraphVerticesStatus(PGraph pGraph);
 
-int minInd(int* arr, int size);
+int minInd(int* arr, int* used, int size);
+Bool isUsedInd(int* used, int ind, int size);
 int findWeight(PSet edges_set, PVertex u, PVertex v);
+PVertex findVertexByNum(PSet vertex_set, int serialNum);
 
 // **************************************     Edges Function             ************************
  
@@ -328,52 +330,90 @@ PSet GraphEdgesStatus(PGraph pGraph)
 	return pGraph->edges_set;
 }
 
-int minInd(int* arr, int size)
+PVertex findVertexByNum(PSet vertex_set, int serialNum)
 {
-	int ind = 0;
-	int min = arr[ind];
-	int i;
-	for (i = 1; i < size; i++)
+	PElem pElem_u;
+	pElem_u = SetGetFirst(vertex_set);
+	PVertex u;
+	while (pElem_u)
 	{
+		u = (PVertex)pElem_u;
+		if (u->serialNumber == serialNum)
+			return u;
+		pElem_u = SetGetNext(vertex_set);
+	}
+	return NULL;
+}
+
+Bool isUsedInd(int* used, int ind, int size)
+{
+	int jj;
+	for (jj = 0; jj < size; jj++)
+	{
+		if (used[jj] == ind)
+			return TRUE;
+	}
+	return FALSE;
+}
+
+Bool allSet(int* used, int size)
+{
+	int jj;
+	for (jj = 0; jj < size; jj++)
+	{
+		if (used[jj] == UNDEFINED)
+			return FALSE;
+	}
+	return TRUE;
+}
+
+int minInd(int* arr, int* used, int size)
+{
+	int ind;
+	int min = INT_MAX;
+	int i;
+	for (i = 0; i < size; i++)
+	{
+		if (isUsedInd(used, i, size) == TRUE)
+			continue;
 		if (arr[i] < min)
 		{
 			ind = i;
 			min = arr[i];
 		}
 	}
-	return i;
+	return ind;
 }
 
 int findWeight(PSet edges_set, PVertex u, PVertex v)
 {
 	int uNum = u->serialNumber, vNum = v->serialNumber;
-	pNode edgeNode = edges_set->setElements->head;
-	pNode temp;
-	temp = edgeNode;
+	PElem pElem_e;
+	pElem_e = SetGetFirst(edges_set);
 	PEdge pEdge;
-	while (temp != NULL)
+	while (pElem_e)
 	{
-		pEdge = (PEdge)temp->pElem;
+		pEdge = (PEdge)pElem_e;
 		if (pEdge->nodeA->serialNumber == uNum && pEdge->nodeB->serialNumber == vNum)
 			return pEdge->weight;
 		else if (pEdge->nodeB->serialNumber == uNum && pEdge->nodeA->serialNumber == vNum)
 			return pEdge->weight;
-		else
-			return UNDEFINED;
+		pElem_e = SetGetNext(edges_set);
 	}
+	return UNDEFINED;
 }
 
-void GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev)
+Bool GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev)
 {
 	if (pGraph == NULL || dist == NULL || prev == NULL)
-		return;
-	if (SetFindElement(pGraph->vertex_set, (PElem)source) == NULL)
-		return;
+		return FALSE;
+	if (findVertexByNum(pGraph->vertex_set, source) == NULL)
+		return FALSE;
 
 	PSet Q; // vertex_set
 	Q = SetCreate(Compare_Vertex, Clone_Vertex, Destroy_Vertex);
 	if (Q == NULL)
-		return;
+		return FALSE;
 
 	PList graph_vertex_list = pGraph->vertex_set->setElements;
 	int size = graph_vertex_list->list_size;
@@ -385,44 +425,75 @@ void GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev)
 		dist[pVertex->serialNumber] = INT_MAX;
 		prev[pVertex->serialNumber] = UNDEFINED;
 		if (SetAdd(Q, pVertex) == FALSE)
-			return;
+			return FALSE;
 	}
 	dist[source] = 0;
 	prev[source] = source;
 
-	int minSerial;
+	int minSerial, ind = 0;
 	PSet neighborVertices;
 	PVertex u;
-	while (Q != NULL)
+	int* usedArr = (int*)malloc(sizeof(dist));
+	
+	int ii;
+	for (ii = 0; ii < size; ii++)
+		usedArr[ii] = UNDEFINED;
+
+
+	while (allSet(usedArr, size) != TRUE)
 	{
-		minSerial = minInd(dist, size);
-		u = (PVertex)SetFindElement(pGraph->vertex_set, (PElem)minSerial);
+		minSerial = minInd(dist, usedArr, size);
+		usedArr[ind++] = minSerial;
+		u = findVertexByNum(pGraph->vertex_set, minSerial);
 		neighborVertices = GraphNeighborVertices(pGraph, minSerial);
 		if (neighborVertices == NULL)
-			return;
+			return FALSE;
+		//SetRemoveElement(Q, (PElem)u);
 
-		pNode neighborNode = Q->setElements->head;
+		PElem pElem_v;
+		pElem_v = SetGetFirst(neighborVertices);
 		PVertex v;
 		int alt, length;
-		for (; neighborNode->pNext != NULL; neighborNode = neighborNode->pNext)
+
+		while (pElem_v)
 		{
-			v = (PVertex)neighborNode->pElem;
+			v = (PVertex)pElem_v;
 			length = findWeight(pGraph->edges_set, u, v);
 			if (length == UNDEFINED)
-				return;
+				return FALSE;
 			alt = dist[u->serialNumber] + length;
 			if (alt < dist[v->serialNumber])
 			{
 				dist[v->serialNumber] = alt;
 				prev[v->serialNumber] = u->serialNumber;
 			}
+			pElem_v = SetGetNext(neighborVertices);
 		}
 	}
+	return TRUE;
+}
 
+void PrintGraph(PGraph pGraph)
+{
+	PSet vertices = GraphVerticesStatus(pGraph);
+	PSet edges = GraphEdgesStatus(pGraph);
 
-
-	
-	
-
-
+	printf("Graph vertices:\n");
+	PVertex pVertex;
+	pVertex = SetGetFirst(vertices);
+	while (pVertex)
+	{
+		printf("%d\n", pVertex->serialNumber);
+		pVertex = SetGetNext(vertices);
+	}
+	printf("Graph edges:\n");
+	PEdge pEdge;
+	pEdge = SetGetFirst(edges);
+	while (pEdge)
+	{
+		int nodeAnum = pEdge->nodeA->serialNumber;
+		int nodeBnum = pEdge->nodeB->serialNumber;
+		printf("%d-%d\n", nodeAnum < nodeBnum ? nodeAnum : nodeBnum, nodeAnum >= nodeBnum ? nodeAnum : nodeBnum);
+		pEdge = SetGetNext(edges);
+	}
 }

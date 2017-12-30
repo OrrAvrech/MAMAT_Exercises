@@ -4,14 +4,15 @@
 
 typedef enum{FALSE, TRUE} Bool;
 
+/*User functions*/
+typedef Bool (*COMP_FUNC)(PElem, PElem);
+
 typedef struct _Set
 {
 	PList setElements;
 	COMP_FUNC cmpFunc;
 } *PSet, Set;
 
-/*User functions*/
-typedef Bool (*COMP_FUNC)(PElem, PElem);
 
 /*Interface functions*/
 PSet SetCreate(COMP_FUNC, CLONE_FUNC, DESTROY_FUNC);

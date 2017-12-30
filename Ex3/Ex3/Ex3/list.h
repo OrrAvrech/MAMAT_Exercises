@@ -3,8 +3,8 @@
 
 typedef void* PElem;
 /*User functions*/
-typedef PElem(*CLONE_FUNC)(PElem);
-typedef void(*DESTROY_FUNC)(PElem);
+typedef PElem (*CLONE_FUNC)(PElem);
+typedef void (*DESTROY_FUNC)(PElem);
 typedef enum { FAIL, SUCCESS } Result;
 
 typedef struct _Node {

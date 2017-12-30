@@ -29,10 +29,11 @@ void GraphDestroy(PGraph);
 Bool GraphAddVertex(PGraph, int);
 Bool GraphAddEdge(PGraph pGraph, int vertex1, int vertex2, int weight);
 PSet GraphNeighborVertices(PGraph, int);
-void GraphFindShortestPath(PGraph, int, int*, int*);    //need to be written
+Bool GraphFindShortestPath(PGraph, int, int*, int*);    //need to be written
 int GraphGetNumberOfEdges(PGraph);
 int GraphGetNumberOfVertices(PGraph);
 PSet GraphVerticesStatus(PGraph);
 PSet GraphEdgesStatus(PGraph);
+void PrintGraph(PGraph);
 
 #endif /* GRAPH_H_ */
