@@ -29,6 +29,10 @@ PList ListCreate(CLONE_FUNC clone_func, DESTROY_FUNC dest_func)
 	list->clone_func = clone_func;
 	list->dest_func = dest_func;
 	list->list_size = 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> a0d25591a9a6b48c5806d5114f50587ea71316fe
 	return list;
 }
 

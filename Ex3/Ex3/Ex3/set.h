@@ -1,7 +1,12 @@
 #ifndef SET_H_
 #define SET_H_
+<<<<<<< HEAD
 typedef enum { FALSE, TRUE } Bool;
+=======
+#include "list.h"
+>>>>>>> a0d25591a9a6b48c5806d5114f50587ea71316fe
 
+typedef enum{FALSE, TRUE} Bool;
 
 /*User functions*/
 typedef Bool(*COMP_FUNC)(PElem, PElem);

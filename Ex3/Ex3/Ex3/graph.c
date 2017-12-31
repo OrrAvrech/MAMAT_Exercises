@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
+<<<<<<< HEAD
 #include "set.h"
 #include "graph.h"
 
@@ -13,7 +14,9 @@ typedef struct _Graph
 	PSet edges_set;
 } Graph;
 
+=======
 #include "limits.h"
+>>>>>>> a0d25591a9a6b48c5806d5114f50587ea71316fe
 
 Bool Compare_Edges(PElem pElem1, PElem pElem2);
 PElem Clone_Edge(PElem org_pElem);
@@ -340,7 +343,9 @@ PSet GraphEdgesStatus(PGraph pGraph)
 	if (pGraph == NULL)
 		return NULL;
 	return pGraph->edges_set;
-}PVertex findVertexByNum(PSet vertex_set, int serialNum)
+}
+
+PVertex findVertexByNum(PSet vertex_set, int serialNum)
 {
 	PElem pElem_u;
 	pElem_u = SetGetFirst(vertex_set);
