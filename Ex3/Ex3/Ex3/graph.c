@@ -1,7 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "graph.h"
 #include "list.h"
+#include "set.h"
+#include "graph.h"
+
+
+#define MAX_WEIGHT 10
+#define MIN_WEIGHT 0
+typedef struct _Graph
+{
+	PSet vertex_set;
+	PSet edges_set;
+} Graph;
+
 
 Bool Compare_Edges(PElem pElem1, PElem pElem2);
 PElem Clone_Edge(PElem org_pElem);

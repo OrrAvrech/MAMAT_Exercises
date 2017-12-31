@@ -2,6 +2,21 @@
 #include <stdlib.h>
 #include "list.h"
 
+typedef struct _Node {
+	PElem pElem;		// element data
+	struct _Node *pNext;	// pointer to next element
+} Node, *pNode;
+
+typedef struct List_
+{
+	pNode head;
+	pNode iterator;
+	CLONE_FUNC clone_func;
+	DESTROY_FUNC dest_func;
+	int list_size; // will be updated on every change in order to skip counting all the elements everytime we need the list number
+}List;
+
+
 /* the function create a list and assign it the specific clone and destroy function
 Input: clone func , destroy func
 Output: list */
@@ -14,6 +29,7 @@ PList ListCreate(CLONE_FUNC clone_func, DESTROY_FUNC dest_func)
 	list->clone_func = clone_func;
 	list->dest_func = dest_func;
 	list->list_size = 0;
+	return list;
 }
 
 /* the function clearing a list and all it contaions from memory
