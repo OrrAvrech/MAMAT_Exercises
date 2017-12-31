@@ -420,7 +420,7 @@ Bool GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev)
 	int size = graph_vertex_list->list_size;
 	pNode vertexNode = graph_vertex_list->head;
 	PVertex pVertex;
-	for (; vertexNode->pNext != NULL; vertexNode = vertexNode->pNext)
+	for (; vertexNode != NULL; vertexNode = vertexNode->pNext)
 	{
 		pVertex = (PVertex)vertexNode->pElem;
 		dist[pVertex->serialNumber] = INT_MAX;
