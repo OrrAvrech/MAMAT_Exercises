@@ -13,6 +13,7 @@ typedef struct _Graph
 	PSet edges_set;
 } Graph;
 
+#include "limits.h"
 
 Bool Compare_Edges(PElem pElem1, PElem pElem2);
 PElem Clone_Edge(PElem org_pElem);
@@ -29,6 +30,12 @@ PGraph GraphCreate();
 PSet GraphNeighborVertices(PGraph pGraph, int source_vertex);
 PSet GraphEdgesStatus(PGraph pGraph);
 PSet GraphVerticesStatus(PGraph pGraph);
+
+int minInd(int* arr, int* used, int size);
+Bool isUsedInd(int* used, int ind, int size);
+int findWeight(PSet edges_set, PVertex u, PVertex v);
+PVertex findVertexByNum(PSet vertex_set, int serialNum);
+Bool allSet(int* used, int size);
 
 // **************************************     Edges Function             ************************
  
@@ -156,7 +163,7 @@ PGraph GraphCreate()
 	if (vertex_set == NULL)
 		return NULL;
 	edge_set = SetCreate(Compare_Edges, Clone_Edge, Destroy_Edge);
-	if (vertex_set == NULL)
+	if (vertex_set == NULL) //edges_set?
 	{
 		SetDestroy(vertex_set);
 		return NULL;
@@ -333,4 +340,148 @@ PSet GraphEdgesStatus(PGraph pGraph)
 	if (pGraph == NULL)
 		return NULL;
 	return pGraph->edges_set;
+}PVertex findVertexByNum(PSet vertex_set, int serialNum)
+{
+	PElem pElem_u;
+	pElem_u = SetGetFirst(vertex_set);
+	PVertex u;
+	while (pElem_u)
+	{
+		u = (PVertex)pElem_u;
+		if (u->serialNumber == serialNum)
+			return u;
+		pElem_u = SetGetNext(vertex_set);
+	}
+	return NULL;
+}
+
+Bool isUsedInd(int* used, int ind, int size)
+{
+	int jj;
+	for (jj = 0; jj < size; jj++)
+	{
+		if (used[jj] == ind)
+			return TRUE;
+	}
+	return FALSE;
+}
+
+Bool allSet(int* used, int size)
+{
+	int jj;
+	for (jj = 0; jj < size; jj++)
+	{
+		if (used[jj] == UNDEFINED)
+			return FALSE;
+	}
+	return TRUE;
+}
+
+int minInd(int* arr, int* used, int size)
+{
+	int ind;
+	int min = INT_MAX;
+	int i;
+	for (i = 0; i < size; i++)
+	{
+		if (isUsedInd(used, i, size) == TRUE)
+			continue;
+		if (arr[i] < min)
+		{
+			ind = i;
+			min = arr[i];
+		}
+	}
+	return ind;
+}
+
+int findWeight(PSet edges_set, PVertex u, PVertex v)
+{
+	int uNum = u->serialNumber, vNum = v->serialNumber;
+	PElem pElem_e;
+	pElem_e = SetGetFirst(edges_set);
+	PEdge pEdge;
+	while (pElem_e)
+	{
+		pEdge = (PEdge)pElem_e;
+		if (pEdge->nodeA->serialNumber == uNum && pEdge->nodeB->serialNumber == vNum)
+			return pEdge->weight;
+		else if (pEdge->nodeB->serialNumber == uNum && pEdge->nodeA->serialNumber == vNum)
+			return pEdge->weight;
+		pElem_e = SetGetNext(edges_set);
+	}
+	return UNDEFINED;
+}
+
+Bool GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev)
+{
+	if (pGraph == NULL || dist == NULL || prev == NULL)
+		return FALSE;
+	if (findVertexByNum(pGraph->vertex_set, source) == NULL)
+		return FALSE;
+
+	PSet Q; // vertex_set
+	Q = SetCreate(Compare_Vertex, Clone_Vertex, Destroy_Vertex);
+	if (Q == NULL)
+		return FALSE;
+
+	PList graph_vertex_list = pGraph->vertex_set->setElements;
+	int size = graph_vertex_list->list_size;
+	pNode vertexNode = graph_vertex_list->head;
+	PVertex pVertex;
+	for (; vertexNode != NULL; vertexNode = vertexNode->pNext)
+	{
+		pVertex = (PVertex)vertexNode->pElem;
+		dist[pVertex->serialNumber] = INT_MAX;
+		prev[pVertex->serialNumber] = UNDEFINED;
+		if (SetAdd(Q, pVertex) == FALSE)
+			return FALSE;
+	}
+	dist[source] = 0;
+	prev[source] = source;
+
+	int minSerial, ind = 0;
+	PSet neighborVertices;
+	PVertex u;
+	int* usedArr = (int*)malloc(size*sizeof(int));
+	
+	int ii;
+	for (ii = 0; ii < size; ii++)
+		usedArr[ii] = UNDEFINED;
+
+
+	while (allSet(usedArr, size) != TRUE)
+	{
+		minSerial = minInd(dist, usedArr, size);
+		usedArr[ind++] = minSerial;
+		u = findVertexByNum(pGraph->vertex_set, minSerial);
+		neighborVertices = GraphNeighborVertices(pGraph, minSerial);
+		if (neighborVertices == NULL)
+			return FALSE;
+		//SetRemoveElement(Q, (PElem)u);
+
+		PElem pElem_v;
+		pElem_v = SetGetFirst(neighborVertices);
+		PVertex v;
+		int alt, length;
+
+		while (pElem_v)
+		{
+			v = (PVertex)pElem_v;
+			length = findWeight(pGraph->edges_set, u, v);
+			if (length == UNDEFINED)
+				return FALSE;
+			alt = dist[u->serialNumber] + length;
+			if (alt < dist[v->serialNumber])
+			{
+				dist[v->serialNumber] = alt;
+				prev[v->serialNumber] = u->serialNumber;
+			}
+			pElem_v = SetGetNext(neighborVertices);
+		}
+		SetDestroy(neighborVertices);
+	}
+	free(usedArr);
+	SetDestroy(Q);
+	return TRUE;
 }

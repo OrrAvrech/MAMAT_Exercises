@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 #ifndef GRAPH_H_
 #define GRAPH_H_
 typedef struct _Graph* PGraph;
+typedef struct _Graph
+{
+	PSet vertex_set;
+	PSet edges_set;
+} *PGraph, Graph;
 
 typedef struct _Vertex
 {
@@ -24,6 +30,7 @@ Bool GraphAddEdge(PGraph pGraph, int vertex1, int vertex2, int weight);
 PSet GraphNeighborVertices(PGraph, int);
 Bool GraphFindShortestPath(PGraph pGraph, int source, int* dist, int* prev);
 
+Bool GraphFindShortestPath(PGraph, int, int*, int*);    //need to be written
 int GraphGetNumberOfEdges(PGraph);
 int GraphGetNumberOfVertices(PGraph);
 

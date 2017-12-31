@@ -1,0 +1,60 @@
+Graph vertices:
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+Graph edges:
+Graph vertices:
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+Graph edges:
+9-10
+6-10
+3-10
+3-6
+6-9
+8-9
+5-9
+5-6
+2-6
+2-3
+2-5
+5-8
+7-8
+5-7
+4-5
+1-5
+1-2
+1-4
+4-7
+0-4
+0-7
+0-1
+Shortest Path Results:
+The shortest path from source 0     to 0     costs: 0     and the previous vertex is: 0    
+The shortest path from source 0     to 1     costs: 3     and the previous vertex is: 0    
+The shortest path from source 0     to 2     costs: 5     and the previous vertex is: 1    
+The shortest path from source 0     to 3     costs: 8     and the previous vertex is: 2    
+The shortest path from source 0     to 4     costs: 5     and the previous vertex is: 0    
+The shortest path from source 0     to 5     costs: 7     and the previous vertex is: 2    
+The shortest path from source 0     to 6     costs: 11    and the previous vertex is: 2    
+The shortest path from source 0     to 7     costs: 4     and the previous vertex is: 0    
+The shortest path from source 0     to 8     costs: 6     and the previous vertex is: 7    
+The shortest path from source 0     to 9     costs: 10    and the previous vertex is: 5    
+The shortest path from source 0     to 10    costs: 10    and the previous vertex is: 3    

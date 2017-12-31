@@ -18,6 +18,7 @@ int comp (const void * elem1, const void * elem2)
 }
 
 int main() {
+	
 	char szLine[MAX_LINE_SIZE];
 	char* delimiters = " \t\n";
 	char* command;
@@ -126,7 +127,7 @@ int main() {
 			}
 			SetDestroy(neighbors);
 		}
-		/*else if(strcmp(command,"find_shortest_path") == 0)            // unmark after finish writing
+		else if(strcmp(command,"find_shortest_path") == 0)            // unmark after finish writing
 		{
 			int i;
 			arg1 = strtok(NULL, delimiters);
@@ -165,7 +166,7 @@ int main() {
 
 			free(dist);
 			free(prev);
-		}*/ 
+		}
 		else if(strcmp(command,"print_graph") == 0)
 		{
 			PSet vertices = GraphVerticesStatus(pGraph);
@@ -207,6 +208,8 @@ int main() {
 		}
 	}
 	GraphDestroy(pGraph);
+
+	
 	return 0;
 }
 

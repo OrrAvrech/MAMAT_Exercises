@@ -2,12 +2,6 @@
 #include "set.h"
 #include "stdlib.h"
 
-typedef struct _Set
-{
-	PList setElements;
-	COMP_FUNC cmpFunc;
-} Set;
-
 PSet SetCreate(COMP_FUNC cmpFunc, CLONE_FUNC cloneFunc, DESTROY_FUNC destroyFunc)
 {
 	PSet pSet =(PSet)malloc(sizeof(*pSet));

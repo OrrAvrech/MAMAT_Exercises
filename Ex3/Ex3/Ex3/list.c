@@ -94,7 +94,7 @@ Result ListRemove(PList list)
 	if (list == NULL || list->iterator == NULL) return FAIL;
 	pNode temp , prev_node;
 	temp = list->head;
-	while (temp->pNext != list->iterator)
+	while (temp->pNext != list->iterator && temp->pNext != NULL)
 	{
 		temp = temp->pNext;
 	}

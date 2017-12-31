@@ -2,10 +2,16 @@
 #define SET_H_
 typedef enum { FALSE, TRUE } Bool;
 
-typedef struct _Set* PSet;
 
 /*User functions*/
 typedef Bool(*COMP_FUNC)(PElem, PElem);
+
+typedef struct _Set
+{
+	PList setElements;
+	COMP_FUNC cmpFunc;
+} *PSet, Set;
+
 
 /*Interface functions*/
 PSet SetCreate(COMP_FUNC, CLONE_FUNC, DESTROY_FUNC);
