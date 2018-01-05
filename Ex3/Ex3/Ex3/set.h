@@ -1,22 +1,12 @@
 #ifndef SET_H_
 #define SET_H_
-<<<<<<< HEAD
-typedef enum { FALSE, TRUE } Bool;
-=======
-#include "list.h"
->>>>>>> a0d25591a9a6b48c5806d5114f50587ea71316fe
 
-typedef enum{FALSE, TRUE} Bool;
+typedef enum { FALSE, TRUE } Bool;
+
+typedef struct _Set* PSet;
 
 /*User functions*/
 typedef Bool(*COMP_FUNC)(PElem, PElem);
-
-typedef struct _Set
-{
-	PList setElements;
-	COMP_FUNC cmpFunc;
-} *PSet, Set;
-
 
 /*Interface functions*/
 PSet SetCreate(COMP_FUNC, CLONE_FUNC, DESTROY_FUNC);
