@@ -1,0 +1,4 @@
+AdminLogin 1234
+CreateFollower FollowerA follower@technion blabla
+CreateFollower FollowerB follower2@technion blabla2
+CreateFollower FollowerC follower3@technion blabla3

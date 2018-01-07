@@ -6,9 +6,13 @@
 
 class Teacher : public Person{
 public:
-// Add your code here ...
+	Teacher(string name, int age, int seniority);
+	int getSeniority() const;
+	void Print();
 private:
-// Add your code here ...
+	string name;
+	int age;
+	int seniority;
 };
 
 #endif

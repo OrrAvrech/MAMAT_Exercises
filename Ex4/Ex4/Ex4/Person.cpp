@@ -4,4 +4,20 @@ using std::string;
 using std::cout;
 using std::endl;
 
-// Add your code here ...
+Person::Person(string name, int age) {
+	this->name = name;
+	this->age = age;
+}
+
+string Person::getName() const{
+	return this->name;
+}
+
+int Person::getAge() const {
+	return this->age;
+}
+
+void Person::Print() {
+	cout << "Name : " << this->name << endl;
+	cout << "Age " << this->age << endl;
+}

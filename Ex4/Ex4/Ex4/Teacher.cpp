@@ -3,4 +3,19 @@ using std::string;
 using std::cout;
 using std::endl;
 
-// Add your code here ...
+Teacher::Teacher(string name, int age, int seniority)
+	:Person(name, age)
+{
+	this->seniority = seniority;
+}
+
+int Teacher::getSeniority() const
+{
+	return this->seniority;
+}
+
+void Teacher::Print()
+{
+	Person::Print();
+	cout << "Seniority : " << this->seniority << endl;
+}

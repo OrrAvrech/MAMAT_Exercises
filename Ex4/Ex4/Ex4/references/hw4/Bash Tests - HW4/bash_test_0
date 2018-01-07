@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ `find empty_dir 2> /dev/null` != "" ]]; then rm -r empty_dir ; fi
+mkdir empty_dir
+./change_extensions empty_dir old_nothing new_nothing
+ls empty_dir > bash_out_0
+rm -r empty_dir

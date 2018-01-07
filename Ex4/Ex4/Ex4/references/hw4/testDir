@@ -1,0 +1,55 @@
+#! /bin/bash
+
+#//********************************
+#//* function name: testDir
+#//* Description  : executes the program with input from input file. saves the output to a log file.
+#//*		    compares the program's output to the expected output given and indicates success or failure of operation
+#//* Parameters	  : 
+#//*		    1. programName - the name of the program to execute
+#//*		    2. tests dir
+#//*		    3. tests number
+#//* Return value : 0 - Always
+
+
+if (( $# < 3 )); then
+	echo "not enough parameters"
+	exit 1
+fi
+
+count=1
+while (( count <= "$3" )); do
+	echo "Test $count"
+
+	# runs program with input from inputFile and saves the output into logfile
+	"$1" <"$2"/in"$count" >out 2>err
+
+	# runs diff on logFile and expectedOutputFile and indicates whether there are diffs or not.
+	if diff -s "$2"/out"$count" out > /dev/null; then
+		echo "InOut V"
+	else
+		echo "InOut X"
+		echo "Printing diff for InOut ${count}:"
+		diff "$2"/out"$count" out
+	fi 
+
+	if diff -s "$2"/err"$count" err > /dev/null; then
+		echo "Error V"
+	else
+		echo "Error X"
+		echo "Printing diff for Error ${count}:"
+		diff "$2"/err"$count" err
+	fi
+
+	valgrind --tool=memcheck --leak-check=full ./"$1" <"$2"/in"$count" &>err
+	if grep -Fq "ERROR SUMMARY: 0 errors from 0 contexts" err & grep -Fq "no leaks are possible" err ; then
+		echo "Memory V"
+	else
+		echo "Memory X"
+		echo "Printing valgrind output for Test ${count}:"
+		cat err
+	fi
+	echo ""
+	(( count = count + 1))
+	rm -f out
+	rm -f err
+done
