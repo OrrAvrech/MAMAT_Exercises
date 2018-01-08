@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $# != 1 ]]; then
+	echo usage: $0 [file]
+	exit 1
+fi
+
+word=$(cat "$1" | sed 's/\./ /g' | sed 's/:/ /g' | sed 's/,/ /g' | tr -s " " |
+sed 's/ /\n/g' | sort | uniq | awk '{print length, $0}' | sort -nr | head -n1 | cut -f2 -d" ")
+
+printf 'The longest word is %s and its length is %d.\n' "$word" "${#word}"
