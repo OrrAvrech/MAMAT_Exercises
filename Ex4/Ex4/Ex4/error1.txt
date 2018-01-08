@@ -1,0 +1,12 @@
+Failed - addChild 2 tal 0546987654
+Failed - removeChild beni
+Failed - removeChild tal
+Failed - removeClass 3
+Failed - removeTeacher rachel
+Failed - removeTeacher sara
+Failed - addChild 1 sivan 0577258258
+Failed - sickChild gili
+Failed - removeTeacher dalia
+Failed - addClass 45 2.250 20 2
+Failed - sickChild tom
+Failed - removeClass 4

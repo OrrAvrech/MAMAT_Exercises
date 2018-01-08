@@ -1,17 +1,5 @@
+typedef struct List_* PList;
 typedef void* PElem;
-
-typedef struct _Node {
-	PElem pElem;		// element data
-	struct _Node *pNext;	// pointer to next element
-} Node, *pNode;
-
-typedef struct List_
-{
-	pNode *head;
-	pNode *iterator;
-}*PList;
-
-
 typedef enum{FAIL, SUCCESS} Result;
 
 /*User functions*/
