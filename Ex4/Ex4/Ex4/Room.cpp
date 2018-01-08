@@ -6,9 +6,9 @@ using std::cout;
 using std::endl;
 using std::boolalpha;
 
-Room::Room(int num, int size) : num_(num), size_(size), occupied_(false) { }
+Room::Room(unsigned int num, unsigned int size) : num_(num), size_(size), occupied_(false) { }
 
-int Room::getNum() const { return num_; }
+unsigned int Room::getNum() const { return num_; }
 
 bool Room::getIsOccupied() const { return occupied_; }
 

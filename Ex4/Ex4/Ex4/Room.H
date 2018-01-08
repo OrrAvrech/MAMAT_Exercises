@@ -10,19 +10,19 @@ using std::string;
 class Room {
 public:
 	// Constructor
-	Room(int num, int size);
+	Room(unsigned int num, unsigned int size);
 	//~Room();
 
 	// Methods
-	int getNum() const;
+	unsigned int getNum() const;
 	bool getIsOccupied() const;
 	void setOccupy();
 	void setEvacuate();
 	void print() const;
 
-private:
-	int num_;
-	int size_;
+protected:
+	unsigned int num_;
+	unsigned int size_;
 	bool occupied_;
 };
 
