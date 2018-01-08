@@ -3,14 +3,27 @@
 
 #include <string>
 #include <iostream>
+#include "defs.H"
 
 using std::string;
 
 class Room {
 public:
-// Add your code here ...
+	// Constructor
+	Room(int num, int size);
+	//~Room();
+
+	// Methods
+	int getNum() const;
+	bool getIsOccupied() const;
+	void setOccupy();
+	void setEvacuate();
+	void print() const;
+
 private:
-// Add your code here ...
+	int num_;
+	int size_;
+	bool occupied_;
 };
 
 #endif
