@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "Office.H"
 #include "Class.H"
 #include "Child.H"
@@ -99,3 +100,15 @@ int main() {
 	}
 	return 0; 
 };
+=======
+#include "Room.H"
+
+int main() {
+
+	Room r(15, 60);
+	r.print();
+	r.setOccupy();
+	r.print();
+	return 0;
+}
+>>>>>>> fc64b6c7e859ca68e263723bed6521acc50f2156
