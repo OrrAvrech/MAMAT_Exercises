@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ `find dir_2 2> /dev/null` != "" ]]; then rm -r dir_2 ; fi
+mkdir dir_2
+mkdir dir_2/inner_dir
+mkdir dir_2/inner_dir/dark_dir
+find ./dir_2/inner_dir/dark_dir -type d -exec touch {}/C.C.C.P \;
+find ./dir_2/inner_dir/dark_dir -type d -exec touch {}/mmt.C.cpp \;
+find ./dir_2/inner_dir/dark_dir -type d -exec touch {}/mmt.mmt.mmt.C.mmt.mmt.C \;
+find ./dir_2/inner_dir/dark_dir -type d -exec touch {}/mmt.cpp.C \;
+find ./dir_2/inner_dir/dark_dir -type d -exec touch {}/mmt.c \;
+./change_extensions dir_2/inner_dir/dark_dir C cpp
+ls dir_2/inner_dir/dark_dir > bash_out_2
+rm -r dir_2

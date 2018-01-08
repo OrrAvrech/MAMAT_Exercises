@@ -21,9 +21,12 @@
     <ClInclude Include="Class.H">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
     <ClInclude Include="defs.H">
       <Filter>Header Files</Filter>
     </ClInclude>
+>>>>>>> fc64b6c7e859ca68e263723bed6521acc50f2156
     <ClInclude Include="Office.H">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -36,6 +39,12 @@
     <ClInclude Include="Teacher.H">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="defs.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+=======
+>>>>>>> fc64b6c7e859ca68e263723bed6521acc50f2156
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Child.cpp">
@@ -44,9 +53,12 @@
     <ClCompile Include="Class.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+>>>>>>> fc64b6c7e859ca68e263723bed6521acc50f2156
     <ClCompile Include="Office.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -7,9 +7,14 @@ using std::string;
 
 class Person {
 public:
-// Add your code here ...
+	Person(string name, int age);
+  // do i need a destructor for string and int
+	string getName() const;
+	int getAge() const;
+	void Print();
 private:
-// Add your code here ...
+	string name;
+	int age;
 };
 
 #endif

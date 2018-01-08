@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ `find dir_1 2> /dev/null` != "" ]]; then rm -r dir_1 ; fi
+mkdir dir_1
+touch dir_1/happy.hanuka
+touch dir_1/hanuka.vacation
+touch dir_1/.hanuka
+touch dir_1/merry.Xmas
+./change_extensions dir_1 hanuka Xmas
+ls dir_1 > bash_out_1
+rm -r dir_1

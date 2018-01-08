@@ -1,0 +1,10 @@
+#!/bin/bash
+files=`find ./"$1" -type f -name "*.$2"`
+# get all files that ends with .$2
+for file in $files; do
+  newname="${file%.$2}"
+  newname="$newname.$3"
+  mv "$file" "$newname"
+done
+# files converted!
+exit 0
