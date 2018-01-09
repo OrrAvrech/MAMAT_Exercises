@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "Office.H"
 #include "Class.H"
 #include "Child.H"
@@ -55,60 +54,112 @@ int main() {
 
 	Office KG_Office; //KinderGarten Office
 	const char* delims = " \t\n";
-	vector<string> tokens;
-	string line;
+	const char* dotDelim = ".";
+	vector<string> tokens , small_tokens;
+	string line ,name , phone;
 	unsigned int lineNumber = 1;
-
+	int size , age , childMax, seniority;
+	double ratio;
 	while (!cin.eof()) {
 	  getline(cin, line);
 	  tokens = tokenize(line, delims);
-	  if (tokens.size() == 0) { //empty line
+	  if (tokens.size() == 0) //empty line
+	  { 
 	    continue;
 	  }
-	  
-	  if (tokens[0] == "addClass") {
-	    //Add your code here ...
+	  if (tokens[0] == "addClass") 
+	  {
+		  if (empty(tokens[1]) || empty(tokens[2]) || empty(tokens[3]) || empty(tokens[4]) || !empty(tokens[5]))
+		  {
+			  cerr << "Failed - " << line << endl;
+			  continue;
+		  }
+		  size = stringToInt(tokens[1]);
+		  small_tokens = tokenize(tokens[2], dotDelim);
+		  ratio = stringToDouble(small_tokens[0] , small_tokens[1]);
+		  childMax = stringToInt(tokens[3]);
+		  age = stringToInt(tokens[4]);
+		 // ********************          still missing all the code        ****************************
 	  }
-	  if (tokens[0] == "removeClass") {
-	    //Add your code here ...
+	  if (tokens[0] == "removeClass")
+	  {
+		  if (empty(tokens[1]) || !empty(tokens[2]))
+		  {
+			  cerr << "Failed - " << line << endl;
+			  continue;
+		  }
+		  age = stringToInt(tokens[1]);
+		  if (Office::removeClass(age) == FAILURE)     // ************* need to check in office      *******************
+			  cerr << "Failed - " << line << endl;
 	  }
-	  if (tokens[0] == "addChild") {
-	    //Add your code here ...
+	  if (tokens[0] == "addChild") 
+	  {
+		  if (empty(tokens[1]) || empty(tokens[2]) || empty(tokens[3]) || !empty(tokens[4]))
+		  {
+			  cerr << "Failed - " << line << endl;
+			  continue;
+		  }
+		  age = stringToInt(tokens[1]);
+		  name = tokens[2];
+		  phone = tokens[3];
+		  if (Office::addChild(age , name , phone) == FAILURE)     // ************* need to check in office      *******************
+			  cerr << "Failed - " << line << endl;
 	  }
-	  
-	  if (tokens[0] == "addTeahcer") {
-	    //Add your code here ...
+	  if (tokens[0] == "addTeahcer") 
+	  {
+		  if (empty(tokens[1]) || empty(tokens[2]) || empty(tokens[3]) || !empty(tokens[4]))
+		  {
+			  cerr << "Failed - " << line << endl;
+			  continue;
+		  }
+		  age = stringToInt(tokens[1]);
+		  name = tokens[2];
+		  seniority = stringToInt(tokens[3]);
+		  if (Office::addTeacher(age, name, seniority) == FAILURE)     // ************* need to check in office      *******************
+			  cerr << "Failed - " << line << endl;
 	  }
-	  
-	  if (tokens[0] == "removeChild") {
-	    //Add your code here ...
+	  if (tokens[0] == "removeChild") 
+	  {
+		  if (empty(tokens[1]) || !empty(tokens[2]))
+		  {
+			  cerr << "Failed - " << line << endl;
+			  continue;
+		  }
+		  name = tokens[1];
+		  if (Office::removeChild(name) == FAILURE)     // ************* need to check in office      *******************
+			  cerr << "Failed - " << line << endl;
 	  }
-	  
-	  if (tokens[0] == "removeTeacher") {
-	    //Add your code here ...
+	  if (tokens[0] == "removeTeacher") 
+	  {
+		  if (empty(tokens[1]) || !empty(tokens[2]))
+		  {
+			  cerr << "Failed - " << line << endl;
+			  continue;
+		  }
+		  name = tokens[1];
+		  if (Office::removeTeacher(name) == FAILURE)     // ************* need to check in office      *******************
+			  cerr << "Failed - " << line << endl;
 	  }
-	  
 	  if (tokens[0] == "PrintKindergarten") {
-	    //Add your code here ...
+		  if (!empty(tokens[1]))
+		  {
+			  cerr << "Failed - " << line << endl;
+			  continue;
+		  }
+		  Office::print();
 	  }
-	  
 	  if (tokens[0] == "sickChild") {
-	    //Add your code here ...
+		  if (empty(tokens[1]) || !empty(tokens[2]))
+		  {
+			  cerr << "Failed - " << line << endl;
+			  continue;
+		  }
+		  name = tokens[1];
+		  if (Office::setSick(name) == FAILURE)     // ************* need to check in office      *******************
+			  cerr << "Failed - " << line << endl;
 	  }
 	  
 	  lineNumber++;
 	}
 	return 0; 
 };
-=======
-#include "Room.H"
-
-int main() {
-
-	Room r(15, 60);
-	r.print();
-	r.setOccupy();
-	r.print();
-	return 0;
-}
->>>>>>> fc64b6c7e859ca68e263723bed6521acc50f2156
