@@ -8,7 +8,7 @@ class Teacher : public Person{
 public:
 	Teacher(string name, int age, int seniority);
 	int getSeniority() const;
-	void Print();
+	void Print() const;
 private:
 	string name;
 	int age;

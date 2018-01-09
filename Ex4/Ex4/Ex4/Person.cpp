@@ -17,7 +17,7 @@ int Person::getAge() const {
 	return this->age;
 }
 
-void Person::Print() {
+void Person::Print() const {
 	cout << "Name : " << this->name << endl;
-	cout << "Age " << this->age << endl;
+	cout << "Age : " << this->age << endl;
 }

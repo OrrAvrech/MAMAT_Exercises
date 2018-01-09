@@ -13,7 +13,7 @@ public:
 	string getPhone() const;
 	void setPhone(string new_phone);
 	Result setSick();
-	void Print();
+	void Print() const;
 private:
 	string name;
 	int age;

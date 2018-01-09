@@ -28,7 +28,7 @@ Result Child::setSick()
 	return SUCCESS;
 }
 
-void Child::Print()
+void Child::Print() const
 {
 	Person::Print();
 	cout << "Parent's Phone : " << this->phone << endl;

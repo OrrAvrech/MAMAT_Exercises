@@ -11,7 +11,7 @@ public:
   // do i need a destructor for string and int
 	string getName() const;
 	int getAge() const;
-	void Print();
+	void Print() const;
 private:
 	string name;
 	int age;

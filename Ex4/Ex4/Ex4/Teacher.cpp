@@ -14,7 +14,7 @@ int Teacher::getSeniority() const
 	return this->seniority;
 }
 
-void Teacher::Print()
+void Teacher::Print() const
 {
 	Person::Print();
 	cout << "Seniority : " << this->seniority << endl;
