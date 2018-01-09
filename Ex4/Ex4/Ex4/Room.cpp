@@ -18,9 +18,9 @@ void Room::setEvacuate() { occupied_ = false; }
 
 void Room::print() const
 {
-	cout << "Number : " << num_ << endl;
-	cout << "Size : " << size_ << " square meters" << endl;
-	cout << boolalpha << "Is Occupied : " << occupied_ << endl;
+	cout << "Number : " << num_ << endl
+		 << "Size : " << size_ << " square meters" << endl
+		 << boolalpha << "Is Occupied : " << occupied_ << endl;
 }
 
 
