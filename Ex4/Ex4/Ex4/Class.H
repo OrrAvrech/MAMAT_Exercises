@@ -22,8 +22,8 @@ public:
 	unsigned int getAge() const;
 	double getRatio() const;
 	string getPhone(string childName) const;
-	void addTeacher();
-	Result addChild();
+	void addTeacher(string name, int age, int seniority);
+	Result addChild(string name, int age, string phone, bool sick_flag);
 	Result removeTeacher(string name);
 	Result removeChild(string name);
 	Result setSickChild(string name);
