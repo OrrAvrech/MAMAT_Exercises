@@ -109,19 +109,23 @@ Result Office::removeChild(string name)
 		for (i = classList_.begin(); i < classList_.end(); i++)
 		{
 			r = ((*i).removeChild(name));
-			if (r = SUCCESS)
+			if (r == SUCCESS)
 			{
 				busy_ = false;
+				return r;
 			}
-			return r;
 		}
+		return FAILURE;
 	}
 	else // normal child removal
 	{
 		for (i = classList_.begin(); i < classList_.end(); i++)
 		{
-			return ((*i).removeChild(name));
+			r =  ((*i).removeChild(name));
+			if (r == SUCCESS)
+				return r;
 		}
+		return FAILURE;
 	}
 }
 
