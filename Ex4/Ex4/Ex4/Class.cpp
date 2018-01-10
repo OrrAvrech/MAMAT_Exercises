@@ -118,10 +118,7 @@ Result Class::setSickChild(string name)
 	for (i = 0; i < childList_.size(); i++)
 	{
 		if (name.compare(childList_[i].getName()) == 0)
-		{
-			childList_[i].setSick();
-			return SUCCESS;
-		}
+			return(childList_[i].setSick());
 	}
 	return FAILURE; // name not found
 }
