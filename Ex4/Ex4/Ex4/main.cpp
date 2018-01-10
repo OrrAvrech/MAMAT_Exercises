@@ -56,8 +56,6 @@ int main()
 {
 	Office KG_Office; //KinderGarten Office
 	const char* delims = " \t\n";
-	vector<string> tokens;
-	string line;
 	const char* dotDelim = ".";
 	vector<string> tokens, small_tokens;
 	string line, name, phone;

@@ -140,7 +140,7 @@ Result Office::reportSick(string name)
 		string phoneNum = (*i).getPhone(name);
 		if (phoneNum.size() == 10 && (phoneNum.substr(0, 2)).compare("05") == 0)
 		{
-			if ((*i).setSickChild == SUCCESS)
+			if ((*i).setSickChild(name) == SUCCESS)
 			{
 				busy_ = true;
 				sickChildName_.assign(name);
