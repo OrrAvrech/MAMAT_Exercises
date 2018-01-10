@@ -129,7 +129,7 @@ void Class::print() const
 			<< string(24, '=') << endl
 			<< "Number : " << num_ << endl
 			<< "Size : " << size_ << " square meters" << endl
-			<< boolalpha << "Is Occupied : " << occupied_ << endl
+			<< boolalpha << "Is Occupied : " << std::boolalpha << occupied_ << endl
 			<< "Max number of children : " << maxChildren_ << endl
 			<< "Number of children : " << childList_.size() << endl
 			<< "Number of teachers : " << teacherList_.size() << endl
@@ -137,7 +137,7 @@ void Class::print() const
 	double currRatio = Class::getRatio();
 	cout << "Current ratio : " << currRatio << endl;
 	string ageRange;
-	ageRange += string(to_string(ageChildren_)) + '-' + string(to_string(ageChildren_ + 1));
+	ageRange += string(to_string(ageChildren_)) + " - " + string(to_string(ageChildren_ + 1));
 	cout << "Children age range : " << ageRange << "\n" << endl;
 
 	cout	<< "Printing childrens status :" << endl

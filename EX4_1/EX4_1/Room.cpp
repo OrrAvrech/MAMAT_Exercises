@@ -20,7 +20,7 @@ void Room::print() const
 {
 	cout << "Number : " << num_ << endl
 		 << "Size : " << size_ << " square meters" << endl
-		 << boolalpha << "Is Occupied : " << occupied_ << endl;
+		 << boolalpha << "Is Occupied : " << std::boolalpha << occupied_ << endl;
 }
 
 

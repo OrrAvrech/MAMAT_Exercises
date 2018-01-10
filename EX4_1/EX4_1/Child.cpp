@@ -32,5 +32,5 @@ void Child::Print() const
 {
 	Person::Print();
 	cout << "Parent's Phone : " << this->phone << endl;
-	cout << "Is sick : " << sick_flag << endl;
+	cout << "Is sick : " << std::boolalpha << sick_flag << endl;
 }
