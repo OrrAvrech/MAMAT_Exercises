@@ -44,20 +44,52 @@ Result Office::addChild(string name, int age, string phone, bool sick_flag)
 	return FAILURE; // Child's age does not exist in classList
 }
 
-Result Office::addTeacher(string name, int age, int seniority) //TODO
+Result Office::addTeacher(string name, int age, int seniority)
 {
 	if (busy_ == true)
 		return FAILURE;
-	vector<Class>::iterator i;
+	vector<Class>::iterator i, minTeacherClass, maxRatioClass;
+	unsigned minTeachers;
+	double maxRatio;
+	bool ratio_flag = 0;
 	for (i = classList_.begin(); i < classList_.end(); i++)
 	{
-		if ((*i).getNumTeachers() == 0 || ((*i).getRatio == 0 && (*i).getNumTeachers != 0))
+		if ((*i).getNumTeachers() == 0 )
 		{
-			// Empty classes - add teacher by order
+			// Empty classes - add teacher by order Of classes
 			(*i).addTeacher(name, age, seniority);
 			return SUCCESS;
 		}
 	}
+	for (i = classList_.begin(); i < classList_.end(); i++)
+	{
+		if (i == classList_.begin())
+		{
+			minTeachers = (*i).getNumTeachers();
+			minTeacherClass = i;
+			maxRatio = (*i).getRatio();
+			maxRatioClass = i;
+		}
+		if ((*i).getRatio() != 0)
+		{
+			ratio_flag = 1;
+		}
+		if ((*i).getNumTeachers() < minTeachers)
+		{
+			minTeachers = (*i).getNumTeachers();
+			minTeacherClass = i;
+		}
+		if ((*i).getRatio() > maxRatio)
+		{
+			maxRatio = (*i).getRatio();
+			maxRatioClass = i;
+		}
+
+	}
+	if (ratio_flag == 0)
+		(*minTeacherClass).addTeacher(name, age, seniority);
+	else
+		(*maxRatioClass).addTeacher(name, age, seniority);
 }
 
 Result Office::removeChild(string name)
@@ -88,7 +120,7 @@ Result Office::removeClass(unsigned int age)
 	vector<Class>::iterator i;
 	for (i = classList_.begin(); i < classList_.end(); i++)
 	{
-		if ((*i).getAge == age)
+		if ((*i).getAge() == age)
 		{
 			i = classList_.erase(i);
 			// delete? TODO
@@ -98,10 +130,10 @@ Result Office::removeClass(unsigned int age)
 	return FAILURE;
 }
 
-void Office::reportSick(string name)
+Result Office::reportSick(string name)
 {
 	if (busy_ == true)
-		return;
+		return FAILURE;
 	vector<Class>::iterator i;
 	for (i = classList_.begin(); i < classList_.end(); i++)
 	{
@@ -115,15 +147,30 @@ void Office::reportSick(string name)
 				cout << "Reporting sick child :" << endl;
 				cout << "Name : " << sickChildName_ << endl;
 				cout << "Parent's phone number : " << phoneNum << endl;
+				return SUCCESS;
 			}
 		}
-		else
-			return;
 	}
+	return FAILURE;
 }
 
 void Office::print() const
 {
-	//TODO
+	cout << "Printing office status : " << endl;
+	cout << "========================" << endl;
+	cout << "Number : 1" << endl;
+	cout << "Size : 20 square meters" << endl;
+	cout << "Is Occupied : " << occupied_ << endl;
+	cout << "Office is busy : " << busy_ << endl;
+	cout << "Sick child : " << sickChildName_ << endl;
+	cout << endl;
+
+	// vector<Class>::iterator i;
+	unsigned int i;
+	for (i = 0; i < classList_.size(); i++)
+	{
+		classList_[i].print();
+	}
+
 }
 

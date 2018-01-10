@@ -18,12 +18,12 @@ public:
 
 	// Methods
 	Result addClass(unsigned int size, double maxRatio, unsigned int maxChildren, unsigned int ageChildren);
-	Result addChild(string name, int age, string phone, bool sick_flag);
+	Result addChild(string name, int age, string phone, bool sick_flag = 0);
 	Result addTeacher(string name, int age, int seniority);
 	Result removeChild(string name);
 	Result removeTeacher(string name);
 	Result removeClass(unsigned int age);
-	void reportSick(string name);
+	Result reportSick(string name);
 	void print() const;
 
 private:
