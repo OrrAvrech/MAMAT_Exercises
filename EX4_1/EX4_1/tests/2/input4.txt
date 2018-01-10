@@ -1,0 +1,38 @@
+
+
+PrintKindergarten 3
+PrintKindergarten
+addClass 30 3.000 5 2
+addClass 30 3.000 5 3
+addClass 30 3.000 5 4
+addTeacher 30 Dana 5
+addTeacher 30 Dina 5
+addTeacher 30 Dona 5
+addTeacher 30 Rami 5
+addTeacher 30 Dov 5
+PrintKindergarten
+addChild 2 Avram 23923923
+addTeacher 30 Momo 5
+addTeacher 30 Ohad 5
+addChild 4 Asaf 91283983
+PrintKindergarten
+addTeacher 30 Shir 5
+addChild 3 Noy 0528383833
+addTeacher 30 Haim 5
+PrintKindergarten
+removeTeacher Ohad
+removeTeacher Momo
+removeTeacher Rami
+removeChild Avram
+removeTeacher Shir
+removeTeacher Dona
+removeChild Asaf
+removeChild Noy
+PrintKindergarten
+addTeacher 30 Niv 5
+addTeacher 30 Dikla 5
+removeTeacher Haim
+removeTeacher Dov
+removeTeacher Dina
+addTeacher 30 Omer 5
+PrintKindergarten

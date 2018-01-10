@@ -1,0 +1,272 @@
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 60 square meters 
+Is Occupied : true
+Max number of children : 20
+Number of children : 3
+Number of teachers : 1
+Max value for ratio : 3.25
+Current ratio : 3
+Children age range : 2 - 3
+
+Printing childrens status :
+========================
+Name : dana
+Age : 2
+Parant's Phone : 0598765432
+Is sick : false
+Name : dani
+Age : 2
+Parant's Phone : 0546123456
+Is sick : false
+Name : tom
+Age : 2
+Parant's Phone : 0545555555
+Is sick : false
+
+Printing teachers status :
+========================
+Name : sara
+Age : 40
+Seniority : 5
+
+Printing class status :
+========================
+Number : 3
+Size : 60 square meters 
+Is Occupied : true
+Max number of children : 10
+Number of children : 2
+Number of teachers : 1
+Max value for ratio : 3.125
+Current ratio : 2
+Children age range : 1 - 2
+
+Printing childrens status :
+========================
+Name : uri
+Age : 1
+Parant's Phone : 0525456456
+Is sick : false
+Name : hadas
+Age : 1
+Parant's Phone : 0505789789
+Is sick : false
+
+Printing teachers status :
+========================
+Name : dalia
+Age : 45
+Seniority : 10
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 60 square meters 
+Is Occupied : true
+Max number of children : 20
+Number of children : 2
+Number of teachers : 1
+Max value for ratio : 3.25
+Current ratio : 2
+Children age range : 2 - 3
+
+Printing childrens status :
+========================
+Name : dani
+Age : 2
+Parant's Phone : 0546123456
+Is sick : false
+Name : tom
+Age : 2
+Parant's Phone : 0545555555
+Is sick : false
+
+Printing teachers status :
+========================
+Name : sara
+Age : 40
+Seniority : 5
+
+Printing class status :
+========================
+Number : 3
+Size : 50 square meters 
+Is Occupied : false
+Max number of children : 30
+Number of children : 0
+Number of teachers : 0
+Max value for ratio : 4.5
+Current ratio : 0
+Children age range : 3 - 4
+
+Printing class status :
+========================
+Number : 4
+Size : 40 square meters 
+Is Occupied : false
+Max number of children : 5
+Number of children : 0
+Number of teachers : 0
+Max value for ratio : 2
+Current ratio : 0
+Children age range : 1 - 2
+
+Reporting sick child : 
+Name : dani
+Parent's phone number : 0546123456
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : true
+Sick child : dani
+
+Printing class status :
+========================
+Number : 2
+Size : 60 square meters 
+Is Occupied : true
+Max number of children : 20
+Number of children : 2
+Number of teachers : 2
+Max value for ratio : 3.25
+Current ratio : 1
+Children age range : 2 - 3
+
+Printing childrens status :
+========================
+Name : dani
+Age : 2
+Parant's Phone : 0546123456
+Is sick : true
+Name : tom
+Age : 2
+Parant's Phone : 0545555555
+Is sick : false
+
+Printing teachers status :
+========================
+Name : sara
+Age : 40
+Seniority : 5
+Name : rachel
+Age : 50
+Seniority : 10
+
+Printing class status :
+========================
+Number : 3
+Size : 50 square meters 
+Is Occupied : true
+Max number of children : 30
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 4.5
+Current ratio : 0
+Children age range : 3 - 4
+
+Printing teachers status :
+========================
+Name : dalia
+Age : 45
+Seniority : 10
+
+Printing class status :
+========================
+Number : 4
+Size : 40 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 2
+Number of teachers : 1
+Max value for ratio : 2
+Current ratio : 2
+Children age range : 1 - 2
+
+Printing childrens status :
+========================
+Name : gili
+Age : 1
+Parant's Phone : 049876543
+Is sick : false
+Name : ron
+Age : 1
+Parant's Phone : 0565147147
+Is sick : false
+
+Printing teachers status :
+========================
+Name : ruti
+Age : 55
+Seniority : 15
+
+Reporting sick child : 
+Name : ron
+Parent's phone number : 0565147147
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 3
+Size : 50 square meters 
+Is Occupied : true
+Max number of children : 30
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 4.5
+Current ratio : 0
+Children age range : 3 - 4
+
+Printing teachers status :
+========================
+Name : dalia
+Age : 45
+Seniority : 10
+
+Printing class status :
+========================
+Number : 4
+Size : 40 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 1
+Number of teachers : 1
+Max value for ratio : 2
+Current ratio : 1
+Children age range : 1 - 2
+
+Printing childrens status :
+========================
+Name : gili
+Age : 1
+Parant's Phone : 049876543
+Is sick : false
+
+Printing teachers status :
+========================
+Name : ruti
+Age : 55
+Seniority : 15
+

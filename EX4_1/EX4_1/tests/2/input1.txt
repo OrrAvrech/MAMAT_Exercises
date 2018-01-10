@@ -1,0 +1,63 @@
+addClass 60 3.250 20 2
+addClass 60 3.125 10 1
+
+addTeacher 40 sara 5
+addTeacher 45 dalia 10
+
+addChild 2 dana 0598765432
+addChild 2 dani 0546123456
+addChild 2 tom 0545555555
+addChild 2 tal 0546987654
+addChild 1 uri 0525456456
+addChild 1 hadas 0505789789
+
+PrintKindergarten
+
+removeChild beni
+removeChild dana
+removeChild tal
+removeClass 3
+removeClass 1
+
+addClass 50 4.500 30 3
+addClass 40 2.000 5 1
+
+PrintKindergarten
+
+removeTeacher rachel
+
+addTeacher 45 dalia 10
+addTeacher 55 ruti 15
+
+removeTeacher sara
+
+addTeacher 50 rachel 10
+
+addChild 1 gili 049876543
+addChild 1 ron 0565147147
+addChild 1 sivan 0577258258
+
+sickChild gili
+sickChild dani
+
+PrintKindergarten
+
+removeTeacher dalia
+
+removeChild dani
+
+addClass 45 2.250 20 2
+
+sickChild ron
+sickChild tom
+
+removeChild ron
+
+removeClass 2
+
+PrintKindergarten
+
+removeClass 1
+removeClass 4
+removeClass 3
+

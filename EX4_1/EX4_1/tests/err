@@ -1,0 +1,25 @@
+Failed - addChild 2 dana 0598765432
+Failed - addTeacher 45 dalia 10
+Failed - addChild 2 dana 0598765432
+Failed - addClass 60 3.125 10 2
+Failed - addChild 3 dana 0598765432
+Failed - addChild 17 dani 0546123456
+Failed - addChild 2 uriel 0525456457
+Failed - removeTeacher dalia
+Failed - removeChild beni
+Failed - removeTeacher dorit
+Failed - removeTeacher yanush
+Failed - sickChild like
+Failed - sickChild dani
+Failed - addChild 2 dana 0598765432
+Failed - addTeacher 88 shosh 16
+Failed - addClass 60 2.500 20 74
+Failed - removeClass 1
+Failed - removeChild tal
+Failed - removeTeacher hedva
+Failed - sickChild hadas
+Failed - removeClass 33
+Failed - removeChild salivan
+Failed - addChild 1 danit 0598767432
+Failed - removeTeacher sara
+Failed - sickChild hadas

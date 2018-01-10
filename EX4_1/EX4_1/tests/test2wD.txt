@@ -1,0 +1,68 @@
+addChild 2 dana 0598765432    //error no class
+addTeacher 45 dalia 10        //error no class
+addClass 60 2.500 20 2        // first class
+addChild 2 dana 0598765432    //error no t
+addClass 60 3.125 10 2        //error class ex
+addClass 60 3.125 10 1        //second class
+addClass 50 0.000 30 3        //third class
+addTeacher 45 dalia 10        //class 2 (1t 0c)
+addTeacher 40 sara 5          //class 1 (1t 0c)
+addTeacher 65 dorit 75        //class 3 (1t 0c)
+addTeacher 21 reuven 13       //class 2 (2t 0c)
+addChild 3 dana 0598765432    //error ratio=0
+addChild 2 dana 0598765432    //class 2 (2t 1c)
+addChild 17 dani 0546123456   // error no class for this age
+addTeacher 77 ilana 76        //class 2 (3t 1c)
+removeTeacher ilana           //class 2 (2t 1c)
+addChild 2 dani 054612        //class 2 (2t 2c)
+addChild 2 tom 0545555555     //class 2 (2t 3c)
+addChild 2 tal 0546987654     //class 2 (2t 4c)
+addChild 2 uri 0525456456     //class 2 (2t 5c)
+addChild 2 uriel 0525456457   //error over ratio
+addChild 1 hadas 0505789789   //class 1 (1t c1)
+addChild 1 salivan 0112358132 //class 1 (1t c2)
+
+PrintKindergarten
+
+removeTeacher dalia           //error over ratio
+removeTeacher dorit           //class 3 (0t 0c)
+
+removeChild beni              //error c not ex
+removeTeacher dorit           //error t not ex
+removeTeacher yanush          //error t not ex
+removeChild dana              //class 2 (2t 4c)
+addTeacher 12 aliza 21	      //class 3 (1t 0c)
+addTeacher 42 hedva 10        //class 2 (3t 4c)
+
+PrintKindergarten
+
+sickChild like                //error c not ex
+sickChild dani                //error Phone not good
+sickChild tom                 //tom is sick
+
+addChild 2 dana 0598765432    //error office busy 
+addTeacher 88 shosh 16        //error office busy
+addClass 60 2.500 20 74       //error office busy
+removeClass 1                 //error office busy  
+removeChild tal               //error office busy
+removeTeacher hedva           //error office busy
+sickChild hadas               //error office busy
+PrintKindergarten
+
+removeChild tom               //class 2 (3t 3c)
+
+PrintKindergarten
+
+addChild 2 dana 0598765432    //class 2 (3t 4c)
+addTeacher 88 shosh 16        //class 1 (2t c2)
+addClass 60 2.500 20 74       //class 74 (0t 0c)
+removeClass 1                 //3 class become second class
+removeClass 33                //error Class not ex
+removeChild salivan           //error c not ex
+addChild 1 danit 0598767432   //error Class 1 not ex
+addClass 45 3.184 10 1        //third class 
+removeChild uri               //class 2 (3t 3c)
+removeTeacher sara            //error t not ex
+removeTeacher hedva           //class 2 (2t 3c)
+sickChild hadas               //error c not ex
+PrintKindergarten

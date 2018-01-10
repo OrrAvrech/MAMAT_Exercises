@@ -1,0 +1,155 @@
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 120 square meters 
+Is Occupied : true
+Max number of children : 3
+Number of children : 3
+Number of teachers : 2
+Max value for ratio : 2
+Current ratio : 1.5
+Children age range : 6 - 7
+
+Printing childrens status :
+========================
+Name : Yoni
+Age : 6
+Parant's Phone : 982391223
+Is sick : false
+Name : Dudu
+Age : 6
+Parant's Phone : 918309238
+Is sick : false
+Name : Beni
+Age : 6
+Parant's Phone : 0524812822
+Is sick : false
+
+Printing teachers status :
+========================
+Name : Hava
+Age : 30
+Seniority : 5
+Name : Dana
+Age : 40
+Seniority : 2
+
+Reporting sick child : 
+Name : Beni
+Parent's phone number : 0524812822
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : true
+Sick child : Beni
+
+Printing class status :
+========================
+Number : 2
+Size : 120 square meters 
+Is Occupied : true
+Max number of children : 3
+Number of children : 3
+Number of teachers : 2
+Max value for ratio : 2
+Current ratio : 1.5
+Children age range : 6 - 7
+
+Printing childrens status :
+========================
+Name : Yoni
+Age : 6
+Parant's Phone : 982391223
+Is sick : false
+Name : Dudu
+Age : 6
+Parant's Phone : 918309238
+Is sick : false
+Name : Beni
+Age : 6
+Parant's Phone : 0524812822
+Is sick : true
+
+Printing teachers status :
+========================
+Name : Hava
+Age : 30
+Seniority : 5
+Name : Dana
+Age : 40
+Seniority : 2
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 120 square meters 
+Is Occupied : true
+Max number of children : 3
+Number of children : 2
+Number of teachers : 2
+Max value for ratio : 2
+Current ratio : 1
+Children age range : 6 - 7
+
+Printing childrens status :
+========================
+Name : Yoni
+Age : 6
+Parant's Phone : 982391223
+Is sick : false
+Name : Dudu
+Age : 6
+Parant's Phone : 918309238
+Is sick : false
+
+Printing teachers status :
+========================
+Name : Hava
+Age : 30
+Seniority : 5
+Name : Dana
+Age : 40
+Seniority : 2
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 120 square meters 
+Is Occupied : false
+Max number of children : 3
+Number of children : 0
+Number of teachers : 0
+Max value for ratio : 2
+Current ratio : 0
+Children age range : 6 - 7
+

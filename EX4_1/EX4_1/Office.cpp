@@ -38,7 +38,7 @@ Result Office::addChild(string name, int age, string phone, bool sick_flag)
 	vector<Class>::iterator i;
 	for (i = classList_.begin(); i < classList_.end(); i++)
 	{
-		if ((*i).getAge() == age)
+		if ((*i).getAge() == (unsigned int) age)
 			return ((*i).addChild(name, age, phone, sick_flag));
 	}
 	return FAILURE; // Child's age does not exist in classList
@@ -131,11 +131,17 @@ Result Office::removeChild(string name)
 
 Result Office::removeTeacher(string name)
 {
+	Result r;
 	if (busy_ == true)
 		return FAILURE;
 	vector<Class>::iterator i;
 	for (i = classList_.begin(); i < classList_.end(); i++)
-		return ((*i).removeTeacher(name));
+	{
+		r = ((*i).removeTeacher(name));
+		if (r == SUCCESS)
+			return r;
+	}
+	return FAILURE;
 }
 
 Result Office::removeClass(unsigned int age)
@@ -169,7 +175,7 @@ Result Office::reportSick(string name)
 			{
 				busy_ = true;
 				sickChildName_.assign(name);
-				cout << "Reporting sick child :" << endl;
+				cout << "Reporting sick child : " << endl;
 				cout << "Name : " << sickChildName_ << endl;
 				cout << "Parent's phone number : " << phoneNum << endl;
 				return SUCCESS;
@@ -181,10 +187,10 @@ Result Office::reportSick(string name)
 
 void Office::print() const
 {
-	cout << "Printing office status : " << endl;
+	cout << "Printing office status :" << endl;
 	cout << "========================" << endl;
 	cout << "Number : 1" << endl;
-	cout << "Size : 20 square meters" << endl;
+	cout << "Size : 20 square meters " << endl;
 	cout << "Is Occupied : " << std::boolalpha << occupied_ << endl;
 	cout << "Office is busy : " << std::boolalpha << busy_ << endl;
 	if(busy_)

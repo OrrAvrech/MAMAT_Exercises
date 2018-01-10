@@ -1,0 +1,342 @@
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 30 square meters 
+Is Occupied : false
+Max number of children : 30
+Number of children : 0
+Number of teachers : 0
+Max value for ratio : 2.5
+Current ratio : 0
+Children age range : 7 - 8
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : false
+Max number of children : 30
+Number of children : 0
+Number of teachers : 0
+Max value for ratio : 3.5
+Current ratio : 0
+Children age range : 8 - 9
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 30
+Number of children : 0
+Number of teachers : 2
+Max value for ratio : 2.5
+Current ratio : 0
+Children age range : 7 - 8
+
+Printing teachers status :
+========================
+Name : tova
+Age : 30
+Seniority : 6
+Name : ronit
+Age : 30
+Seniority : 8
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 30
+Number of children : 0
+Number of teachers : 2
+Max value for ratio : 3.5
+Current ratio : 0
+Children age range : 8 - 9
+
+Printing teachers status :
+========================
+Name : rina
+Age : 26
+Seniority : 5
+Name : dorit
+Age : 80
+Seniority : 50
+
+Printing class status :
+========================
+Number : 4
+Size : 20 square meters 
+Is Occupied : true
+Max number of children : 1
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 1.5
+Current ratio : 0
+Children age range : 9 - 10
+
+Printing teachers status :
+========================
+Name : broria
+Age : 56
+Seniority : 40
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 30
+Number of children : 0
+Number of teachers : 2
+Max value for ratio : 2.5
+Current ratio : 0
+Children age range : 7 - 8
+
+Printing teachers status :
+========================
+Name : tova
+Age : 30
+Seniority : 6
+Name : ronit
+Age : 30
+Seniority : 8
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 30
+Number of children : 2
+Number of teachers : 3
+Max value for ratio : 3.5
+Current ratio : 0.666667
+Children age range : 8 - 9
+
+Printing childrens status :
+========================
+Name : hanan
+Age : 8
+Parant's Phone : 0578643647
+Is sick : false
+Name : roni
+Age : 8
+Parant's Phone : 0506546787
+Is sick : false
+
+Printing teachers status :
+========================
+Name : rina
+Age : 26
+Seniority : 5
+Name : dorit
+Age : 80
+Seniority : 50
+Name : ruti
+Age : 37
+Seniority : 12
+
+Printing class status :
+========================
+Number : 4
+Size : 20 square meters 
+Is Occupied : true
+Max number of children : 1
+Number of children : 1
+Number of teachers : 1
+Max value for ratio : 1.5
+Current ratio : 1
+Children age range : 9 - 10
+
+Printing childrens status :
+========================
+Name : yoni
+Age : 9
+Parant's Phone : 0547657896
+Is sick : false
+
+Printing teachers status :
+========================
+Name : broria
+Age : 56
+Seniority : 40
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 30
+Number of children : 0
+Number of teachers : 2
+Max value for ratio : 2.5
+Current ratio : 0
+Children age range : 7 - 8
+
+Printing teachers status :
+========================
+Name : tova
+Age : 30
+Seniority : 6
+Name : ronit
+Age : 30
+Seniority : 8
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 30
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 3.5
+Current ratio : 0
+Children age range : 8 - 9
+
+Printing teachers status :
+========================
+Name : ruti
+Age : 37
+Seniority : 12
+
+Printing class status :
+========================
+Number : 4
+Size : 20 square meters 
+Is Occupied : true
+Max number of children : 1
+Number of children : 1
+Number of teachers : 1
+Max value for ratio : 1.5
+Current ratio : 1
+Children age range : 9 - 10
+
+Printing childrens status :
+========================
+Name : yoni
+Age : 9
+Parant's Phone : 0547657896
+Is sick : false
+
+Printing teachers status :
+========================
+Name : broria
+Age : 56
+Seniority : 40
+
+Reporting sick child : 
+Name : yoni
+Parent's phone number : 0547657896
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : true
+Sick child : yoni
+
+Printing class status :
+========================
+Number : 2
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 30
+Number of children : 0
+Number of teachers : 2
+Max value for ratio : 2.5
+Current ratio : 0
+Children age range : 7 - 8
+
+Printing teachers status :
+========================
+Name : tova
+Age : 30
+Seniority : 6
+Name : ronit
+Age : 30
+Seniority : 8
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 30
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 3.5
+Current ratio : 0
+Children age range : 8 - 9
+
+Printing teachers status :
+========================
+Name : ruti
+Age : 37
+Seniority : 12
+
+Printing class status :
+========================
+Number : 4
+Size : 20 square meters 
+Is Occupied : true
+Max number of children : 1
+Number of children : 1
+Number of teachers : 2
+Max value for ratio : 1.5
+Current ratio : 0.5
+Children age range : 9 - 10
+
+Printing childrens status :
+========================
+Name : yoni
+Age : 9
+Parant's Phone : 0547657896
+Is sick : true
+
+Printing teachers status :
+========================
+Name : broria
+Age : 56
+Seniority : 40
+Name : rina
+Age : 26
+Seniority : 5
+

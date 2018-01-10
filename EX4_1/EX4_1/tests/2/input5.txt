@@ -1,0 +1,14 @@
+PrintKindergarten
+addClass 30 3.000 5 2
+addTeacher 30 Din 5
+addTeacher 30 David 5
+addTeacher 30 Dana 5
+addChild 2 Noa 231293823
+addChild 2 Beni 22223
+addClass 30 3.000 5 3
+addTeacher 30 Nehama 5
+PrintKindergarten
+removeClass 2
+PrintKindergarten
+addClass 30 3.000 5 2
+PrintKindergarten

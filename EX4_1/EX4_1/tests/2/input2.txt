@@ -1,0 +1,57 @@
+PrintKindergarten
+addChild 6 yoni 0507654323
+addTeacher 30 tova 6
+removeClass 8
+removeChild yoni
+removeTeacher tova
+sickChild yoni
+addClass 30 2.5 30 7
+addClass 30 .5 30 7
+addClass 30 2...5 30 7
+addClass -2 2.500 30 7
+addClass d 2.500 30 7
+addClass 30 2.500 30d 7
+addClass 30 2.500 0 7
+addClass 0 2.500 30d 7
+addClass 30 0.000 30d 7
+addClass 30 2.500 30 a7
+addClass 30 2.500 30 7 
+addClass 30 3.500 30 7
+addClass 30 3.500 30 8 
+addChild 7 yoni 0507654323
+PrintKindergarten
+addTeacher 30 tova 6
+addTeacher 0 rina 6
+addTeacher -8 rina 6
+addTeacher 26 rina 5a
+addTeacher 26 rina 5
+addTeacher 30 ronit 8
+addClass 20 1.500 1 9
+addTeacher 56 broria 40
+addTeacher 80 dorit 50
+PrintKindergarten
+addChild 6 yoni 0507654323
+addChild 9 yoni 0547657896
+addChild 9 dani ileggalnumber
+addChild 8 hanan 0578643647
+addChild 8 roni 0506546787
+addTeacher 37 ruti 12
+addChild 9 dani 0764563836
+addChild 8 sami ileggalnumber
+PrintKindergarten
+removeTeacher dorit
+removeTeacher rina
+removeChild roni
+removeChild sami
+removeChild hanan
+removeTeacher rina
+PrintKindergarten
+addTeacher 26 rina 5
+addChild 9 dani 07645638f36
+sickChild yoni
+removeChild dani
+removeTeacher rina
+PrintKindergarten
+removeChild yoni
+sickChild dani
+removeChild dani

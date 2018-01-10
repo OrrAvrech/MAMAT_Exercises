@@ -1,0 +1,9 @@
+Failed - PrintKindergarten 2
+Failed - addChild 6 Yoni 982391823
+Failed - addChild 6 Beni 0526812822
+Failed - addChild 6 Yohai 929292929
+Failed - removeTeacher Hava
+Failed - sickChild Dudu
+Failed - removeChild Yoni
+Failed - removeTeacher Dana
+Failed - removeTeacher Dana

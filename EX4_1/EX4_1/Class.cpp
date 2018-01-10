@@ -18,7 +18,7 @@ string to_string(T value)
 Class::Class(unsigned int num, unsigned int size, double maxRatio, unsigned int maxChildren, unsigned int ageChildren) :
 	Room(num, size), maxRatio_(maxRatio), maxChildren_(maxChildren), ageChildren_(ageChildren) {}
 
-unsigned int Class::getNumTeachers() const { return unsigned int(teacherList_.size()); }
+unsigned int Class::getNumTeachers() const { return teacherList_.size(); }
 
 unsigned int Class::getAge() const { return ageChildren_; }
 
@@ -32,7 +32,7 @@ double Class::getRatio() const
 
 string Class::getPhone(string childName) const
 {
-	int i;
+	unsigned int i;
 	for (i = 0; i < childList_.size(); i++)
 	{
 		if (childName.compare(childList_[i].getName()) == 0)
@@ -74,13 +74,25 @@ Result Class::removeTeacher(string name)
 		return FAILURE;
 	else if (teacherList_.size() == 1 && childList_.size() > 0)
 		return FAILURE;
+	else if (teacherList_.size() == 1)
+	{
+		if (name.compare(teacherList_[0].getName()) == 0)
+		{
+			teacherList_.erase(teacherList_.begin());
+			if (teacherList_.size() == 0)
+				occupied_ = false;
+			return SUCCESS;
+		}
+		else
+			return FAILURE;
+	}
 	double afterRemoveRatio = double(childList_.size() / (teacherList_.size() - 1));
 	if (afterRemoveRatio > maxRatio_)
 		// Ratio after removing a teacher should be less than or equal maxRatio
 		return FAILURE;
 	else
 	{
-		int i;
+		unsigned int i;
 		for (i = 0; i < teacherList_.size(); i++)
 		{
 			if (name.compare(teacherList_[i].getName()) == 0)
@@ -102,7 +114,7 @@ Result Class::removeChild(string name)
 		return FAILURE;
 	else
 	{
-		int i;
+		unsigned int i;
 		for (i = 0; i < childList_.size(); i++)
 		{
 			if (name.compare(childList_[i].getName()) == 0)
@@ -117,7 +129,7 @@ Result Class::removeChild(string name)
 
 Result Class::setSickChild(string name)
 {
-	int i;
+	unsigned int i;
 	for (i = 0; i < childList_.size(); i++)
 	{
 		if (name.compare(childList_[i].getName()) == 0)
@@ -131,7 +143,7 @@ void Class::print() const
 	cout	<< "Printing class status :" << endl
 			<< string(24, '=') << endl
 			<< "Number : " << num_ << endl
-			<< "Size : " << size_ << " square meters" << endl
+			<< "Size : " << size_ << " square meters " << endl
 			<< boolalpha << "Is Occupied : " << std::boolalpha << occupied_ << endl
 			<< "Max number of children : " << maxChildren_ << endl
 			<< "Number of children : " << childList_.size() << endl
@@ -143,7 +155,7 @@ void Class::print() const
 	ageRange += string(to_string(ageChildren_)) + " - " + string(to_string(ageChildren_ + 1));
 	cout << "Children age range : " << ageRange << "\n" << endl;
 
-	int i;
+	unsigned int i;
 	if (occupied_)
 	{
 		if (childList_.size() != 0)

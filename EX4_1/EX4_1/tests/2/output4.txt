@@ -1,0 +1,395 @@
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 2
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 2 - 3
+
+Printing teachers status :
+========================
+Name : Dana
+Age : 30
+Seniority : 5
+Name : Rami
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 2
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 3 - 4
+
+Printing teachers status :
+========================
+Name : Dina
+Age : 30
+Seniority : 5
+Name : Dov
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 4
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 4 - 5
+
+Printing teachers status :
+========================
+Name : Dona
+Age : 30
+Seniority : 5
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 1
+Number of teachers : 4
+Max value for ratio : 3
+Current ratio : 0.25
+Children age range : 2 - 3
+
+Printing childrens status :
+========================
+Name : Avram
+Age : 2
+Parant's Phone : 23923923
+Is sick : false
+
+Printing teachers status :
+========================
+Name : Dana
+Age : 30
+Seniority : 5
+Name : Rami
+Age : 30
+Seniority : 5
+Name : Momo
+Age : 30
+Seniority : 5
+Name : Ohad
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 2
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 3 - 4
+
+Printing teachers status :
+========================
+Name : Dina
+Age : 30
+Seniority : 5
+Name : Dov
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 4
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 1
+Number of teachers : 1
+Max value for ratio : 3
+Current ratio : 1
+Children age range : 4 - 5
+
+Printing childrens status :
+========================
+Name : Asaf
+Age : 4
+Parant's Phone : 91283983
+Is sick : false
+
+Printing teachers status :
+========================
+Name : Dona
+Age : 30
+Seniority : 5
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 1
+Number of teachers : 4
+Max value for ratio : 3
+Current ratio : 0.25
+Children age range : 2 - 3
+
+Printing childrens status :
+========================
+Name : Avram
+Age : 2
+Parant's Phone : 23923923
+Is sick : false
+
+Printing teachers status :
+========================
+Name : Dana
+Age : 30
+Seniority : 5
+Name : Rami
+Age : 30
+Seniority : 5
+Name : Momo
+Age : 30
+Seniority : 5
+Name : Ohad
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 1
+Number of teachers : 3
+Max value for ratio : 3
+Current ratio : 0.333333
+Children age range : 3 - 4
+
+Printing childrens status :
+========================
+Name : Noy
+Age : 3
+Parant's Phone : 0528383833
+Is sick : false
+
+Printing teachers status :
+========================
+Name : Dina
+Age : 30
+Seniority : 5
+Name : Dov
+Age : 30
+Seniority : 5
+Name : Haim
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 4
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 1
+Number of teachers : 2
+Max value for ratio : 3
+Current ratio : 0.5
+Children age range : 4 - 5
+
+Printing childrens status :
+========================
+Name : Asaf
+Age : 4
+Parant's Phone : 91283983
+Is sick : false
+
+Printing teachers status :
+========================
+Name : Dona
+Age : 30
+Seniority : 5
+Name : Shir
+Age : 30
+Seniority : 5
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 2 - 3
+
+Printing teachers status :
+========================
+Name : Dana
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 3
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 3 - 4
+
+Printing teachers status :
+========================
+Name : Dina
+Age : 30
+Seniority : 5
+Name : Dov
+Age : 30
+Seniority : 5
+Name : Haim
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 4
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 4 - 5
+
+Printing teachers status :
+========================
+Name : Dona
+Age : 30
+Seniority : 5
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 2
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 2 - 3
+
+Printing teachers status :
+========================
+Name : Dana
+Age : 30
+Seniority : 5
+Name : Niv
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 3 - 4
+
+Printing teachers status :
+========================
+Name : Omer
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 4
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 2
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 4 - 5
+
+Printing teachers status :
+========================
+Name : Dona
+Age : 30
+Seniority : 5
+Name : Dikla
+Age : 30
+Seniority : 5
+

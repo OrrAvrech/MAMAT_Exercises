@@ -1,0 +1,67 @@
+addChild 2 dana 0598765432
+addTeacher 45 dalia 10
+addClass 60 2.500 20 2
+addChild 2 dana 0598765432
+addClass 60 3.125 10 2
+addClass 60 3.125 10 1
+addClass 50 0.000 30 3
+addTeacher 45 dalia 10
+addTeacher 40 sara 5
+addTeacher 65 dorit 75
+addTeacher 21 reuven 13
+addChild 3 dana 0598765432
+addChild 2 dana 0598765432
+addChild 17 dani 0546123456
+addTeacher 77 ilana 76
+removeTeacher ilana
+addChild 2 dani 054612
+addChild 2 tom 0545555555
+addChild 2 tal 0546987654
+addChild 2 uri 0525456456
+addChild 2 uriel 0525456457
+addChild 1 hadas 0505789789
+addChild 1 salivan 0112358132
+
+PrintKindergarten
+
+removeTeacher dalia
+removeTeacher dorit
+
+removeChild beni
+removeTeacher dorit
+removeTeacher yanush
+removeChild dana
+addTeacher 12 aliza 21
+addTeacher 42 hedva 10
+PrintKindergarten
+
+sickChild like
+sickChild dani
+sickChild tom
+
+addChild 2 dana 0598765432
+addTeacher 88 shosh 16
+addClass 60 2.500 20 74
+removeClass 1
+removeChild tal
+removeTeacher hedva
+sickChild hadas
+PrintKindergarten
+
+removeChild tom
+
+PrintKindergarten
+
+addChild 2 dana 0598765432
+addTeacher 88 shosh 16
+addClass 60 2.500 20 74
+removeClass 1
+removeClass 33
+removeChild salivan
+addChild 1 danit 0598767432
+addClass 45 3.184 10 1
+removeChild uri
+removeTeacher sara
+removeTeacher hedva
+sickChild hadas
+PrintKindergarten

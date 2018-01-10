@@ -1,0 +1,32 @@
+Failed - addChild 6 yoni 0507654323
+Failed - addTeacher 30 tova 6
+Failed - removeClass 8
+Failed - removeChild yoni
+Failed - removeTeacher tova
+Failed - sickChild yoni
+Failed - addClass 30 2.5 30 7
+Failed - addClass 30 .5 30 7
+Failed - addClass 30 2...5 30 7
+Failed - addClass -2 2.500 30 7
+Failed - addClass d 2.500 30 7
+Failed - addClass 30 2.500 30d 7
+Failed - addClass 30 2.500 0 7
+Failed - addClass 0 2.500 30d 7
+Failed - addClass 30 0.000 30d 7
+Failed - addClass 30 2.500 30 a7
+Failed - addClass 30 3.500 30 7
+Failed - addChild 7 yoni 0507654323
+Failed - addTeacher 0 rina 6
+Failed - addTeacher -8 rina 6
+Failed - addTeacher 26 rina 5a
+Failed - addChild 6 yoni 0507654323
+Failed - addChild 9 dani ileggalnumber
+Failed - addChild 9 dani 0764563836
+Failed - addChild 8 sami ileggalnumber
+Failed - removeChild sami
+Failed - removeTeacher rina
+Failed - addChild 9 dani 07645638f36
+Failed - removeChild dani
+Failed - removeTeacher rina
+Failed - sickChild dani
+Failed - removeChild dani

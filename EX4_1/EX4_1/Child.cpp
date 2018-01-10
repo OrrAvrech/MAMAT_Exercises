@@ -31,6 +31,6 @@ Result Child::setSick()
 void Child::Print() const
 {
 	Person::Print();
-	cout << "Parent's Phone : " << this->phone << endl;
+	cout << "Parant's Phone : " << this->phone << endl;
 	cout << "Is sick : " << std::boolalpha << sick_flag << endl;
 }

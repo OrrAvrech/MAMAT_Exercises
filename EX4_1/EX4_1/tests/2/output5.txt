@@ -1,0 +1,129 @@
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 2
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 2
+Number of teachers : 3
+Max value for ratio : 3
+Current ratio : 0.666667
+Children age range : 2 - 3
+
+Printing childrens status :
+========================
+Name : Noa
+Age : 2
+Parant's Phone : 231293823
+Is sick : false
+Name : Beni
+Age : 2
+Parant's Phone : 22223
+Is sick : false
+
+Printing teachers status :
+========================
+Name : Din
+Age : 30
+Seniority : 5
+Name : David
+Age : 30
+Seniority : 5
+Name : Dana
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 3 - 4
+
+Printing teachers status :
+========================
+Name : Nehama
+Age : 30
+Seniority : 5
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 3 - 4
+
+Printing teachers status :
+========================
+Name : Nehama
+Age : 30
+Seniority : 5
+
+Printing office status :
+========================
+Number : 1
+Size : 20 square meters 
+Is Occupied : true
+Office is busy : false
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : true
+Max number of children : 5
+Number of children : 0
+Number of teachers : 1
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 3 - 4
+
+Printing teachers status :
+========================
+Name : Nehama
+Age : 30
+Seniority : 5
+
+Printing class status :
+========================
+Number : 3
+Size : 30 square meters 
+Is Occupied : false
+Max number of children : 5
+Number of children : 0
+Number of teachers : 0
+Max value for ratio : 3
+Current ratio : 0
+Children age range : 2 - 3
+

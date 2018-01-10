@@ -1,0 +1,28 @@
+
+
+PrintKindergarten 2
+PrintKindergarten
+	addClass 120 2.000 3 6
+addChild 6 Yoni 982391823
+addTeacher 30 Hava 5
+addChild 6 Yoni 982391223
+addChild 6 Dudu 918309238
+addChild 6 Beni 0526812822
+addTeacher 40 Dana 2
+addChild 6 Beni 0524812822
+addChild 6 Yohai 929292929
+PrintKindergarten
+removeTeacher Hava
+sickChild Dudu
+sickChild Beni
+removeChild Yoni
+PrintKindergarten
+removeChild Beni
+PrintKindergarten
+removeTeacher Hava
+removeTeacher Dana
+removeChild Yoni
+removeTeacher Dana
+removeChild Dudu
+removeTeacher Dana
+PrintKindergarten
