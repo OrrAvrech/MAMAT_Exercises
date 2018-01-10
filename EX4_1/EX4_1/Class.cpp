@@ -46,6 +46,7 @@ void Class::addTeacher(string name, int age, int seniority)
 {
 	Teacher t(name, age, seniority);
 	teacherList_.push_back(t);
+	occupied_ = true;
 }
 
 Result Class::addChild(string name, int age, string phone, bool sick_flag)
@@ -85,6 +86,8 @@ Result Class::removeTeacher(string name)
 			if (name.compare(teacherList_[i].getName()) == 0)
 			{
 				teacherList_.erase(teacherList_.begin() + i);
+				if (teacherList_.size() == 0)
+					occupied_ = false;
 				return SUCCESS;
 			}
 		}
@@ -140,21 +143,25 @@ void Class::print() const
 	ageRange += string(to_string(ageChildren_)) + " - " + string(to_string(ageChildren_ + 1));
 	cout << "Children age range : " << ageRange << "\n" << endl;
 
-	cout	<< "Printing childrens status :" << endl
-			<< string(24, '=') << endl;
-
 	int i;
-	for (i = 0; i < childList_.size(); i++)
-		childList_[i].Print();
+	if (occupied_)
+	{
+		if (childList_.size() != 0)
+		{
+			cout << "Printing childrens status :" << endl
+				<< string(24, '=') << endl;
+			for (i = 0; i < childList_.size(); i++)
+				childList_[i].Print();
 
-	cout	<< "\n" << endl;
-	cout	<< "Printing teachers status :" << endl
+			cout << endl;
+		}
+		cout << "Printing teachers status :" << endl
 			<< string(24, '=') << endl;
 
-	for (i = 0; i < teacherList_.size(); i++)
-		teacherList_[i].Print();
-
-	cout << "\n" << endl;
+		for (i = 0; i < teacherList_.size(); i++)
+			teacherList_[i].Print();
+		cout << endl;
+	}
 }
 
 
