@@ -160,8 +160,8 @@ void Office::print() const
 	cout << "========================" << endl;
 	cout << "Number : 1" << endl;
 	cout << "Size : 20 square meters" << endl;
-	cout << "Is Occupied : " << occupied_ << endl;
-	cout << "Office is busy : " << busy_ << endl;
+	cout << "Is Occupied : " << std::boolalpha << occupied_ << endl;
+	cout << "Office is busy : " << std::boolalpha << busy_ << endl;
 	cout << "Sick child : " << sickChildName_ << endl;
 	cout << endl;
 
