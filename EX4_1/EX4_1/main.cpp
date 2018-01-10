@@ -87,7 +87,11 @@ int main()
 			ratio = stringToDouble(small_tokens[0], small_tokens[1]);
 			childMax = stringToInt(tokens[3]);
 			age = stringToInt(tokens[4]);
-			KG_Office.addClass(size, ratio, childMax, age);
+			if (KG_Office.addClass(size, ratio, childMax, age) == FAILURE)
+			{
+				cerr << "Failed - " << line << endl;
+				continue;
+			}
 		}
 		if (tokens[0] == "removeClass")
 		{

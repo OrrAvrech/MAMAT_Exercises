@@ -87,21 +87,42 @@ Result Office::addTeacher(string name, int age, int seniority)
 
 	}
 	if (ratio_flag == 0)
+	{
 		(*minTeacherClass).addTeacher(name, age, seniority);
+		return SUCCESS;
+	}
 	else
+	{
 		(*maxRatioClass).addTeacher(name, age, seniority);
+		return SUCCESS;
+	}
 }
 
 Result Office::removeChild(string name)
 {
-	if (busy_ == true && name.compare(sickChildName_) != 0)
-		// Busy and not removing the sick child
-		return FAILURE;
-
-	// Any other case: ~busy or (busy + removing sick child)
+	Result r;
 	vector<Class>::iterator i;
-	for (i = classList_.begin(); i < classList_.end(); i++)
-		return ((*i).removeChild(name));
+	if (busy_ == true && name.compare(sickChildName_) != 0)    // Busy and not removing the sick child
+		return FAILURE;
+	else if (busy_ == true && name.compare(sickChildName_) == 0)  // removing the sick child
+	{
+		for (i = classList_.begin(); i < classList_.end(); i++)
+		{
+			r = ((*i).removeChild(name));
+			if (r = SUCCESS)
+			{
+				busy_ = false;
+			}
+			return r;
+		}
+	}
+	else // normal child removal
+	{
+		for (i = classList_.begin(); i < classList_.end(); i++)
+		{
+			return ((*i).removeChild(name));
+		}
+	}
 }
 
 Result Office::removeTeacher(string name)
@@ -162,7 +183,8 @@ void Office::print() const
 	cout << "Size : 20 square meters" << endl;
 	cout << "Is Occupied : " << std::boolalpha << occupied_ << endl;
 	cout << "Office is busy : " << std::boolalpha << busy_ << endl;
-	cout << "Sick child : " << sickChildName_ << endl;
+	if(busy_)
+		cout << "Sick child : " << sickChildName_ << endl;
 	cout << endl;
 
 	// vector<Class>::iterator i;
