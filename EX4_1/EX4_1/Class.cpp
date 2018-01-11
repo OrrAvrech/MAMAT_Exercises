@@ -24,10 +24,15 @@ unsigned int Class::getAge() const { return ageChildren_; }
 
 double Class::getRatio() const
 {
+	double r;
 	if (teacherList_.size() == 0)
 		return 0;
 	else
-		return double(childList_.size() / teacherList_.size());
+	{
+		r = (double) childList_.size()  / (double) teacherList_.size();
+		return r;
+	}
+
 }
 
 string Class::getPhone(string childName) const
@@ -51,8 +56,9 @@ void Class::addTeacher(string name, int age, int seniority)
 
 Result Class::addChild(string name, int age, string phone, bool sick_flag)
 {
-	// Check if inserting a child is valid
-	double afterAddRatio = double((childList_.size() + 1) / teacherList_.size());
+	if (teacherList_.size() == 0)
+		return FAILURE;
+	double afterAddRatio = double((childList_.size() + 1) / teacherList_.size()); // Check if inserting a child is valid
 	if (afterAddRatio > maxRatio_) 
 		// Ratio after adding a child should be less than or equal maxRatio
 		return FAILURE;

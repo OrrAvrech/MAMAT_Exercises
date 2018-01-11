@@ -46,6 +46,8 @@ Result Office::addChild(string name, int age, string phone, bool sick_flag)
 
 Result Office::addTeacher(string name, int age, int seniority)
 {
+	if (classList_.size() == 0)
+		return FAILURE;
 	if (busy_ == true)
 		return FAILURE;
 	vector<Class>::iterator i, minTeacherClass, maxRatioClass;
