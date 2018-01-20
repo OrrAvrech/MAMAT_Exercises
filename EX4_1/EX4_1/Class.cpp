@@ -22,7 +22,8 @@ unsigned int Class::getNumTeachers() const { return teacherList_.size(); }
 
 unsigned int Class::getAge() const { return ageChildren_; }
 
-double Class::getRatio() const
+double Class::
+"() const
 {
 	double r;
 	if (teacherList_.size() == 0)
