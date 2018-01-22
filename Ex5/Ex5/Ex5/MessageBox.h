@@ -3,5 +3,21 @@
 
 #include "ObjectInterface.h"
 
+using namespace std;
+
+class MessegeBox
+{
+private:
+	string UserName_;
+	vector<Conversation> ConversationList_;
+public:
+	MessegeBox();
+	~MessegeBox();
+	void VrtDo(string cmdLine, string activeUsrName);
+	void VrtPreview(string activeUsrName);
+	void help() const;
+
+};
 
 #endif
+
