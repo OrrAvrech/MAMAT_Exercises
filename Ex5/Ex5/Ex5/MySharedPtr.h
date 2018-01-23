@@ -32,8 +32,14 @@ public:
 		else
 			this->counter--;
 	}
-	T& operator*() { return *ptr; }
-	T* operator->() { return ptr; }
+	T& MySharedPtr::operator*() { return *ptr; }
+	T* MySharedPtr::operator->() { return ptr; }
+	T* MySharedPtr::opertator=(MySharedPtr new_ptr)
+	{
+		this->counter++;
+		new_ptr->counter = this->counter;
+		new_ptr->ptr = this->ptr;
+	}
 	T* get() { return ptr; }
 };
 

@@ -9,7 +9,7 @@
 class ChatNet : public ObjectInterface {
 public:
 	ChatNet(const string& networkName, const string& adminName, const string& adminPass);
-
+	vector<string> getUserList(/*not sure about inputs*/);
 	
 };
 

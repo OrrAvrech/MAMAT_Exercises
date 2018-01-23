@@ -4,6 +4,7 @@
 #include "ObjectInterface.h"
 #include "Conversation.h"
 #include <list>
+#include "MySharedPtr.h"
 
 using namespace std;
 

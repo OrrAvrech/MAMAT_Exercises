@@ -1,11 +1,22 @@
-#include <iostream>
+
 #include "Defs.h"
 #include "MessageBox.h"
+
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
 //helper function
-
+int stringToInt(const string s) {
+	istringstream istr(s);
+	int i = 0;
+	istr >> i;
+	return i;
+}
 
 
 
@@ -41,7 +52,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 				if (itr == itr2)
 				{
 					cout << CONVERSATION_FAIL_USER_REPETITION;
-					break;
+					return;
 				}
 			}
 		}
@@ -58,20 +69,62 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 			if (find_flag)
 			{
 				cout << CONVERSATION_FAIL_NO_USER;
-				break;
+				return;
 			}
 		}
 		Conversation new_conversation();
-		new_conversation->participants_ = 
-
+		new_conversation->participants_ = chatusers;
+		new_conversation->lastTime_ = chrono::system_clock::now();
+		new_conversation->messageList_ = NULL;
+		for (itr = chatusers.begin() + 1; itr < chatusers.end(); itr++)
+		{
+			new_conversation->readStateList_[itr] = READ;
+		}
+		MySharedPtr ptr1(*new_conversation);
+		/* TO DO:
+		   for each user in the chatusers: 
+		   make a local copy of ptr1 in his
+		   messagebox::ConversationList_.
+		   need to sort the ConversationList_ 
+		   after inserting new element        */
 	}
 	else if (cmdLineTokens[0] == "Open" && cmdLineTokens.size() == 2) // Open
 	{
-		// add code here
+		if (cmdLineTokens[1].find_first_not_of("123456789") != string::npos)
+		{
+			cout << INVALID_CONVERSATION_NUMBER;
+			return;
+		}
+		int convNum = stringToInt(cmdLineTokens[1]);
+		if (convNum<1 || convNum > ConversationList_.size())
+		{
+			cout << INVALID_CONVERSATION_NUMBER;
+			return;
+		}
+		/* TO DO: 
+		   throw exception 
+		   need to update stack to conversation 
+		   and preview conversation 
+		   is it done here or in the ChatNet?    */
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete
 	{
-		// add code here
+		if (cmdLineTokens[1].find_first_not_of("123456789") != string::npos)
+		{
+			cout << INVALID_CONVERSATION_NUMBER;
+			return;
+		}
+		int convNum = stringToInt(cmdLineTokens[1]);
+		if (convNum<1 || convNum > ConversationList_.size())
+		{
+			cout << INVALID_CONVERSATION_NUMBER;
+			return;
+		}
+		list<Conversation>::iterator list_itr;
+		list_itr = ConversationList_.begin();
+		advance(list_itr, convNum);
+		list_itr->removeUser(activeUsrName); / / TO DO : need to write this function. 
+		ConversationList_.remove(*list_itr);
 	}
 	else if (cmdLineTokens[0] == "Search" && cmdLineTokens.size() == 2) // Search
 	{
@@ -93,7 +146,7 @@ void MessageBox::VrtPreview(string activeUsrName)
 		cout << "No conversations" << endl;
 	else
 		cout << "Conversations:" << endl;
-	vector<Conversation>::iterator itr;
+	list <Conversation>::iterator itr;
 	for (itr = ConversationList_.begin() ; itr < ConversationList_.end() ; itr++)
 	{
 		cout << count << ") ";

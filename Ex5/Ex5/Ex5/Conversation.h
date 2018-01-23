@@ -35,6 +35,8 @@ public:
 	void Preview(string activeUsrName);
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Help() const;
+	void removeUser(string user); // TO DO
+	
 
 private:
 	vector<string> participants_; // participants set contains a string as user name (not User class)
