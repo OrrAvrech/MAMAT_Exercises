@@ -4,7 +4,7 @@
 
 
 // Constructor
-Conversation::Conversation(set<string> participants, vector<Message> messageList, map<string, ConversationStatus> readStateList, SysTime lastTime) :
+Conversation::Conversation(vector<string> participants, vector<Message> messageList, map<string, ConversationStatus> readStateList, SysTime lastTime) :
 	participants_(participants), messageList_(messageList), readStateList_(readStateList), lastTime_(lastTime) {}
 
 // Helper Functions

@@ -29,7 +29,7 @@ class Conversation : public ObjectInterface {
 
 public:
 	// Constructor
-	Conversation(set<string> participants, vector<Message> messageList, map<string, ConversationStatus> readStateList, SysTime lastTime) ;
+	Conversation(vector<string> participants, vector<Message> messageList, map<string, ConversationStatus> readStateList, SysTime lastTime) ;
 
 	// Methods
 	void Preview(string activeUsrName);
@@ -37,7 +37,7 @@ public:
 	void Help() const;
 
 private:
-	set<string> participants_; // participants set contains a string as user name (not User class)
+	vector<string> participants_; // participants set contains a string as user name (not User class)
 	vector<Message> messageList_;
 	map<string, ConversationStatus> readStateList_;
 	SysTime lastTime_;

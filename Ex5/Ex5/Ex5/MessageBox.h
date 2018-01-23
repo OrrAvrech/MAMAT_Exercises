@@ -2,21 +2,21 @@
 #define _MESSAGEBOX_H_
 
 #include "ObjectInterface.h"
+#include "Conversation.h"
+#include <list>
 
 using namespace std;
 
-class MessegeBox
+class MessageBox
 {
 private:
-	string UserName_;
-	vector<Conversation> ConversationList_;
+	string username_;
+	list<Conversation> ConversationList_;
 public:
-	MessegeBox();
-	~MessegeBox();
+	MessageBox(string username, list<Conversation> ConversationList);
 	void VrtDo(string cmdLine, string activeUsrName);
 	void VrtPreview(string activeUsrName);
-	void help() const;
-
+	void Help() const;
 };
 
 #endif
