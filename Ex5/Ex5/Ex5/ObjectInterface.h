@@ -22,6 +22,4 @@ public:
 			this->VrtDo(cmd, activeUsrName);
 	}
 };
-
-
 #endif

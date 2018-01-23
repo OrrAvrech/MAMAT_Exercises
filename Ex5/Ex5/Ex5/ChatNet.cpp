@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include "Conversation.h"
 #include "ChatNet.h"
+#include "MessageBox.h"
 
 #define NO_ACTIVE_USER "No User"
 
@@ -39,13 +40,19 @@ void ChatNet::Do(string cmd)
 		// When using stack (from STL) this could like something like the following line:
 		// activeObjectStack_.top().Do(cmd, activeUsrName_);
 	}
-	catch (/* ??? */)
+	catch (newConv)
 	{
-		
+		/* TODO:
+		for each user in the chatusers:
+		make a local copy of newconv.ptr in his
+		messagebox::ConversationList_.
+		than sort his the ConversationList_ */
 	}
-	catch (/* ??? */)
+	catch (convOpen)
 	{
-		
+		/* TODO:
+		update stack to conv2open.c conversation
+		and preview conversation */
 	}
 	// more catch phrases
 }

@@ -20,6 +20,9 @@ int stringToInt(const string s) {
 
 
 
+// exception handling
+
+
 MessageBox::MessageBox(string username, list<Conversation> ConversationList) :
 	username_( username) , ConversationList_(ConversationList) {}
 
@@ -56,7 +59,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 				}
 			}
 		}
-		// userslist = getUserList(); //  should be in CHATNET, removed for now because of errors
+		userslist = getUserList(); // TODO :  should be in CHATNET, removed for now because of errors
 		//checking if all users exsist in the ChatNet
 		bool find_flag = 0;
 		for (itr = chatusers.begin() + 1; itr < chatusers.end(); itr++)
@@ -80,13 +83,9 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		{
 			new_conversation->readStateList_[itr] = READ;
 		}
-		MySharedPtr ptr1(*new_conversation);
-		/* TO DO:
-		   for each user in the chatusers: 
-		   make a local copy of ptr1 in his
-		   messagebox::ConversationList_.
-		   need to sort the ConversationList_ 
-		   after inserting new element        */
+		MySharedPtr<Conversation> ptr1(*new_conversation);
+		newConv newConv1(ptr1, chatusers);
+		throw newConv1;
 	}
 	else if (cmdLineTokens[0] == "Open" && cmdLineTokens.size() == 2) // Open
 	{
@@ -101,11 +100,11 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 			cout << INVALID_CONVERSATION_NUMBER;
 			return;
 		}
-		/* TO DO: 
-		   throw exception 
-		   need to update stack to conversation 
-		   and preview conversation 
-		   is it done here or in the ChatNet?    */
+		list<Conversation>::iterator list_itr;
+		list_itr = ConversationList_.begin();
+		advance(list_itr, convNum);
+		convOpen conv2open(*list_itr);
+		throw conv2open;
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete
 	{
@@ -123,16 +122,19 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		list<Conversation>::iterator list_itr;
 		list_itr = ConversationList_.begin();
 		advance(list_itr, convNum);
-		list_itr->removeUser(activeUsrName); / / TO DO : need to write this function. 
+		list_itr->removeUser(activeUsrName); 
 		ConversationList_.remove(*list_itr);
 	}
 	else if (cmdLineTokens[0] == "Search" && cmdLineTokens.size() == 2) // Search
 	{
-		// add code here
+		/* TODO : 
+		   throw exception and searching the main user list 
+		   not sure if it possible from here without exception   */
 	}
 	else if (cmdLineTokens[0] == "Back") // Back
 	{
-		// add code here
+		/* TODO :
+		throw exception and go back in stack   */
 	}
 	else // INVALID_INPUT
 		cout << INVALID_INPUT;

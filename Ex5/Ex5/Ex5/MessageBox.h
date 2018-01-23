@@ -12,12 +12,35 @@ class MessageBox
 {
 private:
 	string username_;
-	list<Conversation> ConversationList_;
+	list<Conversation> ConversationList_;    //need to be a list of MySharedPtr????
 public:
 	MessageBox(string username, list<Conversation> ConversationList);
 	void VrtDo(string cmdLine, string activeUsrName);
 	void VrtPreview(string activeUsrName);
 	void Help() const;
+};
+
+
+class newConv   // will be thrown as exception in new conversation
+{
+	MySharedPtr<Conversation> ptr;
+	vector<string> userList;
+public : 
+	newConv(MySharedPtr<Conversation> ptr, vector<string> userList)
+	{
+		this->ptr = ptr;
+		this->userList = userList;
+	}
+};
+
+class convOpen   // will be thrown as exception in conversation open
+{
+	Conversation c;
+public:
+	convOpen(Conversation c)
+	{
+		this->c = c;
+	}
 };
 
 #endif
