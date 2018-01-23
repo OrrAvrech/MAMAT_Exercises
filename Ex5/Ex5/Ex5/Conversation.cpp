@@ -21,7 +21,6 @@ void Conversation::VrtDo(string cmdLine, string activeUsrName)
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES, 1);
 	if (cmdLineTokens[0] == "Write" && cmdLineTokens.size() == 2) // Write
 	{
-		// add code here
 	}
 	else if (cmdLineTokens[0] == "Back" && cmdLineTokens.size() == 1) // Back
 	{
