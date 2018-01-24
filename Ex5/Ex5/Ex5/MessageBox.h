@@ -8,7 +8,6 @@
 
 using namespace std;
 
-class MessageBox
 class MessageBox : public ObjectInterface
 {
 	friend class User;

@@ -34,7 +34,16 @@ void Conversation::DisplayParticipants()
 {
 	for (auto itr = participants_.begin(); itr != participants_.end(); ++itr)
 	{
-		cout << *itr << endl;
+		if ((++itr) == participants_.end())
+		{
+			--itr;
+			cout << (*itr) << endl;
+		}
+		else
+		{
+			--itr;
+			cout << (*itr) << COMMA_SPACE;
+		}
 	}
 }
 
