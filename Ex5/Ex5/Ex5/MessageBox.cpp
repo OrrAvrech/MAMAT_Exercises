@@ -23,13 +23,13 @@ vector<string> getUserList()
 }
 
 MessageBox::MessageBox(string username, list<Conversation> ConversationList) :
-	username_( username) , ConversationList_(ConversationList) {}
+	username_(username), ConversationList_(ConversationList) {}
 
 
 void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 {
 	size_t idx;
-	
+
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	vector<string>::iterator itr, itr2;
 	if (cmdLineTokens[0] == "New" && cmdLineTokens.size() > 1) // New
@@ -39,13 +39,13 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		// checking for duplicates and making the chatusers list
 		for (itr = cmdLineTokens.begin() + 1; itr < cmdLineTokens.end(); itr++)
 		{
-			if(chatusers.insert(*itr).second == false) 
+			if (chatusers.insert(*itr).second == false)
 			{
 				cout << CONVERSATION_FAIL_USER_REPETITION;
 				return;
 			}
 		}
-		userslist = getUserList(); 
+		userslist = getUserList();
 		//checking if all users exsist in the ChatNet
 		bool find_flag;
 		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
@@ -108,7 +108,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		list<Conversation>::iterator list_itr;
 		list_itr = ConversationList_.begin();
 		advance(list_itr, convNum);
-		list_itr->removeUser(activeUsrName); 
+		list_itr->removeUser(activeUsrName);
 		ConversationList_.remove(*list_itr);
 	}
 	else if (cmdLineTokens[0] == "Search" && cmdLineTokens.size() == 2) // Search
@@ -118,7 +118,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 	}
 	else if (cmdLineTokens[0] == "Back") // Back
 	{
-		string MessageBox_back = "MessageBox_back"; 
+		string MessageBox_back = "MessageBox_back";
 		throw MessageBox_back;
 	}
 	else // INVALID_INPUT
@@ -134,10 +134,10 @@ void MessageBox::VrtPreview(string activeUsrName)
 	else
 		cout << "Conversations:" << endl;
 	list <Conversation>::iterator itr;
-	for (itr = ConversationList_.begin() ; itr != ConversationList_.end() ; ++itr)
+	for (itr = ConversationList_.begin(); itr != ConversationList_.end(); ++itr)
 	{
 		cout << count << ") ";
-		if (itr->IsRead(activeUsrName) == UNREAD) 
+		if (itr->IsRead(activeUsrName) == UNREAD)
 			cout << "(UNREAD) ";
 		cout << "Participants: ";
 		itr->DisplayParticipants();    // need to add to conversation? 
@@ -154,4 +154,3 @@ void MessageBox::Help() const
 	cout << "Search <partial user name>" << endl;
 	cout << "Back" << endl;
 }
-
