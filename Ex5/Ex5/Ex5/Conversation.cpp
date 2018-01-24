@@ -4,15 +4,12 @@
 
 
 // Constructor
-Conversation::Conversation(vector<string> participants, vector<Message> messageList, map<string, ConversationStatus> readStateList, SysTime lastTime) :
 Conversation::Conversation(set<string> participants, vector<Message> messageList, map<string, ConversationStatus> readStateList, SysTime lastTime) :
 	participants_(participants), messageList_(messageList), readStateList_(readStateList), lastTime_(lastTime) {}
 
 // Helper Functions
 void printMessageList(vector<Message> list)
 {
-	vector<Message>::iterator it;
-	for (it = list.begin(); it != list.end(); it++)
 	for (auto it = list.begin(); it != list.end(); ++it)
 		(*it).Print();
 }
@@ -50,7 +47,6 @@ void Conversation::VrtDo(string cmdLine, string activeUsrName)
 	}
 	else if (cmdLineTokens[0] == "Back" && cmdLineTokens.size() == 1) // Back
 	{
-		// add code here
 		throw "Run MessageBox Preview";
 		/* Deal with this exception in ChatNet:
 		 try: Conversation
@@ -65,20 +61,13 @@ void Conversation::Preview(string activeUsrName)
 	// Mark that user read the conversation and display the conversation on screen
 	if (participants_.find(activeUsrName) != participants_.end())
 	{
-		// Found
 		// activeUsrName is found as a participant
 		readStateList_[activeUsrName] = READ;
 		cout << PARTICIPANTS_TITLE;
 		// Printing the set of conversation participants
-		set<string>::iterator it;
-		for (it = participants_.begin(); it != participants_.end(); it++)
 		for (auto itr = participants_.begin(); itr != participants_.end(); ++itr)
 		{
 			// set is already sorted
-			cout << (*it) << PARTICIPANT_READ_STATUS << COMMA_SPACE;
-			if ((*it).end()[-1])
-				cout << (*it) << PARTICIPANT_READ_STATUS;
-			printMessageList(messageList_);
 			if ((++itr) == participants_.end())
 			{
 				--itr;
