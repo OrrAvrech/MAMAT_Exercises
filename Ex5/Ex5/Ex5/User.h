@@ -24,10 +24,17 @@ protected:
 
 };
 
-
-
 // ------------------------------- Admin ------------------------------- //
+class Admin : public User {
+public:
+	// Constructor
+	Admin(string userName, string userPass, MessageBox msgBox);
 
+	// Methods
+	// Preview() is inherited from User
+	void VrtDo(string cmdLine, string activeUsrName);
+	void Help() const;
+};
 
 
 #endif
