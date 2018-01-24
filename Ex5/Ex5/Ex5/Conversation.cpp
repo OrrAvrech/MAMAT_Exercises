@@ -4,8 +4,9 @@
 
 
 // Constructor
-Conversation::Conversation(set<string> participants, vector<Message> messageList, map<string, ConversationStatus> readStateList, SysTime lastTime) :
-	participants_(participants), messageList_(messageList), readStateList_(readStateList), lastTime_(lastTime) {}
+Conversation::Conversation(set<string> participants, map<string, ConversationStatus> readStateList, SysTime lastTime) :
+	participants_(participants), readStateList_(readStateList), lastTime_(lastTime) {}
+
 
 // Helper Functions
 void printMessageList(vector<Message> list)
@@ -14,6 +15,7 @@ void printMessageList(vector<Message> list)
 		(*it).Print();
 }
 
+//Interface
 bool Conversation::IsRead(string participant) const
 {
 	if (readStateList_.at(participant) == READ)
@@ -22,7 +24,20 @@ bool Conversation::IsRead(string participant) const
 		return false;
 }
 
-//Interface
+void Conversation::removeUser(string user)
+{
+	participants_.erase(user);
+}
+
+
+void Conversation::DisplayParticipants()
+{
+	for (auto itr = participants_.begin(); itr != participants_.end(); ++itr)
+	{
+		cout << *itr << endl;
+	}
+}
+
 void Conversation::VrtDo(string cmdLine, string activeUsrName)
 {
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES, 1);
@@ -41,6 +56,7 @@ void Conversation::VrtDo(string cmdLine, string activeUsrName)
 			// Last conversation time update
 			lastTime_ = chrono::system_clock::now();
 		}
+		
 		else
 			// Not Found
 			cout << activeUsrName << NOT_IN_THE_CONVERSATION;

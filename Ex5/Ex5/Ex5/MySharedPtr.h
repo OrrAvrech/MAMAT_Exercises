@@ -6,14 +6,14 @@
 template <class T>
 class MySharedPtr
 {
-	T* ptr;
-	int* counter;
 public:
-     MySharedPtr(T* p , int* counter = nullptr) : ptr(nullptr), counter(nullptr)
+	T * ptr;
+	int* counter;
+     MySharedPtr()
 	{
 		this->ptr = new T*;
 		this->counter = new int*;
-		this->counter = 1;
+		this->counter = 0;
 	}
 	~MySharedPtr() 
 	{
@@ -25,13 +25,12 @@ public:
 		else
 			this->counter--;
 	}
-	T& MySharedPtr::operator*() { return *ptr; }
-	T* MySharedPtr::operator->() { return ptr; }
-	T* MySharedPtr::opertator = (MySharedPtr new_ptr)
+	T& operator*() { return *ptr; }
+	T* operator->() { return ptr; }
+	T* operator=(T* new_ptr) 
 	{
 		this->counter++;
-		new_ptr->counter = this->counter;
-		new_ptr->ptr = this->ptr;
+		this->ptr = new_ptr;
 	}
 	T* get() { return ptr; }
 };

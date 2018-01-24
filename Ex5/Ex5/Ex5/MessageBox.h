@@ -24,9 +24,9 @@ public:
 class newConv   // will be thrown as exception in new conversation
 {
 	MySharedPtr<Conversation> ptr;
-	vector<string> userList;
+	set<string> userList;
 public : 
-	newConv(MySharedPtr<Conversation> ptr, vector<string> userList)
+	newConv(MySharedPtr<Conversation> ptr, set<string> userList)
 	{
 		this->ptr = ptr;
 		this->userList = userList;
