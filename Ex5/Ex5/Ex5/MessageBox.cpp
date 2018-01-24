@@ -15,6 +15,12 @@ int stringToInt(const string s) {
 	return i;
 }
 
+//only for debugging
+vector<string> getUserList()
+{
+	vector<string> str = { "dean", "marina", "eyal", "or", "ray", "chika", "zeus" };
+	return str;
+}
 
 MessageBox::MessageBox(string username, list<Conversation> ConversationList) :
 	username_( username) , ConversationList_(ConversationList) {}
@@ -56,15 +62,14 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 				return;
 			}
 		}
-		Conversation new_conversation();
-		new_conversation.participants_ = chatusers;
-		new_conversation->lastTime_ = chrono::system_clock::now();
-		new_conversation->messageList_ = NULL;
+		map<string, ConversationStatus> read_map;
 		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
 		{
-			new_conversation->readStateList_[itr] = READ;
+			read_map[*itr] = READ;
 		}
-		MySharedPtr<Conversation> ptr1(*new_conversation);
+		Conversation new_conversation(chatusers, read_map, chrono::system_clock::now());
+		MySharedPtr<Conversation> ptr1;
+		ptr1 = &new_conversation;
 		newConv newConv1(ptr1, chatusers);
 		throw newConv1;
 	}
