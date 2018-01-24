@@ -26,7 +26,6 @@ protected:
 };
 
 
-
 // ------------------------------- Admin ------------------------------- //
 class Admin : public User {
 public:
