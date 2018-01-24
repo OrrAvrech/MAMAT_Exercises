@@ -9,16 +9,17 @@ class User : public ObjectInterface {
 
 public:
 	// Constructor
-	User(std::string userName, std::string userPass, MessageBox msgBox);
+	User(string userName, string userPass, MessageBox msgBox);
 
 	// Methods
-	void Preview(std::string activeUsrName);
-	void VrtDo(std::string cmdLine, std::string activeUsrName);
+	void Preview(string activeUsrName);
+	void VrtDo(string cmdLine, string activeUsrName);
 	void Help() const;
+	bool isNewMessages(MessageBox msgBox, string userName) const;
 
 protected:
-	std::string userName_;
-	std::string userPass_;
+	string userName_;
+	string userPass_;
 	MessageBox msgBox_;
 
 };

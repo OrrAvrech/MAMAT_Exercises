@@ -2,10 +2,19 @@
 #include "User.h"
 
 // ------------------------------- User ------------------------------- //
-using std::string;
-
 // Constructor
-User(const string& userName, const string& userPass, MessageBox msgBox) {}
+
+// Hepler Functions
+bool User::isNewMessages(MessageBox msgBox, string userName) const
+{
+	for (auto itr = msgBox.ConversationList_.begin(); itr != msgBox.ConversationList_.end(); ++itr)
+	{
+		if (!((*itr).IsRead(userName)))
+			// Found a conversation with an UNREAD message --> found new message for User
+			return true;
+	}
+	return false;
+}
 
 // Interface
 void User::VrtDo(string cmdLine, string activeUsrName)
@@ -13,11 +22,11 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	if (cmdLineTokens[0] == "Messages" && cmdLineTokens.size() == 1) // Messages
 	{
-		// add code here
+		throw "User to MessageBox";
 	}
 	else if (cmdLineTokens[0] == "Logout" && cmdLineTokens.size() == 1) // Logout
 	{
-		// add code here
+		throw "User LogOut";
 	}
 	else // INVALID_INPUT
 		cout << INVALID_INPUT;
@@ -25,7 +34,12 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 
 void User::Preview(string activeUsrName)
 {
-
+	auto name_ = activeUsrName;
+	cout << name_ << USER_PREVIEW_PART1;
+	if (isNewMessages(msgBox_, activeUsrName))
+		cout << USER_PREVIEW_PART2_NEW_MESSAGES;
+	else
+		cout << USER_PREVIEW_PART2_NO_MESSAGES;
 }
 
 void User::Help() const
@@ -33,14 +47,6 @@ void User::Help() const
 	cout << "Messages" << endl;
 	cout << "Logout" << endl;
 }
-
-
-
-
-
-
-
-
 
 // ------------------------------- Admin ------------------------------- //
 void Admin::VrtDo(string cmdLine, string activeUsrName)
