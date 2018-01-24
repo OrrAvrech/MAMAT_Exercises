@@ -3,6 +3,8 @@
 
 // ------------------------------- User ------------------------------- //
 // Constructor
+User::User(string userName, string userPass, MessageBox msgBox) :
+	userName_(userName), userPass_(userPass), msgBox_(msgBox) {}
 
 // Hepler Functions
 bool User::isNewMessages(MessageBox msgBox, string userName) const
@@ -49,24 +51,30 @@ void User::Help() const
 }
 
 // ------------------------------- Admin ------------------------------- //
+
+// Constructor
+Admin::Admin(string userName, string userPass, MessageBox msgBox) : 
+	User(userName, userPass, msgBox) {}
+
+// Interface
 void Admin::VrtDo(string cmdLine, string activeUsrName)
 {
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	if (cmdLineTokens[0] == "New" && cmdLineTokens.size() == 3) // New
 	{
-		// add code here
+		throw "Admin New to ChatNet";
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete
 	{
-		// add code here
+		throw "Admin Delete to ChatNet";
 	}
 	else if (cmdLineTokens[0] == "Search" && cmdLineTokens.size() == 2) // Search
 	{
-		// add code here
+		throw "Admin Search to ChatNet";
 	}
 	else // User command
 	{
-		// add code here
+		User::VrtDo(cmdLine, activeUsrName);
 	}
 }
 

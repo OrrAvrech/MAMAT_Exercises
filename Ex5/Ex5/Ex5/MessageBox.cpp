@@ -28,8 +28,6 @@ MessageBox::MessageBox(string username, list<Conversation> ConversationList) :
 
 void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 {
-	size_t idx;
-
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	vector<string>::iterator itr, itr2;
 	if (cmdLineTokens[0] == "New" && cmdLineTokens.size() > 1) // New
@@ -126,7 +124,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 }
 
 
-void MessageBox::VrtPreview(string activeUsrName)
+void MessageBox::Preview(string activeUsrName)
 {
 	int count = 1;
 	if (ConversationList_.size() == 0)
