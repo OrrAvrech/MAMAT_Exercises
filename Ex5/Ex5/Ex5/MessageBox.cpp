@@ -1,8 +1,5 @@
-
 #include "Defs.h"
 #include "MessageBox.h"
-
-
 #include <iostream>
 #include <vector>
 #include <string>
@@ -19,19 +16,8 @@ int stringToInt(const string s) {
 }
 
 
-
-// exception handling
-
-
 MessageBox::MessageBox(string username, list<Conversation> ConversationList) :
 	username_( username) , ConversationList_(ConversationList) {}
-
-
- 
-
-//Interface
-
-
 
 
 void MessageBox::VrtDo(string cmdLine, string activeUsrName)
@@ -42,44 +28,39 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 	vector<string>::iterator itr, itr2;
 	if (cmdLineTokens[0] == "New" && cmdLineTokens.size() > 1) // New
 	{
-		vector<string> chatusers , userslist;
+		vector<string>  userslist;
+		set<string> chatusers;
+		// checking for duplicates and making the chatusers list
 		for (itr = cmdLineTokens.begin() + 1; itr < cmdLineTokens.end(); itr++)
 		{
-			chatusers.end() + 1 = itr;
-		}
-		// checking duplication
-		for (itr = chatusers.begin() + 1; itr < chatusers.end(); itr++)
-		{
-			for (itr2 = chatusers.begin() + 1; itr2 < itr; itr2++)
+			if(chatusers.insert(*itr).second == false) 
 			{
-				if (itr == itr2)
-				{
-					cout << CONVERSATION_FAIL_USER_REPETITION;
-					return;
-				}
+				cout << CONVERSATION_FAIL_USER_REPETITION;
+				return;
 			}
 		}
-		userslist = getUserList(); // TODO :  should be in CHATNET, removed for now because of errors
+		userslist = getUserList(); 
 		//checking if all users exsist in the ChatNet
-		bool find_flag = 0;
-		for (itr = chatusers.begin() + 1; itr < chatusers.end(); itr++)
+		bool find_flag;
+		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
 		{
+			find_flag = 0;
 			for (itr2 = userslist.begin() + 1; itr2 < userslist.end(); itr2++)
 			{
-				if (itr == itr2)
+				if (*itr == *itr2)
 					find_flag = 1;
 			}
-			if (find_flag)
+			if (!find_flag)
 			{
 				cout << CONVERSATION_FAIL_NO_USER;
 				return;
 			}
 		}
 		Conversation new_conversation();
-		new_conversation->participants_ = chatusers;
+		new_conversation.participants_ = chatusers;
 		new_conversation->lastTime_ = chrono::system_clock::now();
 		new_conversation->messageList_ = NULL;
-		for (itr = chatusers.begin() + 1; itr < chatusers.end(); itr++)
+		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
 		{
 			new_conversation->readStateList_[itr] = READ;
 		}
@@ -127,14 +108,13 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 	}
 	else if (cmdLineTokens[0] == "Search" && cmdLineTokens.size() == 2) // Search
 	{
-		/* TODO : 
-		   throw exception and searching the main user list 
-		   not sure if it possible from here without exception   */
+		string substr = cmdLineTokens[1];
+		throw substr;
 	}
 	else if (cmdLineTokens[0] == "Back") // Back
 	{
-		/* TODO :
-		throw exception and go back in stack   */
+		string MessageBox_back = "MessageBox_back"; 
+		throw MessageBox_back;
 	}
 	else // INVALID_INPUT
 		cout << INVALID_INPUT;
@@ -149,13 +129,13 @@ void MessageBox::VrtPreview(string activeUsrName)
 	else
 		cout << "Conversations:" << endl;
 	list <Conversation>::iterator itr;
-	for (itr = ConversationList_.begin() ; itr < ConversationList_.end() ; itr++)
+	for (itr = ConversationList_.begin() ; itr != ConversationList_.end() ; ++itr)
 	{
 		cout << count << ") ";
-		if ((itr)->readStateList_.find(activeUsrName) == UNREAD) // blocked because private and have no function to get this from
+		if (itr->IsRead(activeUsrName) == UNREAD) 
 			cout << "(UNREAD) ";
 		cout << "Participants: ";
-		(itr)->DisplayParticipants();    // need to add to conversation? 
+		itr->DisplayParticipants();    // need to add to conversation? 
 		++count;
 	}
 }

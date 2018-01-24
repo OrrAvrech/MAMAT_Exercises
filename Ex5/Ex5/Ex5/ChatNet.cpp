@@ -8,7 +8,8 @@
 
 
 
-
+/* TODO: 
+   vector<string> getUserList() - returns the Chatnet userlist as a vector<string>     */
 
 
 
@@ -40,7 +41,7 @@ void ChatNet::Do(string cmd)
 		// When using stack (from STL) this could like something like the following line:
 		// activeObjectStack_.top().Do(cmd, activeUsrName_);
 	}
-	catch (newConv)
+	catch (newConv) // from MessageBox
 	{
 		/* TODO:
 		for each user in the chatusers:
@@ -48,11 +49,23 @@ void ChatNet::Do(string cmd)
 		messagebox::ConversationList_.
 		than sort his the ConversationList_ */
 	}
-	catch (convOpen)
+	catch (convOpen)  // from MessageBox
 	{
 		/* TODO:
 		update stack to conv2open.c conversation
 		and preview conversation */
+	} 
+	catch (string substr)   // from MessageBox
+	{
+		/* TODO : 
+		   search in userList if theres a name containing
+		   str substring.   */
+	}
+	catch (string MessageBox_back)    // from MessageBox
+	{
+		/* TODO :
+		   back to previous object in the stack
+		   and preview it  */
 	}
 	// more catch phrases
 }

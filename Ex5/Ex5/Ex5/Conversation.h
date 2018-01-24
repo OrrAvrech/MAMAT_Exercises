@@ -29,17 +29,20 @@ class Conversation : public ObjectInterface {
 
 public:
 	// Constructor
-	Conversation(vector<string> participants, vector<Message> messageList, map<string, ConversationStatus> readStateList, SysTime lastTime) ;
 	Conversation() {};
+	Conversation(set<string> participants, vector<Message> messageList, map<string, ConversationStatus> readStateList, SysTime lastTime);
+
 	// Methods
 	void Preview(string activeUsrName);
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Help() const;
-	void removeUser(string user); // TO DO : remove user from participants
+	void removeUser(string user); // TODO : remove user from participants
+	bool IsRead(string participant) const;
+	void DisplayParticipants(); //TODO : print participants list.
 	
 
 private:
-	vector<string> participants_; // participants set contains a string as user name (not User class)
+	set<string> participants_; // participants set contains a string as user name (not User class)
 	vector<Message> messageList_;
 	map<string, ConversationStatus> readStateList_;
 	SysTime lastTime_;
