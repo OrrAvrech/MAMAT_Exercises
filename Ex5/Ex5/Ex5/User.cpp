@@ -1,14 +1,13 @@
 #include<iostream>
 #include "User.h"
 
-
 // ------------------------------- User ------------------------------- //
+using std::string;
 
-
+// Constructor
+User(const string& userName, const string& userPass, MessageBox msgBox) {}
 
 // Interface
-
-
 void User::VrtDo(string cmdLine, string activeUsrName)
 {
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
@@ -24,9 +23,10 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 		cout << INVALID_INPUT;
 }
 
+void User::Preview(string activeUsrName)
+{
 
-
-
+}
 
 void User::Help() const
 {
