@@ -3,6 +3,7 @@
 
 #include "ObjectInterface.h"
 
+#include <iostream>
 #include <chrono>
 #include <set>
 #include <string>

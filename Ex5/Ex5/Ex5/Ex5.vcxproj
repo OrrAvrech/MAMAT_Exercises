@@ -115,6 +115,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ChatNet.h" />
+    <ClInclude Include="Conversation.h" />
+    <ClInclude Include="Defs.h" />
+    <ClInclude Include="MessageBox.h" />
+    <ClInclude Include="MySharedPtr.h" />
+    <ClInclude Include="ObjectInterface.h" />
+    <ClInclude Include="User.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ChatNet.cpp" />
+    <ClCompile Include="Conversation.cpp" />
+    <ClCompile Include="Defs.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MessageBox.cpp" />
+    <ClCompile Include="User.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

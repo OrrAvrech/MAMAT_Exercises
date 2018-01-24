@@ -8,15 +8,16 @@
 
 using namespace std;
 
-class MessageBox
+class MessageBox : public ObjectInterface
 {
+	friend class User;
 private:
 	string username_;
 	list<Conversation> ConversationList_;    //need to be a list of MySharedPtr????
 public:
 	MessageBox(string username, list<Conversation> ConversationList);
 	void VrtDo(string cmdLine, string activeUsrName);
-	void VrtPreview(string activeUsrName);
+	void Preview(string activeUsrName);
 	void Help() const;
 };
 
