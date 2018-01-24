@@ -9,15 +9,17 @@
 
 class ChatNet : public ObjectInterface 
 {
-	string netName;
+	string networkName_;
 	string currentUser;
 	stack<ActiveObj> objStack;
-	vector<MySharedPtr<User>> UserList;
+	vector<MySharedPtr<User>> UserList_;
 public:
 	ChatNet(const string& networkName, const string& adminName, const string& adminPass);
 	vector<string> getUserList();
-
-	
+	void VrtDo(string cmdLine, string activeUsrName);
+	void VrtPreview(string activeUsrName);
+	void Help() const;
+	User findUserByName(string NeededUsername);
 };
 
 

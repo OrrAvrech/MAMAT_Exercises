@@ -41,7 +41,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		{
 			if (chatusers.insert(*itr).second == false)
 			{
-				cout << CONVERSATION_FAIL_USER_REPETITION;
+				cout << CONVERSATION_FAIL_USER_REPETITION << endl;
 				return;
 			}
 		}
@@ -58,7 +58,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 			}
 			if (!find_flag)
 			{
-				cout << CONVERSATION_FAIL_NO_USER;
+				cout << CONVERSATION_FAIL_NO_USER << endl;
 				return;
 			}
 		}
@@ -77,13 +77,13 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 	{
 		if (cmdLineTokens[1].find_first_not_of("123456789") != string::npos)
 		{
-			cout << INVALID_CONVERSATION_NUMBER;
+			cout << INVALID_CONVERSATION_NUMBER << endl;
 			return;
 		}
 		int convNum = stringToInt(cmdLineTokens[1]);
 		if (convNum<1 || convNum > ConversationList_.size())
 		{
-			cout << INVALID_CONVERSATION_NUMBER;
+			cout << INVALID_CONVERSATION_NUMBER << endl;
 			return;
 		}
 		list<Conversation>::iterator list_itr;
@@ -96,13 +96,13 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 	{
 		if (cmdLineTokens[1].find_first_not_of("123456789") != string::npos)
 		{
-			cout << INVALID_CONVERSATION_NUMBER;
+			cout << INVALID_CONVERSATION_NUMBER << endl;
 			return;
 		}
 		int convNum = stringToInt(cmdLineTokens[1]);
 		if (convNum<1 || convNum > ConversationList_.size())
 		{
-			cout << INVALID_CONVERSATION_NUMBER;
+			cout << INVALID_CONVERSATION_NUMBER << endl;
 			return;
 		}
 		list<Conversation>::iterator list_itr;

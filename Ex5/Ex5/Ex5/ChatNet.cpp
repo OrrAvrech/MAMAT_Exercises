@@ -3,15 +3,38 @@
 #include "Conversation.h"
 #include "ChatNet.h"
 #include "MessageBox.h"
-
+#include "User.h"
 #define NO_ACTIVE_USER "No User"
 
+// helper functions
+vector<string> ChatNet::getUserList()
+{
+	vector<MySharedPtr<User>>::iterator itr;
+	User user;
+	vector<string> StringV;
+	string userName;
+	for (itr = UserList_.begin(); itr < UserList_.end(); ++itr)
+	{
+		user = *(itr->ptr);
+		userName = user.getName();
+		StringV.push_back(userName) ;
+	}
+	return StringV;
+}
 
-
-/* TODO: 
-   vector<string> getUserList() - returns the Chatnet userlist as a vector<string>     */
-
-
+User ChatNet::findUserByName(string NeededUsername) // assuming the user exsist in the userlist
+{
+	vector<MySharedPtr<User>>::iterator itr;
+	User user;
+	string userName;
+	for (itr = UserList_.begin(); itr < UserList_.end(); ++itr)
+	{
+		user = *(itr->ptr);
+		userName = user.getName();
+		if (userName == NeededUsername)
+			return user;
+	}
+}
 
 // Interface
 void ChatNet::VrtDo(string cmdLine, string activeUsrName)
@@ -19,7 +42,31 @@ void ChatNet::VrtDo(string cmdLine, string activeUsrName)
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	if (cmdLineTokens[0] == "Login" && cmdLineTokens.size() == 3) // Login
 	{
-		// add code here
+		vector<string> UserList_ = getUserList();
+		vector<string>::iterator itr;
+		bool find_flag = 0;
+		for (itr = UserList_.begin(); itr < UserList_.end(); ++itr)
+		{
+			if (*itr == cmdLineTokens[1])
+			{
+				find_flag = 1;
+			}
+		}
+		if (find_flag == 0)
+		{
+			cout << USER_DOES_NOT_EXIST << endl;
+			return;
+		}
+
+		User user = findUserByName(cmdLineTokens[1]);
+		if (user.getPassword() != cmdLineTokens[2])
+		{
+			cout << WRONG_PASSWORD << endl;
+			return;
+		}
+		/* TODO : 
+		   making the user the new obj */
+
 	}
 	else if (cmdLineTokens[0] == "New" && cmdLineTokens.size() == 3) // New
 	{
@@ -58,7 +105,7 @@ void ChatNet::Do(string cmd)
 	catch (string substr)   // from MessageBox
 	{
 		/* TODO : 
-		   search in userList if theres a name containing
+		   search in UserList_ if theres a name containing
 		   str substring.   */
 	}
 	catch (string MessageBox_back)    // from MessageBox
