@@ -30,7 +30,7 @@ class Conversation : public ObjectInterface {
 public:
 	// Constructor
 	Conversation(set<string> participants, map<string, ConversationStatus> readStateList, SysTime lastTime);
-
+	Conversation() = default;
 	// Methods
 	void Preview(string activeUsrName);
 	void VrtDo(string cmdLine, string activeUsrName);
