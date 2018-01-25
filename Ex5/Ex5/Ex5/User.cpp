@@ -11,7 +11,7 @@ bool User::isNewMessages(MessageBox msgBox, string userName) const
 {
 	for (auto itr = msgBox.ConversationList_.begin(); itr != msgBox.ConversationList_.end(); ++itr)
 	{
-		if (!((*itr).IsRead(userName)))
+		if (!((*itr)->IsRead(userName)))
 			// Found a conversation with an UNREAD message --> found new message for User
 			return true;
 	}
@@ -37,11 +37,11 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 void User::Preview(string activeUsrName)
 {
 	auto name_ = activeUsrName;
-	cout << name_ << USER_PREVIEW_PART1;
+	cout << USER_PREVIEW_PART1 << endl;
 	if (isNewMessages(msgBox_, activeUsrName))
-		cout << USER_PREVIEW_PART2_NEW_MESSAGES;
+		cout << USER_PREVIEW_PART2_NEW_MESSAGES << endl;
 	else
-		cout << USER_PREVIEW_PART2_NO_MESSAGES;
+		cout << USER_PREVIEW_PART2_NO_MESSAGES << endl;
 }
 
 void User::Help() const

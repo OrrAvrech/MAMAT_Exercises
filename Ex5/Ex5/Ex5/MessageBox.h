@@ -13,36 +13,36 @@ class MessageBox : public ObjectInterface
 	friend class User;
 private:
 	string username_;
-	list<Conversation> ConversationList_;    //need to be a list of MySharedPtr????
+	list<MySharedPtr<Conversation>> ConversationList_;    
 public:
-	MessageBox(string username, list<Conversation> ConversationList);
+	MessageBox(string username, list<MySharedPtr<Conversation>> ConversationList);
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Preview(string activeUsrName);
 	void Help() const;
 };
 
 
-class newConv   // will be thrown as exception in new conversation
-{
-	MySharedPtr<Conversation> ptr;
-	set<string> userList;
-public : 
-	newConv(MySharedPtr<Conversation> ptr, set<string> userList)
-	{
-		this->ptr = ptr;
-		this->userList = userList;
-	}
-};
+//class newConv   // will be thrown as exception in new conversation
+//{
+//	
+//	set<string> userList;
+//public : 
+//	newConv(MySharedPtr<Conversation> ptr, set<string> userList)
+//	{
+//		this->ptr = ptr;
+//		this->userList = userList;
+//	}
+//};
 
-class convOpen   // will be thrown as exception in conversation open
-{
-	Conversation c;
-public:
-	convOpen(Conversation c)
-	{
-		this->c = c;
-	}
-};
+//class convOpen   // will be thrown as exception in conversation open
+//{
+//	Conversation c;
+//public:
+//	convOpen(Conversation c)
+//	{
+//		this->c = c;
+//	}
+//};
 
 #endif
 

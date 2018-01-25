@@ -16,8 +16,8 @@ public:
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Help() const;
 	bool isNewMessages(MessageBox msgBox, string userName) const;
-	string getName(); // TODO: returns the name of the user
-	string getPassword(); // TODO: returns the password of the user
+	//string getName(); // TODO: returns the name of the user
+	//string getPassword(); // TODO: returns the password of the user
 protected:
 	string userName_;
 	string userPass_;
