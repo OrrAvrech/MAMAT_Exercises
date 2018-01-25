@@ -16,33 +16,25 @@ private:
 	list<MySharedPtr<Conversation>> ConversationList_;    
 public:
 	MessageBox(string username, list<MySharedPtr<Conversation>> ConversationList);
+	MessageBox() = default;
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Preview(string activeUsrName);
 	void Help() const;
 };
 
+class newConv   // will be thrown as exception in new conversation
+{
+	set<string> userList_;
+public : 
+	newConv(set<string> userList) : userList_(userList) {}
+};
 
-//class newConv   // will be thrown as exception in new conversation
-//{
-//	
-//	set<string> userList;
-//public : 
-//	newConv(MySharedPtr<Conversation> ptr, set<string> userList)
-//	{
-//		this->ptr = ptr;
-//		this->userList = userList;
-//	}
-//};
-
-//class convOpen   // will be thrown as exception in conversation open
-//{
-//	Conversation c;
-//public:
-//	convOpen(Conversation c)
-//	{
-//		this->c = c;
-//	}
-//};
+class convOpen   // will be thrown as exception in conversation open
+{
+	MySharedPtr<Conversation> pConv_;
+public:
+	convOpen(MySharedPtr<Conversation> pConv) : pConv_(pConv) {}
+};
 
 #endif
 

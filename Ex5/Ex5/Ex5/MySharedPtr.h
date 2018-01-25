@@ -44,7 +44,7 @@ public:
 	T* get() { return ptr_; }
 
 private:
-	T * ptr_;
+	T* ptr_;
 	int* counter_;
 };
 

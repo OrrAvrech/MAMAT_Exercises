@@ -66,9 +66,8 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		//Conversation new_conversation(chatusers, read_map, chrono::system_clock::now());
 		//MySharedPtr<Conversation> ptr1;
 		//ptr1 = &new_conversation;
-		//newConv newConv1(ptr1, chatusers);
-
-		throw conv_users; // Type: set<string>
+		newConv newConv1(conv_users);
+		throw newConv1;
 	}
 	else if (cmdLineTokens[0] == "Open" && cmdLineTokens.size() == 2) // Open
 	{
@@ -86,8 +85,8 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		list<MySharedPtr<Conversation>>::iterator list_itr;
 		list_itr = ConversationList_.begin();
 		advance(list_itr, convNum);
-		//convOpen conv2open(*list_itr);
-		throw (*list_itr); // Type: MySharedPtr<Conversation>
+		convOpen conv2open((*list_itr));
+		throw (conv2open);
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete
 	{

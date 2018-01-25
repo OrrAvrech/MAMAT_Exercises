@@ -6,6 +6,9 @@
 User::User(string userName, string userPass, MessageBox msgBox) :
 	userName_(userName), userPass_(userPass), msgBox_(msgBox) {}
 
+User::User(string userName, string userPass) :
+	userName_(userName), userPass_(userPass) {}
+
 // Hepler Functions
 bool User::isNewMessages(MessageBox msgBox, string userName) const
 {
@@ -18,17 +21,27 @@ bool User::isNewMessages(MessageBox msgBox, string userName) const
 	return false;
 }
 
+string User::getName()
+{
+	return userName_;
+}
+
+string User::getPassword()
+{
+	return userPass_;
+}
+
 // Interface
 void User::VrtDo(string cmdLine, string activeUsrName)
 {
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	if (cmdLineTokens[0] == "Messages" && cmdLineTokens.size() == 1) // Messages
 	{
-		throw "User to MessageBox";
+		throw UserMessages(this->msgBox_); // TODO
 	}
 	else if (cmdLineTokens[0] == "Logout" && cmdLineTokens.size() == 1) // Logout
 	{
-		throw "User LogOut";
+		throw UserLogOut();
 	}
 	else // INVALID_INPUT
 		cout << INVALID_INPUT;
@@ -52,9 +65,12 @@ void User::Help() const
 
 // ------------------------------- Admin ------------------------------- //
 
-// Constructor
+// Constructors
 Admin::Admin(string userName, string userPass, MessageBox msgBox) : 
 	User(userName, userPass, msgBox) {}
+
+Admin::Admin(string userName, string userPass) :
+	User(userName, userPass) {}
 
 // Interface
 void Admin::VrtDo(string cmdLine, string activeUsrName)
