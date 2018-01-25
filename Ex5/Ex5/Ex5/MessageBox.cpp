@@ -14,8 +14,23 @@ int stringToInt(const string s) {
 	istr >> i;
 	return i;
 }
+
+bool compareByTime(MySharedPtr<Conversation> r, MySharedPtr<Conversation> l)
+{
+	SysTime r_time = r->getTime;
+	SysTime l_time = l->getTime;
+	return r_time < l_time;
+}
+
 MessageBox::MessageBox(string username, list<MySharedPtr<Conversation>> ConversationList) :
 	username_(username), ConversationList_(ConversationList) {}
+
+
+void MessageBox::addConv(MySharedPtr<Conversation> convPtr)
+{
+	ConversationList_.push_back(convPtr);
+	ConversationList_.sort(compareByTime);
+}
 
 
 void MessageBox::VrtDo(string cmdLine, string activeUsrName)

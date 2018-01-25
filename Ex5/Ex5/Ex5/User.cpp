@@ -4,11 +4,14 @@
 // ------------------------------- User ------------------------------- //
 // Constructor
 User::User(string userName, string userPass, MessageBox msgBox) :
-	userName_(userName), userPass_(userPass), msgBox_(msgBox) {}
+	userName_(userName), userPass_(userPass), msgBox_(msgBox) {
+	adminFlag = 0;
+}
 
 User::User(string userName, string userPass) : userName_(userName), userPass_(userPass) 
 {
 	MessageBox msgBox_;
+	adminFlag = 0;
 }
 // Hepler Functions
 bool User::isNewMessages(MessageBox msgBox, string userName) const
@@ -60,7 +63,16 @@ void User::Help() const
 
 // Constructor
 Admin::Admin(string userName, string userPass, MessageBox msgBox) : 
-	User(userName, userPass, msgBox) {}
+	User(userName, userPass, msgBox) {
+	adminFlag = 1;
+}
+
+Admin::Admin(string userName, string userPass) :
+	User(userName, userPass) {
+	MessageBox msgBox;
+	adminFlag =1 ;
+}
+
 
 // Interface
 void Admin::VrtDo(string cmdLine, string activeUsrName)
@@ -68,15 +80,18 @@ void Admin::VrtDo(string cmdLine, string activeUsrName)
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	if (cmdLineTokens[0] == "New" && cmdLineTokens.size() == 3) // New
 	{
-		throw "Admin New to ChatNet";
+		Admin newAdmin(cmdLineTokens[1], cmdLineTokens[2]);
+		throw newAdmin;
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete
 	{
-		throw "Admin Delete to ChatNet";
+		string deleteAdmin = cmdLineTokens[1];
+		throw deleteAdmin;
 	}
 	else if (cmdLineTokens[0] == "Search" && cmdLineTokens.size() == 2) // Search
 	{
-		throw "Admin Search to ChatNet";
+		string searchAdmin = cmdLineTokens[1];
+		throw searchAdmin;
 	}
 	else // User command
 	{

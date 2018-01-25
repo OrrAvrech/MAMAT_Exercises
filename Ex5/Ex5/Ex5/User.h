@@ -17,14 +17,16 @@ public:
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Help() const;
 	bool isNewMessages(MessageBox msgBox, string userName) const;
-	string getName(); // TODO: returns the name of the user
-	string getPassword(); // TODO: returns the password of the user
-	void addConv2msgBox(MySharedPtr<Conversation> convPtr); // TODO : call msgBox.addConv(convPtr); 
+	string getName() { return userName_; }
+	string getPassword() { return userPass_; }
+	void addConv2msgBox(MySharedPtr<Conversation> convPtr) { msgBox_.addConv(convPtr); }
+	bool isAdmin() { return adminFlag; }
+	MessageBox* getMsgBox() { return &msgBox_ ; }
 protected:
 	string userName_;
 	string userPass_;
 	MessageBox msgBox_;
-
+	bool adminFlag;
 };
 
 // ------------------------------- Admin ------------------------------- //
@@ -32,7 +34,7 @@ class Admin : public User {
 public:
 	// Constructor
 	Admin(string userName, string userPass, MessageBox msgBox);
-
+	Admin(string userName, string userPass);
 	// Methods
 	// Preview() is inherited from User
 	void VrtDo(string cmdLine, string activeUsrName);

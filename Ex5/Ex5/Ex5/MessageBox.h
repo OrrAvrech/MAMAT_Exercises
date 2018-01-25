@@ -13,14 +13,15 @@ class MessageBox : public ObjectInterface
 	friend class User;
 private:
 	string username_;
-	list<MySharedPtr<Conversation>> ConversationList_;    //need to be a list of MySharedPtr????
+	list<MySharedPtr<Conversation>> ConversationList_; 
 public:
 	MessageBox(string username, list<MySharedPtr<Conversation>> ConversationList);
 	MessageBox() = default;
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Preview(string activeUsrName);
 	void Help() const;
-	void addConv(MySharedPtr<Conversation> convPtr);   //TODO: add a conversation ptr to conversationList_ and sort by date
+	list<MySharedPtr<Conversation>>* getConversationList() { return &ConversationList_; }
+	void addConv(MySharedPtr<Conversation> convPtr);  
 };
 
 

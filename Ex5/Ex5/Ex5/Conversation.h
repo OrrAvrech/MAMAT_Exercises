@@ -36,10 +36,10 @@ public:
 	void Preview(string activeUsrName);
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Help() const;
-	void removeUser(string user); // TODO : remove user from participants
+	void removeUser(string user); 
 	bool IsRead(string participant) const;
-	void DisplayParticipants(); //TODO : print participants list.
-	
+	void DisplayParticipants(); 
+	SysTime getTime() { return lastTime_; }
 
 private:
 	set<string> participants_; // participants set contains a string as user name (not User class)

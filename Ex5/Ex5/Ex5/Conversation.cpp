@@ -26,7 +26,7 @@ bool Conversation::IsRead(string participant) const
 
 void Conversation::removeUser(string user)
 {
-	participants_.erase(user);
+	participants_.erase(user);  
 }
 
 
