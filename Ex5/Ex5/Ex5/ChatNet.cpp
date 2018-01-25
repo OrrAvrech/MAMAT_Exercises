@@ -199,9 +199,9 @@ void ChatNet::Do(string cmd)
 		string username = deleteAdmin;
 		for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
 		{
-			if (itr->get()->getName == username)
+			if (itr->get()->getName() == username)
 			{
-				if (!itr->get()->isAdmin)
+				if (!itr->get()->isAdmin())
 				{
 					cout << REMOVE_USER_FAIL;
 					return;
@@ -216,7 +216,7 @@ void ChatNet::Do(string cmd)
 						 {
 							(*itr3)->removeUser(username);    //hoping it doesnt return error if it doesnt exist in the participant list
 						 }
-						if (itr2->get()->getName == username)
+						if ((*itr2)->get()->getName == username)
 						{
 							UserList_.erase(itr2);
 						}
