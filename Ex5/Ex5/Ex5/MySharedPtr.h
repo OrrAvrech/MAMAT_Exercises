@@ -1,38 +1,51 @@
 #ifndef _MY_SHARED_PTR_H_
 #define _MY_SHARED_PTR_H_
 
-#include "Conversation.h"
-
 template <class T>
 class MySharedPtr
 {
 public:
-	T * ptr;
-	int* counter;
-     MySharedPtr()
+	// Constructors
+	MySharedPtr(T* ptr)
 	{
-		this->ptr = new T*;
-		this->counter = new int*;
-		this->counter = 0;
+		ptr_ = ptr;
+		counter_ = new int(1);
 	}
-	~MySharedPtr() 
+	MySharedPtr(const MySharedPtr<T>& pNew)
 	{
-		if (this->counter == 1)
+		ptr_ = pNew.ptr_;
+		counter_ = pNew.counter_;
+		(*counter_)++;
+	}
+	// Destructor
+	~MySharedPtr()
+	{
+		if (counter_ != nullptr)
 		{
-			delete this->ptr;
-			delete this->counter;
+			(*counter_)--;
+			if (*counter_ == 0)
+			{
+				delete ptr_;
+				delete counter_;
+			}
 		}
-		else
-			this->counter--;
 	}
-	T& operator*() { return *ptr; }
-	T* operator->() { return ptr; }
-	T* operator=(T* new_ptr) 
-	{
-		this->counter++;
-		this->ptr = new_ptr;
+	// Methods
+	T& operator*() { return *ptr_; } // returning a class T --> return by reference
+	T* operator->() { return ptr_; } // returning a pointer to T --> return by address
+	MySharedPtr<T>& operator=(const MySharedPtr<T>& pNew)
+	{   // passing a read-only class MySharedPtr --> pass by reference
+		ptr_ = pNew.ptr_;
+		counter_ = pNew.counter_;
+		(*counter_)++;
+		return *this;
+		// returning a class MySharedPtr --> return by reference
 	}
-	T* get() { return ptr; }
+	T* get() { return ptr_; }
+
+private:
+	T * ptr_;
+	int* counter_;
 };
 
 #endif // _MY_SHARED_PTR_H_
