@@ -15,7 +15,7 @@ bool User::isNewMessages(MessageBox msgBox, string userName) const
 {
 	for (auto itr = msgBox.ConversationList_.begin(); itr != msgBox.ConversationList_.end(); ++itr)
 	{
-		if (!((*itr).IsRead(userName)))
+		if (!((*itr)->IsRead(userName)))
 			// Found a conversation with an UNREAD message --> found new message for User
 			return true;
 	}
@@ -33,7 +33,8 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 	}
 	else if (cmdLineTokens[0] == "Logout" && cmdLineTokens.size() == 1) // Logout
 	{
-		throw "User LogOut";
+		string user_logout = "User LogOut";
+		throw user_logout;
 	}
 	else // INVALID_INPUT
 		cout << INVALID_INPUT;

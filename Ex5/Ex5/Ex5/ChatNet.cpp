@@ -5,15 +5,14 @@
 #include "MessageBox.h"
 #include "User.h"
 #define NO_ACTIVE_USER "No User"
-
+using namespace std;
 // helper functions
 vector<string> ChatNet::getUserList()
 {
-	vector<MySharedPtr<User>>::iterator itr;
-	User user;
+	User user;   
 	vector<string> StringV;
 	string userName;
-	for (itr = UserList_.begin(); itr < UserList_.end(); ++itr)
+	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
 	{
 		user = *(itr->ptr);
 		userName = user.getName();
@@ -24,10 +23,9 @@ vector<string> ChatNet::getUserList()
 
 User ChatNet::findUserByName(string NeededUsername) // assuming the user exsist in the userlist
 {
-	vector<MySharedPtr<User>>::iterator itr;
-	User user;
+	User user;   
 	string userName;
-	for (itr = UserList_.begin(); itr < UserList_.end(); ++itr)
+	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
 	{
 		user = *(itr->ptr);
 		userName = user.getName();
@@ -54,14 +52,14 @@ void ChatNet::VrtDo(string cmdLine, string activeUsrName)
 		}
 		if (find_flag == 0)
 		{
-			cout << USER_DOES_NOT_EXIST << endl;
+			cout << USER_DOES_NOT_EXIST;
 			return;
 		}
 
 		User user = findUserByName(cmdLineTokens[1]);
 		if (user.getPassword() != cmdLineTokens[2])
 		{
-			cout << WRONG_PASSWORD << endl;
+			cout << WRONG_PASSWORD;
 			return;
 		}
 		/* TODO : 
@@ -70,7 +68,20 @@ void ChatNet::VrtDo(string cmdLine, string activeUsrName)
 	}
 	else if (cmdLineTokens[0] == "New" && cmdLineTokens.size() == 3) // New
 	{
-		// add code here
+		vector<string> UserList = getUserList();
+		vector<string>::iterator itr;
+		for (itr = UserList.begin(); itr < UserList.end(); ++itr)
+		{
+			if (*itr == cmdLineTokens[1])
+			{
+				cout << USER_ALREADY_EXISTS;
+				return;
+			}
+		}
+		User new_user(cmdLineTokens[1], cmdLineTokens[2]);
+		MySharedPtr<User> userPtr;
+		userPtr = &new_user;
+		UserList_.insert(userPtr);
 	}
 	else if (cmdLineTokens[0] == "Exit" && cmdLineTokens.size() == 1) // Exit
 	{
@@ -88,13 +99,44 @@ void ChatNet::Do(string cmd)
 		// When using stack (from STL) this could like something like the following line:
 		// activeObjectStack_.top().Do(cmd, activeUsrName_);
 	}
-	catch (newConv) // from MessageBox
+	catch (newConv newConv1) // from MessageBox
 	{
-		/* TODO:
-		for each user in the chatusers:
-		make a local copy of newconv.ptr in his
-		messagebox::ConversationList_.
-		than sort his the ConversationList_ */
+		vector<string>  userslist;
+		userslist = getUserList();
+		set<string> chatusers = newConv1.userList; 
+		vector<string>::iterator itr2;
+		//checking if all users exsist in the ChatNet
+		bool find_flag;
+		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
+		{
+			find_flag = 0;
+			for (itr2 = userslist.begin() + 1; itr2 < userslist.end(); itr2++)
+			{
+				if (*itr == *itr2)
+					find_flag = 1;
+			}
+			if (!find_flag)
+			{
+				cout << CONVERSATION_FAIL_NO_USER;
+				return;
+			}
+		}
+		map<string, ConversationStatus> read_map;
+		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
+		{
+			read_map[*itr] = READ;
+		}
+		Conversation new_conversation(chatusers, read_map, chrono::system_clock::now());
+		MySharedPtr<Conversation> ptr1;
+		ptr1 = &new_conversation;
+		User user;
+		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
+		{
+			user = findUserByName(*itr);
+			MySharedPtr<Conversation> convPtr; // not sure it will realy make a new ptr each run and update counter
+			convPtr = ptr1; 
+			user.addConv2msgBox(convPtr);
+		}
 	}
 	catch (convOpen)  // from MessageBox
 	{
@@ -102,18 +144,48 @@ void ChatNet::Do(string cmd)
 		update stack to conv2open.c conversation
 		and preview conversation */
 	} 
-	catch (string substr)   // from MessageBox
+	catch (string substr)   // from MessageBox     // not sure it will catch a string.
 	{
-		/* TODO : 
-		   search in UserList_ if theres a name containing
-		   str substring.   */
+		vector<string> userlist;
+		userlist = getUserList();
+		bool find_flag = 0;
+		for (auto itr = userlist.begin(); itr != userlist.end(); ++itr)
+		{
+			if (find_flag == 0 && itr->find(substr) != string::npos)
+			{
+				find_flag = 1;
+				cout << SEARCH_FOUND_TITLE;
+				cout << *itr << endl;
+			}
+			else if (itr->find(substr) != string::npos)
+				cout << *itr << endl;
+		}
+		if (find_flag == 0)
+			cout << SEARCH_NOT_FOUND_TITLE;
 	}
-	catch (string MessageBox_back)    // from MessageBox
+	catch (char const* MessageBox_back)    // from MessageBox
 	{
 		/* TODO :
 		   back to previous object in the stack
 		   and preview it  */
 	}
+	catch (string user2msgBox)  // from user
+	{
+		/* TODO :
+		users messagebox is the new object
+		and preview it  */
+	}
+	catch (string user_logout)
+	{
+		c
+	}
+
+	catch (BackSignal)   // from ChatNet
+	{
+		/* TODO :
+		   exit Chat  */
+	}  
+
 	// more catch phrases
 }
 

@@ -19,6 +19,7 @@ public:
 	bool isNewMessages(MessageBox msgBox, string userName) const;
 	string getName(); // TODO: returns the name of the user
 	string getPassword(); // TODO: returns the password of the user
+	void addConv2msgBox(MySharedPtr<Conversation> convPtr); // TODO : call msgBox.addConv(convPtr); 
 protected:
 	string userName_;
 	string userPass_;

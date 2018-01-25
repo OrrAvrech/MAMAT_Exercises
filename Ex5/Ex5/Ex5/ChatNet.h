@@ -20,6 +20,7 @@ public:
 	void VrtPreview(string activeUsrName);
 	void Help() const;
 	User findUserByName(string NeededUsername);
+	void Do(string cmd);
 };
 
 
