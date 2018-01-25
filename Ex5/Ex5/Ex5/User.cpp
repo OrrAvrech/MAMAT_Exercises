@@ -6,6 +6,10 @@
 User::User(string userName, string userPass, MessageBox msgBox) :
 	userName_(userName), userPass_(userPass), msgBox_(msgBox) {}
 
+User::User(string userName, string userPass) : userName_(userName), userPass_(userPass) 
+{
+	MessageBox msgBox_;
+}
 // Hepler Functions
 bool User::isNewMessages(MessageBox msgBox, string userName) const
 {
@@ -24,7 +28,8 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	if (cmdLineTokens[0] == "Messages" && cmdLineTokens.size() == 1) // Messages
 	{
-		throw "User to MessageBox";
+		string user2msgBox = "User to MessageBox";
+		throw user2msgBox;
 	}
 	else if (cmdLineTokens[0] == "Logout" && cmdLineTokens.size() == 1) // Logout
 	{

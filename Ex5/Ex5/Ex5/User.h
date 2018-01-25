@@ -9,8 +9,9 @@ class User : public ObjectInterface {
 
 public:
 	// Constructor
-	User(string userName, string userPass, MessageBox msgBox);
 	User() = default;
+	User(string userName, string userPass, MessageBox msgBox);
+	User(string userName, string userPass);
 	// Methods
 	void Preview(string activeUsrName);
 	void VrtDo(string cmdLine, string activeUsrName);

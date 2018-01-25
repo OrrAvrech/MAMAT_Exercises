@@ -5,14 +5,14 @@
 #include "ObjectInterface.h"
 #include <stack>
 #include "User.h"
-
+#include <set>
 
 class ChatNet : public ObjectInterface 
 {
 	string networkName_;
 	string currentUser;
 	stack<ActiveObj> objStack;
-	vector<MySharedPtr<User>> UserList_;
+	set<MySharedPtr<User>> UserList_;
 public:
 	ChatNet(const string& networkName, const string& adminName, const string& adminPass);
 	vector<string> getUserList();
