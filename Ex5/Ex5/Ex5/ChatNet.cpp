@@ -108,25 +108,7 @@ void ChatNet::Do(string cmd)
 		// When using stack (from STL) this could like something like the following line:
 		objStack_.top().Do(cmd, currentUser_);
 	}
-	//catch (char const* MessageBox_back)    // from MessageBox
-	//{
-	//	/* TODO :
-	//	   back to previous object in the stack
-	//	   and preview it  */
-	//}
-	//catch (string user2msgBox)  // from user
-	//{
-	//	/* TODO :
-	//	users messagebox is the new object
-	//	and preview it  */
-	//}
-	//catch (string user_logout)    //from user
-	//{
-	//	currentUser_ = "";
-	//	/* TODO :
-	//	chatnet is the new object */ 
-	//	Preview(currentUser_);
-	//}
+	
 	//catch (Admin newAdmin)    //from admin
 	//{
 	//	string username = newAdmin.getName();
@@ -196,11 +178,7 @@ void ChatNet::Do(string cmd)
 	//	if (find_flag == 0)
 	//		cout << SEARCH_NOT_FOUND_TITLE;
 	//}
-	catch (BackSignal)   // from ChatNet
-	{
-		/* TODO :
-		   exit Chat  */
-	}  
+ 
 
 	//catch (MessageBox msgBox) // from User
 	//{
@@ -282,6 +260,16 @@ void ChatNet::Do(string cmd)
 			MySharedPtr<Conversation> convPtr(ptr1); // not sure it will realy make a new ptr each run and update counter
 			user.addConv2msgBox(convPtr);
 		}
+	}
+	catch (BackSignal back)   // from ChatNet
+	{
+		throw (back);
+	}
+	catch (char const* MessageBox_back)    // from MessageBox
+	{
+		objStack_.pop();
+		objStack_.top().Preview(currentUser_);
+
 	}
 	// more catch phrases
 }
