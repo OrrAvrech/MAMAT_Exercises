@@ -15,8 +15,9 @@ private:
 	string username_;
 	list<MySharedPtr<Conversation>> ConversationList_;    
 public:
+	MessageBox();
+	MessageBox(string username);
 	MessageBox(string username, list<MySharedPtr<Conversation>> ConversationList);
-	MessageBox() = default;
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Preview(string activeUsrName);
 	void Help() const;

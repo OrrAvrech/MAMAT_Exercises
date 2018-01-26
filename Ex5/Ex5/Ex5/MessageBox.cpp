@@ -22,6 +22,8 @@ int stringToInt(const string s) {
 //	return str;
 //}
 
+MessageBox::MessageBox() {}
+MessageBox::MessageBox(string username) : username_(username) {}
 MessageBox::MessageBox(string username, list<MySharedPtr<Conversation>> ConversationList) :
 	username_(username), ConversationList_(ConversationList) {}
 

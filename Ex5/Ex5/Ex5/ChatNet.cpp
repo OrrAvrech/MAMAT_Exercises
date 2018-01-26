@@ -42,6 +42,7 @@ ChatNet::ChatNet(const string& networkName, const string& adminName, const strin
 	networkName_ = networkName;
 	Admin initAdmin(adminName, adminPass);
 	currentUser_ = adminName;
+	Preview(currentUser_);
 	objStack_.push(this);
 }
 
@@ -193,9 +194,18 @@ void ChatNet::Do(string cmd)
 		exit Chat  */
 	}
 
-	catch (UserMessages) // from User
+	catch (MessageBox msgBox) // from User
 	{
-		objStack_.top(
+		ActiveObj activeMsgBox(&msgBox);
+		objStack_.push(activeMsgBox);
+		msgBox.Preview(currentUser_);
+	}
+
+	catch (UserLogOut) // from User
+	{
+		objStack_.pop();
+		currentUser_ = NO_ACTIVE_USER;
+		objStack_.top().Preview(currentUser_);
 	}
 
 	//// more catch phrases

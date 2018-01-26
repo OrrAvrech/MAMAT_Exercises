@@ -37,7 +37,8 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	if (cmdLineTokens[0] == "Messages" && cmdLineTokens.size() == 1) // Messages
 	{
-		throw UserMessages(this->msgBox_); // TODO
+		msgBox_.username_ = activeUsrName;
+		throw (this->msgBox_);
 	}
 	else if (cmdLineTokens[0] == "Logout" && cmdLineTokens.size() == 1) // Logout
 	{

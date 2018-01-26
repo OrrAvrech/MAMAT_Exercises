@@ -26,13 +26,6 @@ protected:
 };
 
 // Exception Classes
-class UserMessages {
-protected:
-	MySharedPtr<MessageBox> pMsgBox_;
-public:
-	UserMessages(MySharedPtr<MessageBox> pMsgBox) : pMsgBox_(pMsgBox) {}
-};
-
 class UserLogOut {
 };
 
