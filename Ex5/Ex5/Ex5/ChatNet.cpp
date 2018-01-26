@@ -20,17 +20,17 @@ vector<string> ChatNet::getUserList()
 	return StringV;
 }
 
-User ChatNet::findUserByName(string NeededUsername) // assuming the user exsist in the userlist
-{
-	User user;
-	string userName;
-	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
-	{
-		userName = (*itr).get()->getName();
-		if (userName == NeededUsername)
-			return user;
-	}
-}
+//User ChatNet::findUserByName(const string& NeededUsername) // assuming the user exsist in the userlist
+//{
+//	User user;
+//	string userName;
+//	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+//	{
+//		userName = (*itr).get()->getName();
+//		if (userName == NeededUsername)
+//			return user;
+//	}
+//}
 
 // Constructor
 ChatNet::ChatNet(const string& networkName, const string& adminName, const string& adminPass)
@@ -186,44 +186,64 @@ void ChatNet::Do(string cmd)
 	//	c
 	//}
 
-	catch (newConv(chat_users)) // from MessageBox
+	catch (newConv(conv_participants)) // from MessageBox
 	{
-		newConv newConv1 = newConv(chat_users);
-		vector<string>  userslist;
-		userslist = getUserList();
-		set<string> chatusers = newConv1.userList_;
-		vector<string>::iterator itr2;
+		newConv newConv1 = newConv(conv_participants);
+		//vector<string>  userslist;
+		//userslist = getUserList();
+		set<string> conv_users = newConv1.userList_;
+		//vector<string>::iterator itr2;
 		//checking if all users exsist in the ChatNet
 		bool find_flag;
-		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
+		map<string, ConversationStatus> read_map;
+		for (auto itr1 = conv_users.begin(); itr1 != conv_users.end(); ++itr1)
 		{
 			find_flag = 0;
-			for (itr2 = userslist.begin() + 1; itr2 < userslist.end(); itr2++)
+			for (auto itr2 = UserList_.begin(); itr2 != UserList_.end(); ++itr2)
 			{
-				if (*itr == *itr2)
+				if ((*itr1) == (*itr2).get()->getName())
+				{
 					find_flag = 1;
+					read_map[(*itr1)] = READ;
+					break;
+				}
 			}
-			if (!find_flag)
+		}
+		if (!find_flag)
+		{
+			cout << CONVERSATION_FAIL_NO_USER;
+			return;
+		}
+		else
+		{
+			conv_users.insert(currentUser_);
+			read_map[currentUser_] = READ;
+			MySharedPtr<Conversation> newConversation(new Conversation(conv_users, read_map, chrono::system_clock::now()));
+			for (auto itr1 = conv_users.begin(); itr1 != conv_users.end(); ++itr1)
 			{
-				cout << CONVERSATION_FAIL_NO_USER;
-				return;
+				for (auto itr2 = UserList_.begin(); itr2 != UserList_.end(); ++itr2)
+				{
+					if ((*itr1) == (*itr2).get()->getName())
+					{
+						(*itr2).get()->addConv2msgBox(newConversation);
+						break;
+					}
+				}
 			}
 		}
-		chatusers.insert(currentUser_);
-		map<string, ConversationStatus> read_map;
-		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
+		/*for (auto itr = conv_users.begin(); itr != conv_users.end(); ++itr)
 		{
-			read_map[*itr] = READ;
-		}
-		Conversation new_conversation(chatusers, read_map, chrono::system_clock::now());
-		MySharedPtr<Conversation> ptr1(&new_conversation);
-		User user;
-		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
-		{
-			user = findUserByName(*itr);
-			MySharedPtr<Conversation> convPtr(ptr1); // not sure it will realy make a new ptr each run and update counter
-			user.addConv2msgBox(convPtr);
-		}
+			read_map[(*itr)] = READ;
+		}*/
+		//Conversation new_conversation(conv_users, read_map, chrono::system_clock::now());
+		//User user;
+		//for (auto itr = conv_users.begin(); itr != conv_users.end(); ++itr)
+		//{
+		//	//User user = findUserByName(*itr);
+		//	//MySharedPtr<Conversation> convPtr(newConversation); // not sure it will realy make a new ptr each run and update counter
+		//	//user.addConv2msgBox(convPtr);
+
+		//}
 	}
 
 	catch (MBsearch(partName))   // from MessageBox     // not sure it will print in alphabetical order

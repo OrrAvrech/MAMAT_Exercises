@@ -24,6 +24,7 @@ public:
 	void addConv(MySharedPtr<Conversation> convPtr);
 };
 
+// Exception Classes
 class newConv   // will be thrown as exception in new conversation
 {
 public : 
@@ -38,7 +39,7 @@ public:
 	ActiveObj activeConv_;
 };
 
-class MBsearch
+class MBsearch	// will be thrown as exception in MessageBox search
 {
 public:
 	MBsearch(string partName) : partName_(partName) {}

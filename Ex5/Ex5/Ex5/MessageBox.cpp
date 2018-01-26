@@ -39,18 +39,18 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	if (cmdLineTokens[0] == "New" && cmdLineTokens.size() > 1) // New
 	{
-		set<string> conv_users;
+		set<string> conv_participants;
 		// checking for duplicates and making the chatusers list
 		for (auto itr = cmdLineTokens.begin() + 1; itr != cmdLineTokens.end(); ++itr)
 		{
-			if (conv_users.insert(*itr).second == false)
+			if (conv_participants.insert(*itr).second == false)
 			{
 				// Element already exists
 				cout << CONVERSATION_FAIL_USER_REPETITION << endl;
 				return;
 			}
 		}
-		throw newConv(conv_users);
+		throw newConv(conv_participants);
 	}
 	else if (cmdLineTokens[0] == "Open" && cmdLineTokens.size() == 2) // Open
 	{
@@ -67,7 +67,8 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		}
 		list<MySharedPtr<Conversation>>::iterator list_itr;
 		list_itr = ConversationList_.begin();
-		advance(list_itr, convNum);
+		if (ConversationList_.size() > convNum)
+			advance(list_itr, convNum);
 		//convOpen conv2open((*list_itr));
 		//throw (conv2open);
 		//MySharedPtr<Conversation> convPtr_exp(*list_itr);

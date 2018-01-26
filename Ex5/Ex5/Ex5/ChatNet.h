@@ -20,7 +20,7 @@ public:
 	void Preview(string activeUsrName);
 	void Help() const;
 	void Do(string cmd);
-	User findUserByName(string NeededUsername);
+	User findUserByName(const string& NeededUsername);
 };
 
 
