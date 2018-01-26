@@ -186,7 +186,7 @@ void ChatNet::Do(string cmd)
 	//	currentUser_ = "";
 	//	/* TODO :
 	//	chatnet is the new object */ 
-	//	VrtPreview(currentUser);
+	//	Preview(currentUser_);
 	//}
 	//catch (Admin newAdmin)    //from admin
 	//{
@@ -227,7 +227,7 @@ void ChatNet::Do(string cmd)
 	//					 {
 	//						(*itr3)->removeUser(username);    //hoping it doesnt return error if it doesnt exist in the participant list
 	//					 }
-	//					if ((*itr2)->get()->getName == username)
+	//					if ((*itr2).get()->getName == username)
 	//					{
 	//						UserList_.erase(itr2);
 	//					}
