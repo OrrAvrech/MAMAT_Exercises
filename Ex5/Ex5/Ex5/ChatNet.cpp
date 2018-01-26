@@ -4,6 +4,7 @@
 #include "ChatNet.h"
 #include "MessageBox.h"
 #include "User.h"
+#include <algorithm>
 #define NO_ACTIVE_USER "No User"
 using namespace std;
 // helper functions
@@ -42,8 +43,8 @@ ChatNet::ChatNet(const string& networkName, const string& adminName, const strin
 	Admin initAdmin(adminName, adminPass);
 	currentUser_ = adminName;
 	Preview(currentUser_);
-	MySharedPtr<User> UserPtr(&initAdmin);
-	UserList_.push_back(UserPtr);
+	//MySharedPtr<User> UserPtr(&initAdmin);
+	//UserList_.push_back(UserPtr);
 	objStack_.push(this);
 }
 
@@ -164,6 +165,7 @@ void ChatNet::Do(string cmd)
 	//	vector<string> userlist;
 	//	userlist = getUserList();
 	//	bool find_flag = 0;
+	//	sort(userlist.begin(), userlist.end());
 	//	for (auto itr = userlist.begin(); itr != userlist.end(); ++itr)
 	//	{
 	//		if (find_flag == 0 && itr->find(searchAdmin) != string::npos)
@@ -208,6 +210,7 @@ void ChatNet::Do(string cmd)
 	{
 		vector<string> userlist;
 		userlist = getUserList();
+		sort(userlist.begin(), userlist.end());
 		bool find_flag = 0;
 		for (auto itr = userlist.begin(); itr != userlist.end(); ++itr)
 		{
