@@ -46,7 +46,6 @@ ChatNet::ChatNet(const string& networkName, const string& adminName, const strin
 }
 
 // Interface
-// Interface
 void ChatNet::VrtDo(string cmdLine, string activeUsrName)
 {
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);

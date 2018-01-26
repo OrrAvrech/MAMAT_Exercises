@@ -7,6 +7,13 @@
 
 using namespace std;
 
+// Constructors
+MessageBox::MessageBox() {}
+MessageBox::MessageBox(string username) : username_(username) {}
+MessageBox::MessageBox(string username, list<MySharedPtr<Conversation>> ConversationList) :
+	username_(username), ConversationList_(ConversationList) {}
+
+
 //helper function
 int stringToInt(const string s) {
 	istringstream istr(s);
@@ -21,10 +28,6 @@ bool compareByTime(MySharedPtr<Conversation> r, MySharedPtr<Conversation> l)
 	SysTime l_time = l->getTime();
 	return r_time < l_time;
 }
-
-MessageBox::MessageBox(string username, list<MySharedPtr<Conversation>> ConversationList) :
-	username_(username), ConversationList_(ConversationList) {}
-
 
 void MessageBox::addConv(MySharedPtr<Conversation> convPtr)
 {
@@ -49,8 +52,8 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 				return;
 			}
 		}
-		/*newConv newConv1(chatusers);
-		throw newConv1;*/
+		newConv newConv1(chatusers);
+		throw newConv1;
 	}
 	else if (cmdLineTokens[0] == "Open" && cmdLineTokens.size() == 2) // Open
 	{
@@ -65,11 +68,11 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 			cout << INVALID_CONVERSATION_NUMBER;
 			return;
 		}
-		/*list<MySharedPtr<Conversation>>::iterator list_itr;
+		list<MySharedPtr<Conversation>>::iterator list_itr;
 		list_itr = ConversationList_.begin();
 		advance(list_itr, convNum);
 		convOpen conv2open(*list_itr);
-		throw conv2open;*/
+		throw conv2open;
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete
 	{
@@ -93,8 +96,11 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		ConversationList_.remove(*list_itr);*/
 		
 		// ********************** //
-
-
+		list<MySharedPtr<Conversation>>::iterator list_itr_Del;
+		list_itr_Del = ConversationList_.begin();
+		advance(list_itr_Del, convNum);
+		(*list_itr_Del)->removeUser(activeUsrName);
+		ConversationList_.erase(list_itr_Del);
 	}
 	else if (cmdLineTokens[0] == "Search" && cmdLineTokens.size() == 2) // Search
 	{
