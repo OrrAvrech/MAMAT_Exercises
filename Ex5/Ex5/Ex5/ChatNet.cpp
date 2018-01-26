@@ -36,7 +36,9 @@ User ChatNet::findUserByName(string NeededUsername) // assuming the user exsist 
 ChatNet::ChatNet(const string& networkName, const string& adminName, const string& adminPass)
 {
 	networkName_ = networkName;
-	Admin initAdmin(adminName, adminPass);
+	//Admin initAdmin(adminName, adminPass);
+	MySharedPtr<User> pInitAdmin(new Admin(adminName, adminPass));
+	UserList_.push_back(pInitAdmin);
 	currentUser_ = adminName;
 	Preview(currentUser_);
 	objStack_.push(this);
