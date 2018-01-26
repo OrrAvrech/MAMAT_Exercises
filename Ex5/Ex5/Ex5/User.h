@@ -29,6 +29,10 @@ protected:
 	bool adminFlag;
 };
 
+// Exception Classes
+class UserLogOut {
+};
+
 // ------------------------------- Admin ------------------------------- //
 class Admin : public User {
 public:

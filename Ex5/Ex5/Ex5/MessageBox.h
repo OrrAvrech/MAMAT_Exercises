@@ -25,25 +25,26 @@ public:
 };
 
 
-class newConv   // will be thrown as exception in new conversation
-{
-public : 
-	set<string> userList;
-	newConv(set<string> userList)
-	{
-		this->userList = userList;
-	}
-};
+//class newConv   // will be thrown as exception in new conversation
+//{
+//public : 
+//	set<string> userList;
+//	newConv(set<string> userList)
+//	{
+//		this->userList = userList;
+//	}
+//};
+//
+//class convOpen   // will be thrown as exception in conversation open
+//{
+//public:
+//	MySharedPtr<Conversation> convPtr;
+//	convOpen(MySharedPtr<Conversation> convPtr)
+//	{
+//		this->convPtr = convPtr;
+//	}
+//};
 
-class convOpen   // will be thrown as exception in conversation open
-{
-public:
-	MySharedPtr<Conversation> convPtr;
-	convOpen(MySharedPtr<Conversation> convPtr)
-	{
-		this->convPtr = convPtr;
-	}
-};
 
 #endif
 
