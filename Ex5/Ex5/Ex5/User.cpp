@@ -57,9 +57,9 @@ void User::Preview(string activeUsrName)
 	auto name_ = activeUsrName;
 	cout << USER_PREVIEW_PART1 << endl;
 	if (isNewMessages(msgBox_, activeUsrName))
-		cout << USER_PREVIEW_PART2_NEW_MESSAGES << endl;
+		cout << USER_PREVIEW_PART2_NEW_MESSAGES;
 	else
-		cout << USER_PREVIEW_PART2_NO_MESSAGES << endl;
+		cout << USER_PREVIEW_PART2_NO_MESSAGES;
 }
 
 void User::Help() const

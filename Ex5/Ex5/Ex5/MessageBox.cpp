@@ -102,8 +102,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 	}
 	else if (cmdLineTokens[0] == "Back") // Back
 	{
-		string MessageBox_back = "MessageBox_back";
-		throw MessageBox_back;
+		throw BackMessageBox();
 	}
 	else // INVALID_INPUT
 		cout << INVALID_INPUT;

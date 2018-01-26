@@ -46,5 +46,8 @@ public:
 	string partName_;
 };
 
+class BackMessageBox {
+};
+
 #endif
 

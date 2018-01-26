@@ -280,6 +280,12 @@ void ChatNet::Do(string cmd)
 		convOpen(activeConv).activeConv_.Preview(currentUser_);
 	}
 
+	catch (BackMessageBox) // from MessageBox
+	{
+		objStack_.pop();
+		objStack_.top().Preview(currentUser_);
+	}
+
 	catch (ActiveObj activeMsgBox) // from User
 	{
 		//MySharedPtr<MessageBox> msgBox_ptr_cpy(new MessageBox);
@@ -298,8 +304,7 @@ void ChatNet::Do(string cmd)
 
 	catch (BackSignal)   // from ChatNet
 	{
-		/* TODO :
-		exit Chat  */
+		throw BackSignal();
 	}
 	//// more catch phrases
 }
