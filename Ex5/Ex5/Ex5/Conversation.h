@@ -39,7 +39,7 @@ public:
 	void removeUser(string user); // TODO : remove user from participants
 	bool IsRead(string participant) const;
 	void DisplayParticipants(); //TODO : print participants list.
-	
+	SysTime getTime() { return lastTime_; }
 
 private:
 	set<string> participants_; // participants set contains a string as user name (not User class)

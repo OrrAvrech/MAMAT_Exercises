@@ -21,20 +21,28 @@ public:
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Preview(string activeUsrName);
 	void Help() const;
+	void addConv(MySharedPtr<Conversation> convPtr);
 };
 
 class newConv   // will be thrown as exception in new conversation
 {
-	set<string> userList_;
 public : 
 	newConv(set<string> userList) : userList_(userList) {}
+	set<string> userList_;
 };
 
 class convOpen   // will be thrown as exception in conversation open
 {
-	MySharedPtr<Conversation> pConv_;
 public:
-	convOpen(MySharedPtr<Conversation> pConv) : pConv_(pConv) {}
+	convOpen(ActiveObj activeConv) : activeConv_(activeConv) {}
+	ActiveObj activeConv_;
+};
+
+class MBsearch
+{
+public:
+	MBsearch(string partName) : partName_(partName) {}
+	string partName_;
 };
 
 #endif

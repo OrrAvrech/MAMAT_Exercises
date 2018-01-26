@@ -38,7 +38,11 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 	if (cmdLineTokens[0] == "Messages" && cmdLineTokens.size() == 1) // Messages
 	{
 		msgBox_.username_ = activeUsrName;
-		throw (this->msgBox_);
+		//throw (this->msgBox_);
+		//MySharedPtr<MessageBox> msgBox_ptr(&msgBox_);
+		//MySharedPtr<MessageBox> msgBox_ptr_exp(msgBox_ptr);
+		ActiveObj activeMsgBox(&msgBox_);
+		throw (activeMsgBox);
 	}
 	else if (cmdLineTokens[0] == "Logout" && cmdLineTokens.size() == 1) // Logout
 	{

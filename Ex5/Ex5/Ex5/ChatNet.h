@@ -15,12 +15,12 @@ class ChatNet : public ObjectInterface
 	list<MySharedPtr<User>> UserList_;
 public:
 	ChatNet(const string& networkName, const string& adminName, const string& adminPass);
-	//vector<string> getUserList();
+	vector<string> getUserList();
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Preview(string activeUsrName);
 	void Help() const;
 	void Do(string cmd);
-	//User findUserByName(string NeededUsername);
+	User findUserByName(string NeededUsername);
 };
 
 

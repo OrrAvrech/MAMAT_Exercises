@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 #include "Conversation.h"
 #include "ChatNet.h"
 #include "MessageBox.h"
@@ -9,32 +10,27 @@
 using namespace std;
 
 // helper functions
-//vector<string> ChatNet::getUserList()
-//{
-//	User user;
-//	vector<string> StringV;
-//	string userName;
-//	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
-//	{
-//		user = *(itr->ptr);
-//		userName = user.getName();
-//		StringV.push_back(userName);
-//	}
-//	return StringV;
-//}
+vector<string> ChatNet::getUserList()
+{
+	User user;
+	vector<string> StringV;
+	string userName;
+	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+		StringV.push_back((*itr).get()->getName());
+	return StringV;
+}
 
-//User ChatNet::findUserByName(string NeededUsername) // assuming the user exsist in the userlist
-//{
-//	User user;
-//	string userName;
-//	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
-//	{
-//		user = *(itr->ptr);
-//		userName = user.getName();
-//		if (userName == NeededUsername)
-//			return user;
-//	}
-//}
+User ChatNet::findUserByName(string NeededUsername) // assuming the user exsist in the userlist
+{
+	User user;
+	string userName;
+	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+	{
+		userName = (*itr).get()->getName();
+		if (userName == NeededUsername)
+			return user;
+	}
+}
 
 // Constructor
 ChatNet::ChatNet(const string& networkName, const string& adminName, const string& adminPass)
@@ -188,17 +184,87 @@ void ChatNet::Do(string cmd)
 	//	c
 	//}
 
+	catch (newConv(chat_users)) // from MessageBox
+	{
+		newConv newConv1 = newConv(chat_users);
+		vector<string>  userslist;
+		userslist = getUserList();
+		set<string> chatusers = newConv1.userList_;
+		vector<string>::iterator itr2;
+		//checking if all users exsist in the ChatNet
+		bool find_flag;
+		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
+		{
+			find_flag = 0;
+			for (itr2 = userslist.begin() + 1; itr2 < userslist.end(); itr2++)
+			{
+				if (*itr == *itr2)
+					find_flag = 1;
+			}
+			if (!find_flag)
+			{
+				cout << CONVERSATION_FAIL_NO_USER;
+				return;
+			}
+		}
+		chatusers.insert(currentUser_);
+		map<string, ConversationStatus> read_map;
+		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
+		{
+			read_map[*itr] = READ;
+		}
+		Conversation new_conversation(chatusers, read_map, chrono::system_clock::now());
+		MySharedPtr<Conversation> ptr1(&new_conversation);
+		User user;
+		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
+		{
+			user = findUserByName(*itr);
+			MySharedPtr<Conversation> convPtr(ptr1); // not sure it will realy make a new ptr each run and update counter
+			user.addConv2msgBox(convPtr);
+		}
+	}
+
+	catch (MBsearch(partName))   // from MessageBox     // not sure it will print in alphabetical order
+	{
+		const string substr = MBsearch(partName).partName_;
+		vector<string> userlist;
+		userlist = getUserList();
+		sort(userlist.begin(), userlist.end());
+		bool find_flag = 0;
+		for (auto itr = userlist.begin(); itr != userlist.end(); ++itr)
+		{
+			if (find_flag == 0 && itr->find(substr) != string::npos)
+			{
+				find_flag = 1;
+				cout << SEARCH_FOUND_TITLE;
+				cout << *itr << endl;
+			}
+			else if (itr->find(substr) != string::npos)
+				cout << *itr << endl;
+		}
+		if (find_flag == 0)
+			cout << SEARCH_NOT_FOUND_TITLE;
+	}
+
+	catch (convOpen(activeConv))  // from MessageBox
+	{
+		objStack_.push(convOpen(activeConv).activeConv_);
+		convOpen(activeConv).activeConv_.Preview(currentUser_);
+	}
+
 	catch (BackSignal)   // from ChatNet
 	{
 		/* TODO :
 		exit Chat  */
 	}
 
-	catch (MessageBox msgBox) // from User
+	catch (ActiveObj activeMsgBox) // from User
 	{
-		ActiveObj activeMsgBox(&msgBox);
+		//MySharedPtr<MessageBox> msgBox_ptr_cpy(new MessageBox);
+		//msgBox_ptr_cpy = msgBox_ptr; // copy Ctor
+		//ActiveObj activeMsgBox(&msgBox);
 		objStack_.push(activeMsgBox);
-		msgBox.Preview(currentUser_);
+		activeMsgBox.Preview(currentUser_);
 	}
 
 	catch (UserLogOut) // from User

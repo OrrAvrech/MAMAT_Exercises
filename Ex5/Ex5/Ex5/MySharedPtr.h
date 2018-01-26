@@ -35,10 +35,13 @@ public:
 	T* operator->() { return ptr_; } // returning a pointer to T --> return by address
 	MySharedPtr<T>& operator=(const MySharedPtr<T>& pNew)
 	{   // passing a read-only class MySharedPtr --> pass by reference
-		ptr_ = pNew.ptr_;
-		counter_ = pNew.counter_;
-		(*counter_)++;
-		return *this;
+		if (counter_ != nullptr)
+		{
+			ptr_ = pNew.ptr_;
+			counter_ = pNew.counter_;
+			(*counter_)++;
+			return *this;
+		}
 		// returning a class MySharedPtr --> return by reference
 	}
 	T* get() { return ptr_; }
