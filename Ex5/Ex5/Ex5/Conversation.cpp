@@ -72,10 +72,7 @@ void Conversation::VrtDo(string cmdLine, string activeUsrName)
 	}
 	else if (cmdLineTokens[0] == "Back" && cmdLineTokens.size() == 1) // Back
 	{
-		throw "Run MessageBox Preview";
-		/* Deal with this exception in ChatNet:
-		 try: Conversation
-		 catch: MessageBox.Preview */
+		throw BackConversation();
 	}
 	else // INVALID_INPUT
 		cout << INVALID_INPUT;

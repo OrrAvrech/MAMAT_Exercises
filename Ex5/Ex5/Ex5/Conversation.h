@@ -48,4 +48,8 @@ private:
 	SysTime lastTime_;
 };
 
+// Exception Classes
+class BackConversation {
+};
+
 #endif

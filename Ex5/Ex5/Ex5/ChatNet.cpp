@@ -246,6 +246,12 @@ void ChatNet::Do(string cmd)
 		//}
 	}
 
+	catch (BackConversation) // from Conversation
+	{
+		objStack_.pop();
+		objStack_.top().Preview(currentUser_);
+	}
+
 	catch (MBsearch(partName))   // from MessageBox     // not sure it will print in alphabetical order
 	{
 		const string substr = MBsearch(partName).partName_;
@@ -274,12 +280,6 @@ void ChatNet::Do(string cmd)
 		convOpen(activeConv).activeConv_.Preview(currentUser_);
 	}
 
-	catch (BackSignal)   // from ChatNet
-	{
-		/* TODO :
-		exit Chat  */
-	}
-
 	catch (ActiveObj activeMsgBox) // from User
 	{
 		//MySharedPtr<MessageBox> msgBox_ptr_cpy(new MessageBox);
@@ -296,6 +296,11 @@ void ChatNet::Do(string cmd)
 		objStack_.top().Preview(currentUser_);
 	}
 
+	catch (BackSignal)   // from ChatNet
+	{
+		/* TODO :
+		exit Chat  */
+	}
 	//// more catch phrases
 }
 
