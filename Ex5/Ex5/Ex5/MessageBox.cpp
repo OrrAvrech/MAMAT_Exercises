@@ -71,8 +71,8 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		list<MySharedPtr<Conversation>>::iterator list_itr;
 		list_itr = ConversationList_.begin();
 		advance(list_itr, convNum);
-		convOpen conv2open(*list_itr);
-		throw conv2open;
+		MySharedPtr<Conversation> convPtr_exp(*list_itr);
+		throw (convPtr_exp);
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete
 	{

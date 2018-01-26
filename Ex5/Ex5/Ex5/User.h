@@ -29,6 +29,7 @@ protected:
 	bool adminFlag;
 };
 
+
 // Exception Classes
 class UserLogOut {
 };

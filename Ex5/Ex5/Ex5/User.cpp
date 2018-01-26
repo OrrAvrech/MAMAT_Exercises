@@ -31,10 +31,10 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	if (cmdLineTokens[0] == "Messages" && cmdLineTokens.size() == 1) // Messages
 	{
-		/*string user2msgBox = "User to MessageBox";
-		throw user2msgBox;*/
 		msgBox_.username_ = activeUsrName;
-		throw (this->msgBox_);
+		MySharedPtr<MessageBox> msgBox_ptr(&msgBox_);
+		MySharedPtr<MessageBox> msgBox_ptr_exp(msgBox_ptr);
+		throw (msgBox_ptr_exp);
 	}
 	else if (cmdLineTokens[0] == "Logout" && cmdLineTokens.size() == 1) // Logout
 	{
@@ -49,11 +49,11 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 void User::Preview(string activeUsrName)
 {
 	auto name_ = activeUsrName;
-	cout << USER_PREVIEW_PART1 << endl;
+	cout << USER_PREVIEW_PART1;
 	if (isNewMessages(msgBox_, activeUsrName))
-		cout << USER_PREVIEW_PART2_NEW_MESSAGES << endl;
+		cout << USER_PREVIEW_PART2_NEW_MESSAGES;
 	else
-		cout << USER_PREVIEW_PART2_NO_MESSAGES << endl;
+		cout << USER_PREVIEW_PART2_NO_MESSAGES ;
 }
 
 void User::Help() const

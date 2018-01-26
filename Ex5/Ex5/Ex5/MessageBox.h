@@ -48,17 +48,17 @@ public:
 
 class newConv   // will be thrown as exception in new conversation
 {
-	set<string> userList_;
 public:
 	newConv(set<string> userList) : userList_(userList) {}
+	set<string> userList_;
 };
 
-class convOpen   // will be thrown as exception in conversation open
-{
-	MySharedPtr<Conversation> pConv_;
-public:
-	convOpen(MySharedPtr<Conversation> pConv) : pConv_(pConv) {}
-};
+//class convopen   // will be thrown as exception in conversation open
+//{
+//	conversation conv_;
+//public:
+//	convopen(conversation conv) : conv_(conv) {}
+//};
 
 
 #endif
