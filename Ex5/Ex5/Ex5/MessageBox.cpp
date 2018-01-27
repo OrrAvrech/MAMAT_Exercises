@@ -91,7 +91,8 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		}
 		list<MySharedPtr<Conversation>>::iterator list_itr_Del;
 		list_itr_Del = ConversationList_.begin();
-		advance(list_itr_Del, convNum);
+		if (ConversationList_.size() > convNum)
+			advance(list_itr_Del, convNum);
 		(*list_itr_Del)->removeUser(activeUsrName);
 		ConversationList_.erase(list_itr_Del);
 	}

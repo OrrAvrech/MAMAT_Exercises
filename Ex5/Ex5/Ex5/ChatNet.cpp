@@ -74,6 +74,7 @@ void ChatNet::VrtDo(string cmdLine, string activeUsrName)
 		currentUser_ = (*itr)->getName();
 		ActiveObj activeUserObj((*itr).get());
 		objStack_.push(activeUserObj);
+		activeUserObj.Preview(currentUser_);
 	}
 	else if (cmdLineTokens[0] == "New" && cmdLineTokens.size() == 3) // New
 	{
@@ -109,10 +110,7 @@ void ChatNet::Do(string cmd)
 	catch (newConv(conv_participants)) // from MessageBox
 	{
 		newConv newConv1 = newConv(conv_participants);
-		//vector<string>  userslist;
-		//userslist = getUserList();
 		set<string> conv_users = newConv1.userList_;
-		//vector<string>::iterator itr2;
 		//checking if all users exsist in the ChatNet
 		bool find_flag;
 		map<string, ConversationStatus> read_map;
@@ -151,19 +149,7 @@ void ChatNet::Do(string cmd)
 				}
 			}
 		}
-		/*for (auto itr = conv_users.begin(); itr != conv_users.end(); ++itr)
-		{
-			read_map[(*itr)] = READ;
-		}*/
-		//Conversation new_conversation(conv_users, read_map, chrono::system_clock::now());
-		//User user;
-		//for (auto itr = conv_users.begin(); itr != conv_users.end(); ++itr)
-		//{
-		//	//User user = findUserByName(*itr);
-		//	//MySharedPtr<Conversation> convPtr(newConversation); // not sure it will realy make a new ptr each run and update counter
-		//	//user.addConv2msgBox(convPtr);
 
-		//}
 	}
 
 	catch (BackConversation) // from Conversation
@@ -172,7 +158,7 @@ void ChatNet::Do(string cmd)
 		objStack_.top().Preview(currentUser_);
 	}
 
-	catch (const MBsearch& PartialName)   // from MessageBox     // not sure it will print in alphabetical order
+	catch (const MBsearch& PartialName)   // from MessageBox  
 	{
 		// PartialName is a reference to the thrown class argument
 		const string substr = PartialName.partName_;
@@ -212,9 +198,6 @@ void ChatNet::Do(string cmd)
 
 	catch (ActiveObj& activeMsgBox) // from User
 	{
-		//MySharedPtr<MessageBox> msgBox_ptr_cpy(new MessageBox);
-		//msgBox_ptr_cpy = msgBox_ptr; // copy Ctor
-		//ActiveObj activeMsgBox(&msgBox);
 		objStack_.push(activeMsgBox);
 		activeMsgBox.Preview(currentUser_);
 	}
@@ -264,7 +247,7 @@ void ChatNet::Do(string cmd)
 			cout << SEARCH_NOT_FOUND_TITLE;
 	}
 
-	catch (const deleteUser& delete_user)    //from admin
+	catch (const deleteUser& delete_user)    //from Admin
 	{
 		string username = delete_user.userName_;
 		for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
@@ -285,6 +268,7 @@ void ChatNet::Do(string cmd)
 	{
 		throw BackSignal();
 	}
+	
 	//// more catch phrases
 }
 
