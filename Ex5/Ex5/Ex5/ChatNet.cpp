@@ -15,7 +15,8 @@ vector<string> ChatNet::getUserList()
 	User user;
 	vector<string> StringV;
 	string userName;
-	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+	list<MySharedPtr<User> >::iterator itr;
+	for (itr = UserList_.begin(); itr != UserList_.end(); ++itr)
 		StringV.push_back((*itr).get()->getName());
 	return StringV;
 }
@@ -24,12 +25,14 @@ vector<string> ChatNet::getUserList()
 //{
 //	User user;
 //	string userName;
-//	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+//  list<MySharedPtr<User> >::iterator itr;
+//	for (itr = UserList_.begin(); itr != UserList_.end(); ++itr)
 //	{
 //		userName = (*itr).get()->getName();
 //		if (userName == NeededUsername)
 //			return user;
 //	}
+//	return user; // if it comes to here its an ERROR and you should check the user exsistance before.
 //}
 
 // Constructor
@@ -50,7 +53,7 @@ void ChatNet::VrtDo(string cmdLine, string activeUsrName)
 	if (cmdLineTokens[0] == "Login" && cmdLineTokens.size() == 3) // Login
 	{
 		bool find_flag = 0;
-		list<MySharedPtr<User>>::iterator itr;
+		list<MySharedPtr<User> >::iterator itr;
 		for (itr = UserList_.begin(); itr != UserList_.end(); ++itr)
 		{
 			if ((*itr)->getName() == cmdLineTokens[1])
@@ -77,7 +80,7 @@ void ChatNet::VrtDo(string cmdLine, string activeUsrName)
 	}
 	else if (cmdLineTokens[0] == "New" && cmdLineTokens.size() == 3) // New
 	{
-		list<MySharedPtr<User>>::iterator itr;
+		list<MySharedPtr<User> >::iterator itr;
 		for (itr = UserList_.begin(); itr != UserList_.end(); ++itr)
 		{
 			if ((*itr)->getName() == cmdLineTokens[1])
@@ -113,10 +116,12 @@ void ChatNet::Do(string cmd)
 		//checking if all users exsist in the ChatNet
 		bool find_flag;
 		map<string, ConversationStatus> read_map;
-		for (auto itr1 = conv_users.begin(); itr1 != conv_users.end(); ++itr1)
+		set<string>::iterator itr1;
+		list<MySharedPtr<User> >::iterator itr2;
+		for (itr1 = conv_users.begin(); itr1 != conv_users.end(); ++itr1)
 		{
 			find_flag = 0;
-			for (auto itr2 = UserList_.begin(); itr2 != UserList_.end(); ++itr2)
+			for (itr2 = UserList_.begin(); itr2 != UserList_.end(); ++itr2)
 			{
 				if ((*itr1) == (*itr2).get()->getName())
 				{
@@ -136,9 +141,9 @@ void ChatNet::Do(string cmd)
 			conv_users.insert(currentUser_);
 			read_map[currentUser_] = READ;
 			MySharedPtr<Conversation> newConversation(new Conversation(conv_users, read_map, chrono::system_clock::now()));
-			for (auto itr1 = conv_users.begin(); itr1 != conv_users.end(); ++itr1)
+			for (itr1 = conv_users.begin(); itr1 != conv_users.end(); ++itr1)
 			{
-				for (auto itr2 = UserList_.begin(); itr2 != UserList_.end(); ++itr2)
+				for (itr2 = UserList_.begin(); itr2 != UserList_.end(); ++itr2)
 				{
 					if ((*itr1) == (*itr2).get()->getName())
 					{
@@ -165,7 +170,8 @@ void ChatNet::Do(string cmd)
 		userlist = getUserList();
 		sort(userlist.begin(), userlist.end());
 		bool find_flag = 0;
-		for (auto itr = userlist.begin(); itr != userlist.end(); ++itr)
+		vector<string>::iterator itr;
+		for (itr = userlist.begin(); itr != userlist.end(); ++itr)
 		{
 			if (find_flag == 0 && itr->find(substr) != string::npos)
 			{
@@ -212,7 +218,8 @@ void ChatNet::Do(string cmd)
 	{
 		string adminName = new_admin.adminName_;
 		string adminPass = new_admin.adminPass_;
-		for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+		list<MySharedPtr<User> >::iterator itr;
+		for (itr = UserList_.begin(); itr != UserList_.end(); ++itr)
 		{
 			if ((*itr)->getName() == adminName)
 			{
@@ -231,7 +238,8 @@ void ChatNet::Do(string cmd)
 		userlist = getUserList();
 		sort(userlist.begin(), userlist.end());
 		bool find_flag = 0;
-		for (auto itr = userlist.begin(); itr != userlist.end(); ++itr)
+		vector<string>::iterator itr;
+		for (itr = userlist.begin(); itr != userlist.end(); ++itr)
 		{
 			if (find_flag == 0 && itr->find(substr) != string::npos)
 			{
@@ -249,7 +257,8 @@ void ChatNet::Do(string cmd)
 	catch (const deleteUser& delete_user)    //from Admin
 	{
 		string username = delete_user.userName_;
-		for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+		list<MySharedPtr<User> >::iterator itr;
+		for (itr = UserList_.begin(); itr != UserList_.end(); ++itr)
 		{
 			if (itr->get()->getName() == username)
 			{
@@ -261,6 +270,18 @@ void ChatNet::Do(string cmd)
 			}
 		}
 		cout << USER_DOES_NOT_EXIST;
+	}
+
+	catch (SortConv)
+	{
+		string userName;
+		list<MySharedPtr<User> >::iterator itr;
+		for (itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+		{
+			userName = (*itr).get()->getName();
+			if (userName == currentUser_)
+				itr->get()->getMsgBox()->sortConvList() ;
+		}
 	}
 
 	catch (BackSignal)   // from ChatNet

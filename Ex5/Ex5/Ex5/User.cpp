@@ -59,7 +59,7 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 void User::Preview(string activeUsrName)
 {
 	auto name_ = activeUsrName;
-	cout << USER_PREVIEW_PART1 << endl;
+	cout << USER_PREVIEW_PART1;
 	if (isNewMessages(msgBox_, activeUsrName))
 		cout << USER_PREVIEW_PART2_NEW_MESSAGES;
 	else

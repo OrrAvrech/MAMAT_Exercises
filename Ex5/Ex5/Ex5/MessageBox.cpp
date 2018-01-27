@@ -26,12 +26,16 @@ bool compareByTime(MySharedPtr<Conversation> r, MySharedPtr<Conversation> l)
 {
 	SysTime r_time = r->getTime();
 	SysTime l_time = l->getTime();
-	return r_time < l_time;
+	return r_time > l_time;
+}
+void MessageBox::sortConvList()
+{ 
+	ConversationList_.sort(compareByTime);
 }
 
 void MessageBox::addConv(MySharedPtr<Conversation> convPtr)
 {
-	ConversationList_.push_back(convPtr);
+	ConversationList_.push_front(convPtr);
 	ConversationList_.sort(compareByTime);
 }
 
@@ -47,7 +51,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 			if (conv_participants.insert(*itr).second == false)
 			{
 				// Element already exists
-				cout << CONVERSATION_FAIL_USER_REPETITION << endl;
+				cout << CONVERSATION_FAIL_USER_REPETITION;
 				return;
 			}
 		}
@@ -55,21 +59,21 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 	}
 	else if (cmdLineTokens[0] == "Open" && cmdLineTokens.size() == 2) // Open
 	{
+
 		if (cmdLineTokens[1].find_first_not_of("123456789") != string::npos)
 		{
 			cout << INVALID_CONVERSATION_NUMBER;
 			return;
 		}
 		int convNum = stringToInt(cmdLineTokens[1]);
-		if (convNum<1 || convNum > ConversationList_.size())
+		if (convNum<1 || convNum >(int) ConversationList_.size())
 		{
 			cout << INVALID_CONVERSATION_NUMBER;
 			return;
 		}
 		list<MySharedPtr<Conversation>>::iterator list_itr;
 		list_itr = ConversationList_.begin();
-		if (ConversationList_.size() > convNum)
-			advance(list_itr, convNum);
+		advance(list_itr, convNum - 1);
 		throw convOpen((*list_itr).get()); // pass anonymous object to ChatNet catch
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete
@@ -80,7 +84,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 			return;
 		}
 		int convNum = stringToInt(cmdLineTokens[1]);
-		if (convNum<1 || convNum > ConversationList_.size())
+		if (convNum<1 || convNum >(int) ConversationList_.size())
 		{
 			cout << INVALID_CONVERSATION_NUMBER;
 			return;
@@ -88,7 +92,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 
 		list<MySharedPtr<Conversation>>::iterator list_itr_Del;
 		list_itr_Del = ConversationList_.begin();
-		if (ConversationList_.size() > convNum)
+		if ((int)ConversationList_.size() > convNum)
 			advance(list_itr_Del, convNum);
 		(*list_itr_Del)->removeUser(activeUsrName);
 		ConversationList_.erase(list_itr_Del);
@@ -105,8 +109,6 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 	else // INVALID_INPUT
 		cout << INVALID_INPUT;
 }
-
-
 void MessageBox::Preview(string activeUsrName)
 {
 	int count = 1;

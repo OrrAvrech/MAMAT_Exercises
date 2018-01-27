@@ -13,15 +13,16 @@ class MessageBox : public ObjectInterface
 	friend class User;
 private:
 	string username_;
-	list<MySharedPtr<Conversation>> ConversationList_;    
+	list<MySharedPtr<Conversation> > ConversationList_;    
 public:
 	MessageBox();
 	MessageBox(string username);
-	MessageBox(string username, list<MySharedPtr<Conversation>> ConversationList);
+	MessageBox(string username, list<MySharedPtr<Conversation> > ConversationList);
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Preview(string activeUsrName);
 	void Help() const;
 	void addConv(MySharedPtr<Conversation> convPtr);
+	void sortConvList();
 };
 
 // Exception Classes

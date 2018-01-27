@@ -31,6 +31,13 @@ class Conversation : public ObjectInterface {
 public:
 	// Constructor
 	Conversation(set<string> participants, map<string, ConversationStatus> readStateList, SysTime lastTime);
+	Conversation(const Conversation& pConv)
+	{
+		participants_ = pConv.participants_;
+		messageList_ = pConv.messageList_;
+		readStateList_ = pConv.readStateList_;
+		lastTime_ = pConv.lastTime_;
+	}
 	Conversation() = default;
 	// Methods
 	void Preview(string activeUsrName);
@@ -40,10 +47,10 @@ public:
 	bool IsRead(string participant) const;
 	void DisplayParticipants(); // print participants list.
 	SysTime getTime() { return lastTime_; }
-
+	
 private:
 	set<string> participants_; // participants set contains a string as user name (not User class)
-	vector<Message> messageList_ = vector<Message>();
+	vector<Message> messageList_;
 	map<string, ConversationStatus> readStateList_;
 	SysTime lastTime_;
 };
@@ -51,5 +58,6 @@ private:
 // Exception Classes
 class BackConversation {
 };
-
+class SortConv {
+};
 #endif

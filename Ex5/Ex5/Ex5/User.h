@@ -21,6 +21,7 @@ public:
 	string getPassword();
 	void addConv2msgBox(MySharedPtr<Conversation> convPtr) { msgBox_.addConv(convPtr); }
 	virtual bool del(string username);
+	MessageBox* getMsgBox() { return &msgBox_; }
 
 protected:
 	string userName_;
