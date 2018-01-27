@@ -69,11 +69,6 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		list_itr = ConversationList_.begin();
 		if (ConversationList_.size() > convNum)
 			advance(list_itr, convNum);
-		//convOpen conv2open((*list_itr));
-		//throw (conv2open);
-		//MySharedPtr<Conversation> convPtr_exp(*list_itr);
-		//throw (convPtr_exp);
-		//throw((*list_itr).get());
 		throw convOpen((*list_itr).get()); // pass anonymous object to ChatNet catch
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete

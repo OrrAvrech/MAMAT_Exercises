@@ -36,7 +36,6 @@ vector<string> ChatNet::getUserList()
 ChatNet::ChatNet(const string& networkName, const string& adminName, const string& adminPass)
 {
 	networkName_ = networkName;
-	//Admin initAdmin(adminName, adminPass);
 	MySharedPtr<User> pInitAdmin(new Admin(adminName, adminPass));
 	UserList_.push_back(pInitAdmin);
 	currentUser_ = adminName;
@@ -269,7 +268,6 @@ void ChatNet::Do(string cmd)
 		throw BackSignal();
 	}
 	
-	//// more catch phrases
 }
 
 
