@@ -17,18 +17,16 @@ public:
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Help() const;
 	bool isNewMessages(MessageBox msgBox, string userName) const;
-	string getName() { return userName_; }
-	string getPassword() { return userPass_; }
+	string getName(); 
+	string getPassword();
 	void addConv2msgBox(MySharedPtr<Conversation> convPtr) { msgBox_.addConv(convPtr); }
-	bool isAdmin() { return adminFlag; }
-	MessageBox* getMsgBox() { return &msgBox_ ; }
+	virtual bool del(string username);
+
 protected:
 	string userName_;
 	string userPass_;
 	MessageBox msgBox_;
-	bool adminFlag;
 };
-
 
 // Exception Classes
 class UserLogOut {
@@ -40,12 +38,38 @@ public:
 	// Constructor
 	Admin(string userName, string userPass, MessageBox msgBox);
 	Admin(string userName, string userPass);
+
 	// Methods
 	// Preview() is inherited from User
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Help() const;
+	virtual bool del(string username);
 };
 
+// Exception Classes
+class newAdmin   // new admin
+{
+public:
+	newAdmin(string adminName, string adminPass) : adminName_(adminName), adminPass_(adminPass) {}
+	newAdmin() = default;
+	string adminName_;
+	string adminPass_;
+};
+
+class searchAdmin	// search admin
+{
+public:
+	searchAdmin(string partName) : partName_(partName) {}
+	searchAdmin() = default;
+	string partName_;
+};
+
+class deleteUser	// delete admin
+{
+public:
+	deleteUser(string userName) : userName_(userName) {}
+	deleteUser() = default;
+	string userName_;
+};
 
 #endif
-

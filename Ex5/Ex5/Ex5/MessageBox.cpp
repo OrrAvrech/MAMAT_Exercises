@@ -35,31 +35,29 @@ void MessageBox::addConv(MySharedPtr<Conversation> convPtr)
 	ConversationList_.sort(compareByTime);
 }
 
-
 void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 {
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
-	//vector<string>::iterator itr, itr2;
 	if (cmdLineTokens[0] == "New" && cmdLineTokens.size() > 1) // New
 	{
-		set<string> chatusers;
+		set<string> conv_participants;
 		// checking for duplicates and making the chatusers list
-		for (auto itr = cmdLineTokens.begin() + 1; itr != cmdLineTokens.end(); itr++)
+		for (auto itr = cmdLineTokens.begin() + 1; itr != cmdLineTokens.end(); ++itr)
 		{
-			if (chatusers.insert(*itr).second == false)
+			if (conv_participants.insert(*itr).second == false)
 			{
-				cout << CONVERSATION_FAIL_USER_REPETITION;
+				// Element already exists
+				cout << CONVERSATION_FAIL_USER_REPETITION << endl;
 				return;
 			}
 		}
-		newConv newConv1(chatusers);
-		throw newConv1;
+		throw newConv(conv_participants);
 	}
 	else if (cmdLineTokens[0] == "Open" && cmdLineTokens.size() == 2) // Open
 	{
 		if (cmdLineTokens[1].find_first_not_of("123456789") != string::npos)
 		{
-			cout << INVALID_CONVERSATION_NUMBER ;
+			cout << INVALID_CONVERSATION_NUMBER;
 			return;
 		}
 		int convNum = stringToInt(cmdLineTokens[1]);
@@ -70,9 +68,9 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 		}
 		list<MySharedPtr<Conversation>>::iterator list_itr;
 		list_itr = ConversationList_.begin();
-		advance(list_itr, convNum);
-		MySharedPtr<Conversation> convPtr_exp(*list_itr);
-		throw (convPtr_exp);
+		if (ConversationList_.size() > convNum)
+			advance(list_itr, convNum);
+		throw convOpen((*list_itr).get()); // pass anonymous object to ChatNet catch
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete
 	{
@@ -87,30 +85,22 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 			cout << INVALID_CONVERSATION_NUMBER;
 			return;
 		}
-		// Had a compilation error //
 
-		/*list<MySharedPtr<Conversation>>::iterator list_itr;
-		list_itr = ConversationList_.begin();
-		advance(list_itr, convNum);
-		list_itr->get()->removeUser(activeUsrName);
-		ConversationList_.remove(*list_itr);*/
-		
-		// ********************** //
 		list<MySharedPtr<Conversation>>::iterator list_itr_Del;
 		list_itr_Del = ConversationList_.begin();
-		advance(list_itr_Del, convNum);
+		if (ConversationList_.size() > convNum)
+			advance(list_itr_Del, convNum);
 		(*list_itr_Del)->removeUser(activeUsrName);
 		ConversationList_.erase(list_itr_Del);
 	}
 	else if (cmdLineTokens[0] == "Search" && cmdLineTokens.size() == 2) // Search
 	{
-		string substr = cmdLineTokens[1];
-		throw substr;
+		string partName = cmdLineTokens[1];
+		throw (MBsearch(partName));
 	}
 	else if (cmdLineTokens[0] == "Back") // Back
 	{
-		char const* MessageBox_back = "MessageBox_back";
-		throw MessageBox_back;
+		throw BackMessageBox();
 	}
 	else // INVALID_INPUT
 		cout << INVALID_INPUT;
@@ -128,10 +118,10 @@ void MessageBox::Preview(string activeUsrName)
 	for (itr = ConversationList_.begin(); itr != ConversationList_.end(); ++itr)
 	{
 		cout << count << ") ";
-		if (!(itr->get()->IsRead(activeUsrName)))
+		if (!((*itr)->IsRead(activeUsrName)))
 			cout << "(UNREAD) ";
 		cout << "Participants: ";
-		(*itr)->DisplayParticipants();
+		(*itr)->DisplayParticipants();   
 		++count;
 	}
 }

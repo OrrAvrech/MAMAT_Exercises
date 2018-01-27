@@ -4,8 +4,6 @@
 #include "ChatNet.h"
 using namespace std;
 
-
-
 int main() {
 	string line;
 	ChatNet MamatChat("MamatChat", "Admin", "1234");
@@ -30,6 +28,5 @@ int main() {
 			return 1;
 		}
 	}
-
 	return 0;
 };

@@ -19,8 +19,8 @@ public:
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Preview(string activeUsrName);
 	void Help() const;
-	User findUserByName(string NeededUsername);
 	void Do(string cmd);
+	//User findUserByName(const string& NeededUsername);
 };
 
 

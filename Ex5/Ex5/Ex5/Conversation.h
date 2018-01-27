@@ -36,9 +36,9 @@ public:
 	void Preview(string activeUsrName);
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Help() const;
-	void removeUser(string user); 
+	void removeUser(string user); // remove user from participants
 	bool IsRead(string participant) const;
-	void DisplayParticipants(); 
+	void DisplayParticipants(); // print participants list.
 	SysTime getTime() { return lastTime_; }
 
 private:
@@ -46,6 +46,10 @@ private:
 	vector<Message> messageList_ = vector<Message>();
 	map<string, ConversationStatus> readStateList_;
 	SysTime lastTime_;
+};
+
+// Exception Classes
+class BackConversation {
 };
 
 #endif

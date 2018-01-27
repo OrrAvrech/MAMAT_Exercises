@@ -1,0 +1,110 @@
+Welcome to MamatChat.
+Invalid Input! Type Help for possible Inputs
+Invalid Input! Type Help for possible Inputs
+Login <user name> <password>
+New <user name> <password>
+Exit
+Login <user name> <password>
+New <user name> <password>
+Exit
+Wrong password
+Wrong password
+Hi a, you have no new messages.
+No conversations
+Invalid conversation number
+Participants: Admin (read), a (read), b (read)
+Conversations:
+1) Participants: Admin, a, b
+Hi a, you have no new messages.
+Welcome to MamatChat.
+Hi Admin, you have new messages.
+New <admin name> <admin password>
+Delete <user name>
+Search <partial user name>
+Messages
+Logout
+Users matching the pattern are:
+Admin
+Admin2
+Welcome to MamatChat.
+Hi Admin2, you have no new messages.
+No conversations
+Hi Admin2, you have no new messages.
+Welcome to MamatChat.
+Hi Admin, you have new messages.
+Conversations:
+1) (UNREAD) Participants: Admin, a
+Participants: Admin (read), a (read)
+a : new message //..%3$!@$^%*!@# .awekak
+Conversations:
+1) Participants: Admin, a
+Hi Admin, you have no new messages.
+Conversations:
+1) Participants: Admin
+Participants: Admin (read)
+a : new message //..%3$!@$^%*!@# .awekak
+Conversations:
+1) Participants: Admin
+New <user names separated by spaces>
+Open <conversation number>
+Delete <conversation number>
+Search <partial user name>
+Back
+Hi Admin, you have no new messages.
+No conversations
+Hi Admin, you have no new messages.
+No conversations
+Failed to create conversation - User repetitions found in participants list
+Failed to create conversation - some users don't exist
+Hi Admin, you have no new messages.
+Conversations:
+1) Participants: Admin, Admin2
+Invalid conversation number
+Participants: Admin (read), Admin2 (read)
+Conversations:
+1) Participants: Admin, Admin2
+Participants: Admin (read), Admin2 (unread)
+Admin : Hi admin2, How you doin'?
+Conversations:
+1) Participants: Admin, Admin2
+Hi Admin, you have no new messages.
+Welcome to MamatChat.
+Hi Admin2, you have new messages.
+Conversations:
+1) (UNREAD) Participants: Admin, Admin2
+Hi Admin2, you have new messages.
+Conversations:
+1) Participants: Admin, Admin2
+2) (UNREAD) Participants: Admin, Admin2
+Participants: Admin (read), Admin2 (read)
+Conversations:
+1) Participants: Admin, Admin2
+2) (UNREAD) Participants: Admin, Admin2
+Participants: Admin (read), Admin2 (read)
+Admin : Hi admin2, How you doin'?
+Conversations:
+1) Participants: Admin, Admin2
+2) Participants: Admin, Admin2
+Hi Admin2, you have no new messages.
+Conversations:
+1) Participants: Admin, Admin2
+Hi Admin2, you have no new messages.
+Welcome to MamatChat.
+Hi Admin, you have new messages.
+Users matching the pattern are:
+Admin
+Admin2
+No user matches the pattern
+Conversations:
+1) (UNREAD) Participants: Admin, Admin2
+2) Participants: Admin
+Hi Admin, you have new messages.
+Conversations:
+1) (UNREAD) Participants: Admin, Admin2
+Participants: Admin (read), Admin2 (read)
+Admin2 : Hi asdhaisud
+Conversations:
+1) Participants: Admin, Admin2
+Hi Admin, you have no new messages.
+Welcome to MamatChat.
+Invalid Input! Type Help for possible Inputs

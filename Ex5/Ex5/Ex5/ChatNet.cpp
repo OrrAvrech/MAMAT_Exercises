@@ -1,50 +1,45 @@
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 #include "Conversation.h"
 #include "ChatNet.h"
 #include "MessageBox.h"
 #include "User.h"
-#include <algorithm>
 #define NO_ACTIVE_USER "No User"
+
 using namespace std;
+
 // helper functions
 vector<string> ChatNet::getUserList()
 {
-	User user;   
+	User user;
 	vector<string> StringV;
 	string userName;
 	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
-	{
-		user = *(itr->get());
-		userName = user.getName();
-		StringV.push_back(userName) ;
-	}
+		StringV.push_back((*itr).get()->getName());
 	return StringV;
 }
 
-User ChatNet::findUserByName(string neededusername) // assuming the user exsist in the userlist
-{
-	User user;   
-	string username;
-	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
-	{
-		user = *(itr->get());
-		username = user.getName();
-		if (username == neededusername)
-			return user;
-	}
-	return user; //just for compilng.. shouldnt come to here
-}
+//User ChatNet::findUserByName(const string& NeededUsername) // assuming the user exsist in the userlist
+//{
+//	User user;
+//	string userName;
+//	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+//	{
+//		userName = (*itr).get()->getName();
+//		if (userName == NeededUsername)
+//			return user;
+//	}
+//}
 
 // Constructor
 ChatNet::ChatNet(const string& networkName, const string& adminName, const string& adminPass)
 {
 	networkName_ = networkName;
-	Admin initAdmin(adminName, adminPass);
+	MySharedPtr<User> pInitAdmin(new Admin(adminName, adminPass));
+	UserList_.push_back(pInitAdmin);
 	currentUser_ = adminName;
 	Preview(currentUser_);
-	//MySharedPtr<User> UserPtr(&initAdmin);
-	//UserList_.push_back(UserPtr);
 	objStack_.push(this);
 }
 
@@ -78,11 +73,12 @@ void ChatNet::VrtDo(string cmdLine, string activeUsrName)
 		currentUser_ = (*itr)->getName();
 		ActiveObj activeUserObj((*itr).get());
 		objStack_.push(activeUserObj);
-		(*itr).get()->Preview(currentUser_);
+		activeUserObj.Preview(currentUser_);
 	}
 	else if (cmdLineTokens[0] == "New" && cmdLineTokens.size() == 3) // New
 	{
-		for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+		list<MySharedPtr<User>>::iterator itr;
+		for (itr = UserList_.begin(); itr != UserList_.end(); ++itr)
 		{
 			if ((*itr)->getName() == cmdLineTokens[1])
 			{
@@ -109,105 +105,62 @@ void ChatNet::Do(string cmd)
 		// When using stack (from STL) this could like something like the following line:
 		objStack_.top().Do(cmd, currentUser_);
 	}
-	
-	//catch (Admin newAdmin)    //from admin
-	//{
-	//	string username = newAdmin.getName();
-	//	string password = newAdmin.getPassword();
-	//	vector<string> userlist = getUserList();
-	//	for (auto itr = userlist.begin(); itr != userlist.end(); ++itr)
-	//	{
-	//		if (*itr == username)
-	//		{
-	//			cout << USER_ALREADY_EXISTS;
-	//			return;
 
-	//		}
-	//		MySharedPtr<User> adminPtr(&newAdmin);
-	//		UserList_.insert(adminPtr);
-	//	}
-	//}
-	//catch (string deleteAdmin)    //from admin
-	//{
-	//	string username = deleteAdmin;
-	//	for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
-	//	{
-	//		if (itr->get()->getName() == username)
-	//		{
-	//			if (!itr->get()->isAdmin())
-	//			{
-	//				cout << REMOVE_USER_FAIL;
-	//				return;
-	//			}
-	//			else
-	//			{
-	//				for (auto itr2 = UserList_.begin(); itr2 != UserList_.end(); ++itr2)
-	//				{
-	//					MessageBox*  msgbox = itr2->get()->getMsgBox();
-	//					list<MySharedPtr<Conversation>>* convList = msgbox->getConversationList();
-	//					for (auto itr3 = (*convList).begin(); itr3 != (*convList).end(); ++itr3)
-	//					 {
-	//						(*itr3)->removeUser(username);    //hoping it doesnt return error if it doesnt exist in the participant list
-	//					 }
-	//					if ((*itr2).get()->getName == username)
-	//					{
-	//						UserList_.erase(itr2);
-	//					}
-	//				}
-	//				return;
-	//			}
-	//		}
-	//	}
-	//	cout << USER_DOES_NOT_EXIST;
-	//}
-	//catch (string searchAdmin)    //from admin
-	//{
-	//	vector<string> userlist;
-	//	userlist = getUserList();
-	//	bool find_flag = 0;
-	//	sort(userlist.begin(), userlist.end());
-	//	for (auto itr = userlist.begin(); itr != userlist.end(); ++itr)
-	//	{
-	//		if (find_flag == 0 && itr->find(searchAdmin) != string::npos)
-	//		{
-	//			find_flag = 1;
-	//			cout << SEARCH_FOUND_TITLE;
-	//			cout << *itr << endl;
-	//		}
-	//		else if (itr->find(searchAdmin) != string::npos)
-	//			cout << *itr << endl;
-	//	}
-	//	if (find_flag == 0)
-	//		cout << SEARCH_NOT_FOUND_TITLE;
-	//}
- 
-
-	//catch (MessageBox msgBox) // from User
-	//{
-	//	ActiveObj activeMsgBox(&msgBox);
-	//	objStack_.push(activeMsgBox);
-	//	msgBox.Preview(currentUser_);
-	//}
-	catch (MySharedPtr<MessageBox> msgBox_ptr) // from User
+	catch (newConv(conv_participants)) // from MessageBox
 	{
-		ActiveObj activeMsgBox(msgBox_ptr.get());
-		objStack_.push(activeMsgBox);
-		msgBox_ptr->Preview(currentUser_);
+		newConv newConv1 = newConv(conv_participants);
+		set<string> conv_users = newConv1.userList_;
+		//checking if all users exsist in the ChatNet
+		bool find_flag;
+		map<string, ConversationStatus> read_map;
+		for (auto itr1 = conv_users.begin(); itr1 != conv_users.end(); ++itr1)
+		{
+			find_flag = 0;
+			for (auto itr2 = UserList_.begin(); itr2 != UserList_.end(); ++itr2)
+			{
+				if ((*itr1) == (*itr2).get()->getName())
+				{
+					find_flag = 1;
+					read_map[(*itr1)] = READ;
+					break;
+				}
+			}
+		}
+		if (!find_flag)
+		{
+			cout << CONVERSATION_FAIL_NO_USER;
+			return;
+		}
+		else
+		{
+			conv_users.insert(currentUser_);
+			read_map[currentUser_] = READ;
+			MySharedPtr<Conversation> newConversation(new Conversation(conv_users, read_map, chrono::system_clock::now()));
+			for (auto itr1 = conv_users.begin(); itr1 != conv_users.end(); ++itr1)
+			{
+				for (auto itr2 = UserList_.begin(); itr2 != UserList_.end(); ++itr2)
+				{
+					if ((*itr1) == (*itr2).get()->getName())
+					{
+						(*itr2).get()->addConv2msgBox(newConversation);
+						break;
+					}
+				}
+			}
+		}
+
 	}
-	catch (UserLogOut) // from User
+
+	catch (BackConversation) // from Conversation
 	{
 		objStack_.pop();
-		currentUser_ = NO_ACTIVE_USER;
 		objStack_.top().Preview(currentUser_);
 	}
-	catch (MySharedPtr<Conversation> convPtr)  // from MessageBox
+
+	catch (const MBsearch& PartialName)   // from MessageBox  
 	{
-		ActiveObj activeConv(convPtr.get());
-		objStack_.push(activeConv);
-		convPtr->Preview(currentUser_);
-	}
-	catch (string substr)   // from MessageBox     // not sure it will print in alphabetical order
-	{
+		// PartialName is a reference to the thrown class argument
+		const string substr = PartialName.partName_;
 		vector<string> userlist;
 		userlist = getUserList();
 		sort(userlist.begin(), userlist.end());
@@ -226,55 +179,95 @@ void ChatNet::Do(string cmd)
 		if (find_flag == 0)
 			cout << SEARCH_NOT_FOUND_TITLE;
 	}
-	catch (newConv newConv1) // from MessageBox
+
+	catch (convOpen conv_open)  // from MessageBox
 	{
-		vector<string>  userslist;
-		userslist = getUserList();
-		set<string> chatusers = newConv1.userList_;
-		vector<string>::iterator itr2;
-		//checking if all users exsist in the ChatNet
-		bool find_flag;
-		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
-		{
-			find_flag = 0;
-			for (itr2 = userslist.begin() + 1; itr2 < userslist.end(); itr2++)
-			{
-				if (*itr == *itr2)
-					find_flag = 1;
-			}
-			if (!find_flag)
-			{
-				cout << CONVERSATION_FAIL_NO_USER;
-				return;
-			}
-		}
-		chatusers.insert(currentUser_);
-		map<string, ConversationStatus> read_map;
-		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
-		{
-			read_map[*itr] = READ;
-		}
-		Conversation new_conversation(chatusers, read_map, chrono::system_clock::now());
-		MySharedPtr<Conversation> ptr1(&new_conversation);
-		User user;
-		for (auto itr = chatusers.begin(); itr != chatusers.end(); ++itr)
-		{
-			user = findUserByName(*itr);
-			MySharedPtr<Conversation> convPtr(ptr1); // not sure it will realy make a new ptr each run and update counter
-			user.addConv2msgBox(convPtr);
-		}
+		objStack_.push(conv_open.activeConv_);
+		conv_open.activeConv_.Preview(currentUser_);
+		// conv_open is passed by value since Preview is a non-const method
+		// Cannot use pass by non-const reference since an anonymous object is passed
+		// An anonymous object is treated as a r-value
 	}
-	catch (BackSignal back)   // from ChatNet
-	{
-		throw (back);
-	}
-	catch (char const* MessageBox_back)    // from MessageBox
+
+	catch (BackMessageBox) // from MessageBox
 	{
 		objStack_.pop();
 		objStack_.top().Preview(currentUser_);
-
 	}
-	// more catch phrases
+
+	catch (ActiveObj& activeMsgBox) // from User
+	{
+		objStack_.push(activeMsgBox);
+		activeMsgBox.Preview(currentUser_);
+	}
+
+	catch (UserLogOut) // from User
+	{
+		objStack_.pop();
+		currentUser_ = NO_ACTIVE_USER;
+		objStack_.top().Preview(currentUser_);
+	}
+
+	catch (const newAdmin& new_admin) // from Admin
+	{
+		string adminName = new_admin.adminName_;
+		string adminPass = new_admin.adminPass_;
+		for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+		{
+			if ((*itr)->getName() == adminName)
+			{
+				cout << USER_ALREADY_EXISTS;
+				break;
+			}
+		}
+		MySharedPtr<User> pAdmin(new Admin(adminName, adminPass));
+		UserList_.push_back(pAdmin);
+	}
+
+	catch (const searchAdmin& PartialName) // from Admin
+	{
+		const string substr = PartialName.partName_;
+		vector<string> userlist;
+		userlist = getUserList();
+		sort(userlist.begin(), userlist.end());
+		bool find_flag = 0;
+		for (auto itr = userlist.begin(); itr != userlist.end(); ++itr)
+		{
+			if (find_flag == 0 && itr->find(substr) != string::npos)
+			{
+				find_flag = 1;
+				cout << SEARCH_FOUND_TITLE;
+				cout << *itr << endl;
+			}
+			else if (itr->find(substr) != string::npos)
+				cout << *itr << endl;
+		}
+		if (find_flag == 0)
+			cout << SEARCH_NOT_FOUND_TITLE;
+	}
+
+	catch (const deleteUser& delete_user)    //from Admin
+	{
+		string username = delete_user.userName_;
+		for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+		{
+			if (itr->get()->getName() == username)
+			{
+				// Delete user from Conversation list
+				if (((itr->get())->del(username)) == true) // Dynamic binding --> will delete accordingly
+					// Delete user from ChatNet users list
+					UserList_.erase(itr);
+				return;
+			}
+		}
+		cout << USER_DOES_NOT_EXIST;
+	}
+
+	catch (BackSignal)   // from ChatNet
+	{
+		throw BackSignal();
+	}
+	
 }
 
 
