@@ -1,0 +1,22 @@
+Welcome to MamatChat.
+Login <user name> <password>
+New <user name> <password>
+Exit
+User doesn't exist
+Hi a, you have no new messages.
+No conversations
+Invalid conversation number
+No user matches the pattern
+Users matching the pattern are:
+Admin
+Participants: Admin (read), a (read)
+Conversations:
+1) Participants: Admin, a
+Failed to create conversation - some users don't exist
+Participants: Admin (unread), a (read)
+a : Hi Admin
+Conversations:
+1) Participants: Admin, a
+2) Participants: Admin, a
+Hi a, you have no new messages.
+Welcome to MamatChat.

@@ -25,21 +25,21 @@ public:
 };
 
 // Exception Classes
-class newConv   // will be thrown as exception in new conversation
+class newConv   // new conversation
 {
 public : 
 	newConv(set<string> userList) : userList_(userList) {}
 	set<string> userList_;
 };
 
-class convOpen   // will be thrown as exception in conversation open
+class convOpen   // conversation open
 {
 public:
 	convOpen(ActiveObj activeConv) : activeConv_(activeConv) {}
 	ActiveObj activeConv_;
 };
 
-class MBsearch	// will be thrown as exception in MessageBox search
+class MBsearch	// MessageBox search
 {
 public:
 	MBsearch(string partName) : partName_(partName) {}

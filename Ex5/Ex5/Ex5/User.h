@@ -43,5 +43,22 @@ public:
 	void Help() const;
 };
 
+// Exception Classes
+class newAdmin   // new admin
+{
+public:
+	newAdmin(string adminName, string adminPass) : adminName_(adminName), adminPass_(adminPass) {}
+	newAdmin() = default;
+	string adminName_;
+	string adminPass_;
+};
+
+class searchAdmin	// search admin
+{
+public:
+	searchAdmin(string partName) : partName_(partName) {}
+	searchAdmin() = default;
+	string partName_;
+};
 
 #endif

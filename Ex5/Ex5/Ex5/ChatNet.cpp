@@ -302,6 +302,44 @@ void ChatNet::Do(string cmd)
 		objStack_.top().Preview(currentUser_);
 	}
 
+	catch (newAdmin) // from Admin
+	{
+		string adminName = newAdmin().adminName_;
+		string adminPass = newAdmin().adminPass_;
+		for (auto itr = UserList_.begin(); itr != UserList_.end(); ++itr)
+		{
+			if ((*itr)->getName() == adminName)
+			{
+				cout << USER_ALREADY_EXISTS;
+				break;
+			}
+		}
+		MySharedPtr<User> pAdmin(new Admin(adminName, adminPass));
+		UserList_.push_back(pAdmin);
+	}
+
+	catch (searchAdmin(partName))
+	{
+		const string substr = searchAdmin(partName).partName_;
+		vector<string> userlist;
+		userlist = getUserList();
+		sort(userlist.begin(), userlist.end());
+		bool find_flag = 0;
+		for (auto itr = userlist.begin(); itr != userlist.end(); ++itr)
+		{
+			if (find_flag == 0 && itr->find(substr) != string::npos)
+			{
+				find_flag = 1;
+				cout << SEARCH_FOUND_TITLE;
+				cout << *itr << endl;
+			}
+			else if (itr->find(substr) != string::npos)
+				cout << *itr << endl;
+		}
+		if (find_flag == 0)
+			cout << SEARCH_NOT_FOUND_TITLE;
+	}
+
 	catch (BackSignal)   // from ChatNet
 	{
 		throw BackSignal();

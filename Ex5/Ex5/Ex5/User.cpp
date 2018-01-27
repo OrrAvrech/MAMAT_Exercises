@@ -83,7 +83,7 @@ void Admin::VrtDo(string cmdLine, string activeUsrName)
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	if (cmdLineTokens[0] == "New" && cmdLineTokens.size() == 3) // New
 	{
-		throw "Admin New to ChatNet";
+		throw (newAdmin(cmdLineTokens[1], cmdLineTokens[2]));
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete
 	{
@@ -91,7 +91,7 @@ void Admin::VrtDo(string cmdLine, string activeUsrName)
 	}
 	else if (cmdLineTokens[0] == "Search" && cmdLineTokens.size() == 2) // Search
 	{
-		throw "Admin Search to ChatNet";
+		throw (searchAdmin(cmdLineTokens[1]));
 	}
 	else // User command
 	{
