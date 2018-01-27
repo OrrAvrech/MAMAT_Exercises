@@ -45,6 +45,10 @@ public:
 		// returning a class MySharedPtr --> return by reference
 	}
 	T* get() { return ptr_; }
+	void deleteMSP()
+	{
+		MySharedPtr::~MySharedPtr();
+	}
 
 private:
 	T* ptr_;

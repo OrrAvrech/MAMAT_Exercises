@@ -31,6 +31,13 @@ string User::getPassword()
 	return userPass_;
 }
 
+bool User::del(string username)
+{
+	for (auto itr = msgBox_.ConversationList_.begin(); itr != msgBox_.ConversationList_.end(); ++itr)
+		(*itr)->removeUser(username);
+	return true;
+}
+
 // Interface
 void User::VrtDo(string cmdLine, string activeUsrName)
 {
@@ -77,21 +84,30 @@ Admin::Admin(string userName, string userPass, MessageBox msgBox) :
 Admin::Admin(string userName, string userPass) :
 	User(userName, userPass) {}
 
+bool Admin::del(string username)
+{
+	cout << REMOVE_USER_FAIL;
+	return false;
+}
+
 // Interface
 void Admin::VrtDo(string cmdLine, string activeUsrName)
 {
 	vector<string> cmdLineTokens = StringSplit(cmdLine, BLANK_SPACES);
 	if (cmdLineTokens[0] == "New" && cmdLineTokens.size() == 3) // New
 	{
-		throw (newAdmin(cmdLineTokens[1], cmdLineTokens[2]));
+		newAdmin new_admin(cmdLineTokens[1], cmdLineTokens[2]);
+		throw (new_admin);
 	}
 	else if (cmdLineTokens[0] == "Delete" && cmdLineTokens.size() == 2) // Delete
 	{
-		throw "Admin Delete to ChatNet";
+		deleteUser delete_user(cmdLineTokens[1]);
+		throw (delete_user);
 	}
 	else if (cmdLineTokens[0] == "Search" && cmdLineTokens.size() == 2) // Search
 	{
-		throw (searchAdmin(cmdLineTokens[1]));
+		searchAdmin search_admin(cmdLineTokens[1]);
+		throw (search_admin);
 	}
 	else // User command
 	{

@@ -36,9 +36,9 @@ public:
 	void Preview(string activeUsrName);
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Help() const;
-	void removeUser(string user); // TODO : remove user from participants
+	void removeUser(string user); // remove user from participants
 	bool IsRead(string participant) const;
-	void DisplayParticipants(); //TODO : print participants list.
+	void DisplayParticipants(); // print participants list.
 	SysTime getTime() { return lastTime_; }
 
 private:

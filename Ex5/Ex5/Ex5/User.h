@@ -20,6 +20,7 @@ public:
 	string getName(); 
 	string getPassword();
 	void addConv2msgBox(MySharedPtr<Conversation> convPtr) { msgBox_.addConv(convPtr); }
+	virtual bool del(string username);
 protected:
 	string userName_;
 	string userPass_;
@@ -41,6 +42,7 @@ public:
 	// Preview() is inherited from User
 	void VrtDo(string cmdLine, string activeUsrName);
 	void Help() const;
+	virtual bool del(string username);
 };
 
 // Exception Classes
@@ -59,6 +61,14 @@ public:
 	searchAdmin(string partName) : partName_(partName) {}
 	searchAdmin() = default;
 	string partName_;
+};
+
+class deleteUser	// delete admin
+{
+public:
+	deleteUser(string userName) : userName_(userName) {}
+	deleteUser() = default;
+	string userName_;
 };
 
 #endif
