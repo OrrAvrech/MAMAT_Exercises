@@ -27,7 +27,7 @@ public:
 			(*counter_)--;
 			if (*counter_ == 0)
 			{
-				// delete ptr_;   no "new" no delete? 
+				delete ptr_;
 				delete counter_;
 			}
 	}
