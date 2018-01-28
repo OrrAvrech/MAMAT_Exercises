@@ -1,6 +1,6 @@
-CC = g++
-CFLAGS = -g -Wall -std=c++0x
-CCLINK = $(CC)
+CXX = g++
+CXXFLAGS = -c -g -Wall -std=c++0x
+CXXLINK = $(CXX)
 LIBS =
 OBJS =  ChatNet.o Conversation.o Defs.o main.o MessageBox.o User.o
 TARGET = MamatNet
@@ -8,7 +8,7 @@ RM = rm -f
 
 # Creating the executable
 $(TARGET): $(OBJS)
-	$(CCLINK) -o $(TARGET) $(OBJS) $(LIBS)
+	$(CXXLINK) -o $(TARGET) $(OBJS) $(LIBS)
 	# Creating object files using default rules
 
 # Creating object files using default rules
