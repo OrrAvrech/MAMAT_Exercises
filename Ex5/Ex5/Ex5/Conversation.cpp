@@ -8,9 +8,10 @@ Conversation::Conversation(set<string> participants, map<string, ConversationSta
 	participants_(participants), readStateList_(readStateList), lastTime_(lastTime) {}
 
 // Helper Functions
-void printMessageList(vector<Message> list)
+void printMessageList(vector<Message> l)
 {
-	for (auto it = list.begin(); it != list.end(); ++it)
+	vector<Message>::iterator it;
+	for (it = l.begin(); it != l.end(); ++it)
 		(*it).Print();
 }
 
@@ -31,7 +32,8 @@ void Conversation::removeUser(string user)
 
 void Conversation::DisplayParticipants()
 {
-	for (auto itr = participants_.begin(); itr != participants_.end(); ++itr)
+	set<string>::iterator itr;
+	for (itr = participants_.begin(); itr != participants_.end(); ++itr)
 	{
 		if ((++itr) == participants_.end())
 		{
@@ -67,7 +69,9 @@ void Conversation::VrtDo(string cmdLine, string activeUsrName)
 			readStateList_[activeUsrName] = READ;
 			// Last conversation time update
 			lastTime_ = chrono::system_clock::now();
-			throw SortConv() ;
+			SortConv SortConv1;
+			SortConv1.participants = participants_;
+			throw SortConv1 ;
 		}
 		else
 			// Not Found
@@ -90,8 +94,8 @@ void Conversation::Preview(string activeUsrName)
 		readStateList_[activeUsrName] = READ;
 		cout << PARTICIPANTS_TITLE;
 		// Printing the set of conversation participants
-		
-		for (auto itr = participants_.begin(); itr != participants_.end(); ++itr)
+		set<string>::iterator itr;
+		for (itr = participants_.begin(); itr != participants_.end(); ++itr)
 		{
 			// set is already sorted
 			if ((++itr) == participants_.end())

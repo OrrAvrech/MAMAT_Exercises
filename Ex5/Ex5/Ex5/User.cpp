@@ -12,7 +12,8 @@ User::User(string userName, string userPass) :
 // Hepler Functions
 bool User::isNewMessages(MessageBox msgBox, string userName) const
 {
-	for (auto itr = msgBox.ConversationList_.begin(); itr != msgBox.ConversationList_.end(); ++itr)
+	list<MySharedPtr<Conversation> >::iterator itr;
+	for (itr = msgBox.ConversationList_.begin(); itr != msgBox.ConversationList_.end(); ++itr)
 	{
 		if (!((*itr)->IsRead(userName)))
 			// Found a conversation with an UNREAD message --> found new message for User
@@ -33,7 +34,8 @@ string User::getPassword()
 
 bool User::del(string username)
 {
-	for (auto itr = msgBox_.ConversationList_.begin(); itr != msgBox_.ConversationList_.end(); ++itr)
+	list<MySharedPtr<Conversation> >::iterator itr;
+	for (itr = msgBox_.ConversationList_.begin(); itr != msgBox_.ConversationList_.end(); ++itr)
 		(*itr)->removeUser(username);
 	return true;
 }
@@ -58,7 +60,8 @@ void User::VrtDo(string cmdLine, string activeUsrName)
 
 void User::Preview(string activeUsrName)
 {
-	auto name_ = activeUsrName;
+	string name_;
+	name_ = activeUsrName;
 	cout << USER_PREVIEW_PART1;
 	if (isNewMessages(msgBox_, activeUsrName))
 		cout << USER_PREVIEW_PART2_NEW_MESSAGES;

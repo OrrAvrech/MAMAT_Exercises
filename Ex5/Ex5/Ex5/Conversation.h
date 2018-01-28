@@ -59,5 +59,7 @@ private:
 class BackConversation {
 };
 class SortConv {
+public:
+	set<string> participants;
 };
 #endif

@@ -272,15 +272,19 @@ void ChatNet::Do(string cmd)
 		cout << USER_DOES_NOT_EXIST;
 	}
 
-	catch (SortConv)
+	catch (SortConv& s)
 	{
 		string userName;
 		list<MySharedPtr<User> >::iterator itr;
+		set<string>::iterator itr2;
 		for (itr = UserList_.begin(); itr != UserList_.end(); ++itr)
 		{
 			userName = (*itr).get()->getName();
-			if (userName == currentUser_)
-				itr->get()->getMsgBox()->sortConvList() ;
+			for (itr2 = s.participants.begin(); itr2 != s.participants.end(); ++itr2)
+			{
+				if (userName == *itr2)
+					itr->get()->getMsgBox()->sortConvList();
+			}
 		}
 	}
 

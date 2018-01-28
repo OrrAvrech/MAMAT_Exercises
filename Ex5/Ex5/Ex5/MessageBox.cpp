@@ -10,7 +10,7 @@ using namespace std;
 // Constructors
 MessageBox::MessageBox() {}
 MessageBox::MessageBox(string username) : username_(username) {}
-MessageBox::MessageBox(string username, list<MySharedPtr<Conversation>> ConversationList) :
+MessageBox::MessageBox(string username, list<MySharedPtr<Conversation> > ConversationList) :
 	username_(username), ConversationList_(ConversationList) {}
 
 
@@ -46,7 +46,8 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 	{
 		set<string> conv_participants;
 		// checking for duplicates and making the chatusers list
-		for (auto itr = cmdLineTokens.begin() + 1; itr != cmdLineTokens.end(); ++itr)
+		vector<string>::iterator itr;
+		for (itr = cmdLineTokens.begin() + 1; itr != cmdLineTokens.end(); ++itr)
 		{
 			if (conv_participants.insert(*itr).second == false)
 			{
@@ -71,7 +72,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 			cout << INVALID_CONVERSATION_NUMBER;
 			return;
 		}
-		list<MySharedPtr<Conversation>>::iterator list_itr;
+		list<MySharedPtr<Conversation> >::iterator list_itr;
 		list_itr = ConversationList_.begin();
 		advance(list_itr, convNum - 1);
 		throw convOpen((*list_itr).get()); // pass anonymous object to ChatNet catch
@@ -90,7 +91,7 @@ void MessageBox::VrtDo(string cmdLine, string activeUsrName)
 			return;
 		}
 
-		list<MySharedPtr<Conversation>>::iterator list_itr_Del;
+		list<MySharedPtr<Conversation> >::iterator list_itr_Del;
 		list_itr_Del = ConversationList_.begin();
 		if ((int)ConversationList_.size() > convNum)
 			advance(list_itr_Del, convNum);
@@ -116,7 +117,7 @@ void MessageBox::Preview(string activeUsrName)
 		cout << "No conversations" << endl;
 	else
 		cout << "Conversations:" << endl;
-	list<MySharedPtr<Conversation>>::iterator itr;
+	list<MySharedPtr<Conversation> >::iterator itr;
 	for (itr = ConversationList_.begin(); itr != ConversationList_.end(); ++itr)
 	{
 		cout << count << ") ";
